@@ -5,9 +5,8 @@ import Timeline from '../components/Timeline';
 import Badge from '../components/Badge';
 import CTA from '../components/CTA';
 import ResponsiveGrid from '../components/ResponsiveGrid';
-import { BentoGrid, BentoItem } from '../components/BentoGrid';
 import { BRAND, PROBLEMS, MODULES, TIMELINE_PHASES, COMPLIANCE, AUDIENCE_CTAS, POSITIONING_PILLARS } from '../data/content';
-import { Activity, Heart, Shield, TrendingUp, Microscope, AlertTriangle, Users, Database, BarChart3, Sparkles, Zap } from 'lucide-react';
+import { Activity, Heart, Shield, TrendingUp, Microscope, AlertTriangle, Users, Database, BarChart3} from 'lucide-react';
 
 export default function Home() {
     return (
@@ -272,90 +271,6 @@ export default function Home() {
                         </div>
                     ))}
                 </ResponsiveGrid>
-            </Section>
-
-            {/* Modern Features Showcase Section */}
-            <Section
-                title="Platform Highlights"
-                subtitle="Advanced technology meets intuitive design"
-                variant="gradient"
-            >
-                <BentoGrid className="max-w-6xl mx-auto">
-                    <BentoItem size="large" gradient>
-                        <div className="flex items-start gap-6">
-                            <div className="p-4 rounded-2xl bg-gradient-to-br from-primary-500 to-primary-600 text-white">
-                                <Sparkles className="w-8 h-8" />
-                            </div>
-                            <div>
-                                <h3 className="text-2xl font-bold text-neutral-900 dark:text-white mb-3">
-                                    AI-Powered Insights
-                                </h3>
-                                <p className="text-neutral-600 dark:text-neutral-400 leading-relaxed">
-                                    Advanced machine learning algorithms analyze patterns in real-time physiological data to predict adverse events before they occur, enabling proactive intervention and improved patient outcomes.
-                                </p>
-                            </div>
-                        </div>
-                    </BentoItem>
-                    
-                    <BentoItem>
-                        <div className="text-center">
-                            <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-success-500 to-success-600 flex items-center justify-center shadow-glow-success">
-                                <Shield className="w-8 h-8 text-white animate-bounce-subtle" />
-                            </div>
-                            <h4 className="text-lg font-bold text-neutral-900 dark:text-white mb-2">Enterprise Security</h4>
-                            <p className="text-sm text-neutral-600 dark:text-neutral-400">
-                                Bank-level encryption and HIPAA compliance built-in
-                            </p>
-                        </div>
-                    </BentoItem>
-
-                    <BentoItem>
-                        <div className="text-center">
-                            <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center shadow-glow">
-                                <Zap className="w-8 h-8 text-white animate-pulse" />
-                            </div>
-                            <h4 className="text-lg font-bold text-neutral-900 dark:text-white mb-2">Real-Time Monitoring</h4>
-                            <p className="text-sm text-neutral-600 dark:text-neutral-400">
-                                Continuous data streams with instant alerts
-                            </p>
-                        </div>
-                    </BentoItem>
-
-                    <BentoItem size="large">
-                        <div className="space-y-4">
-                            <h4 className="text-xl font-bold text-neutral-900 dark:text-white">Clinical Validation</h4>
-                            <div className="space-y-3">
-                                <div className="flex items-center gap-3">
-                                    <div className="w-12 h-12 rounded-xl bg-primary-100 dark:bg-primary-900/30 flex items-center justify-center flex-shrink-0">
-                                        <span className="text-2xl font-bold text-primary-600 dark:text-primary-400">1</span>
-                                    </div>
-                                    <div>
-                                        <p className="font-semibold text-neutral-900 dark:text-white">Evidence-Based Approach</p>
-                                        <p className="text-sm text-neutral-600 dark:text-neutral-400">Built on peer-reviewed research</p>
-                                    </div>
-                                </div>
-                                <div className="flex items-center gap-3">
-                                    <div className="w-12 h-12 rounded-xl bg-success-100 dark:bg-success-900/30 flex items-center justify-center flex-shrink-0">
-                                        <span className="text-2xl font-bold text-success-600 dark:text-success-400">2</span>
-                                    </div>
-                                    <div>
-                                        <p className="font-semibold text-neutral-900 dark:text-white">Clinical Partnerships</p>
-                                        <p className="text-sm text-neutral-600 dark:text-neutral-400">Collaboration with leading institutions</p>
-                                    </div>
-                                </div>
-                                <div className="flex items-center gap-3">
-                                    <div className="w-12 h-12 rounded-xl bg-warning-100 dark:bg-warning-900/30 flex items-center justify-center flex-shrink-0">
-                                        <span className="text-2xl font-bold text-warning-600 dark:text-warning-400">3</span>
-                                    </div>
-                                    <div>
-                                        <p className="font-semibold text-neutral-900 dark:text-white">Regulatory Pathway</p>
-                                        <p className="text-sm text-neutral-600 dark:text-neutral-400">FDA submission in progress</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </BentoItem>
-                </BentoGrid>
             </Section>
         </div>
     );

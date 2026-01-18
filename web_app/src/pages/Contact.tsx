@@ -174,8 +174,8 @@ export default function Contact() {
                         <div className="text-center glass rounded-xl p-6">
                             <Mail className="w-12 h-12 text-primary-600 dark:text-primary-400 mx-auto mb-4" />
                             <h4 className="font-bold mb-2 text-neutral-900 dark:text-white">Email</h4>
-                            <a href="mailto:contact.enturaflex@gmail.com" className="text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 text-sm">
-                                contact.enturaflex@gmail.com
+                            <a href="mailto:contact.enteraflux@gmail.com" className="text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 text-sm">
+                                contact.enteraflux@gmail.com
                             </a>
                         </div>
                     </div>
