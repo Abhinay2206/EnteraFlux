@@ -1,6 +1,6 @@
 import Section from '../components/Section';
 import Badge from '../components/Badge';
-import ScrollText from '../components/ScrollText';
+import ScrollReveal from '../components/ScrollReveal';
 import { AlertTriangle, Shield, FileText, Lock } from 'lucide-react';
 
 export default function Legal() {
@@ -12,7 +12,7 @@ export default function Legal() {
                 variant="gradient"
                 firstSection
             >
-                <ScrollText delay={200}>
+                <ScrollReveal delay={200} direction="up">
                     <div className="max-w-3xl mx-auto text-center">
                         <div className="flex flex-wrap justify-center gap-3 mb-6">
                             <Badge text="Platform Under Development" variant="development" />
@@ -20,7 +20,7 @@ export default function Legal() {
                             <Badge text="Research-Only Phase" variant="research" />
                         </div>
                     </div>
-                </ScrollText>
+                </ScrollReveal>
             </Section>
 
             <Section variant="dark">

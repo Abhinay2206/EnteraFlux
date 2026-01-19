@@ -1,8 +1,9 @@
 import Section from '../components/Section';
 import ModuleCard from '../components/ModuleCard';
 import ResponsiveGrid from '../components/ResponsiveGrid';
-import ScrollText from '../components/ScrollText';
+import ScrollReveal from '../components/ScrollReveal';
 import { MODULES } from '../data/content';
+import ModulesIntegration from '../components/visualizations/ModulesIntegration';
 
 export default function Modules() {
     return (
@@ -13,13 +14,13 @@ export default function Modules() {
                 variant="gradient"
                 firstSection
             >
-                <ScrollText delay={200}>
+                <ScrollReveal delay={200} direction="up">
                     <div className="max-w-4xl mx-auto">
                         <p className="text-lg text-neutral-700 dark:text-neutral-300 leading-relaxed text-center mb-8">
                             Each module addresses a critical gap in the current GLP-1 therapy ecosystem. Together, they form a unified platform for safety, research, and intervention.
                         </p>
                     </div>
-                </ScrollText>
+                </ScrollReveal>
             </Section>
 
             {MODULES.map((module, index) => (
@@ -30,7 +31,7 @@ export default function Modules() {
                     variant={index % 2 === 0 ? 'dark' : 'default'}
                 >
                     <div className="max-w-5xl mx-auto">
-                    <div className="glass rounded-2xl p-8 mb-12">
+                        <div className="glass rounded-2xl p-8 mb-12">
                             <p className="text-neutral-700 dark:text-neutral-300 leading-relaxed mb-6">
                                 {module.detailedDescription}
                             </p>
@@ -53,6 +54,9 @@ export default function Modules() {
                     <p className="text-lg text-neutral-700 dark:text-neutral-300 mb-16">
                         All modules work together seamlessly, sharing data and insights to provide comprehensive metabolic therapy support. The platform learns from every interaction to improve predictions and recommendations.
                     </p>
+                    <div className="mb-16 max-w-2xl mx-auto">
+                        <ModulesIntegration />
+                    </div>
                     <ResponsiveGrid columns={{ mobile: 1, tablet: 2, desktop: 3 }}>
                         {MODULES.map((module) => (
                             <ModuleCard

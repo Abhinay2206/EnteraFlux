@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import Section from '../components/Section';
-import ScrollText from '../components/ScrollText';
+import ScrollReveal from '../components/ScrollReveal';
 import { Mail, User, Building, MessageSquare } from 'lucide-react';
 
 type UserRole = 'patient' | 'researcher' | 'clinician' | 'investor' | 'partner';
@@ -45,13 +45,13 @@ export default function Contact() {
                 variant="gradient"
                 firstSection
             >
-                <ScrollText delay={200}>
+                <ScrollReveal delay={200} direction="up">
                     <div className="max-w-2xl mx-auto text-center">
                         <p className="text-neutral-700 dark:text-neutral-300 mb-8">
                             Whether you're a patient interested in early access, a researcher exploring partnerships, or an investor learning about our mission, we'd love to hear from you.
                         </p>
                     </div>
-                </ScrollText>
+                </ScrollReveal>
             </Section>
 
             <Section variant="dark">

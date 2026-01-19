@@ -1,7 +1,7 @@
 import Section from '../components/Section';
 import Timeline from '../components/Timeline';
 import Badge from '../components/Badge';
-import ScrollText from '../components/ScrollText';
+import ScrollReveal from '../components/ScrollReveal';
 import { TIMELINE_PHASES } from '../data/content';
 
 export default function Roadmap() {
@@ -9,16 +9,16 @@ export default function Roadmap() {
         <div>
             <Section
                 title="Development Roadmap"
-                subtitle="Transparent progress from Alpha to Commercial Launch"
+                subtitle="Transparent progress from R&D to Commercial Launch"
                 variant="gradient"
                 firstSection
             >
                 <div className="max-w-4xl mx-auto text-center">
-                    <ScrollText delay={200}>
+                    <ScrollReveal delay={200} direction="up">
                         <p className="text-lg text-neutral-700 dark:text-neutral-300 mb-8">
-                            We're building EnteraFlux with regulatory validation and clinical safety as foundational requirements, not afterthoughts. This roadmap reflects our commitment to evidence-based development.
+                            We are building EnteraFlux with a "Safety First, Move Fast" philosophy. Unlike typical consumer health apps, our roadmap is dictated by rigorous clinical validation and regulatory milestones. We are currently in the Alpha phase, focusing on infrastructure stability and initial biomarker model training.
                         </p>
-                    </ScrollText>
+                    </ScrollReveal>
                     <div className="flex justify-center gap-3 flex-wrap">
                         <Badge text="Currently in Alpha Phase" variant="development" />
                         <Badge text="Beta Access Q2 2026" variant="status" />
@@ -32,152 +32,138 @@ export default function Roadmap() {
 
             <Section title="Phase Details" variant="default">
                 <div className="max-w-5xl mx-auto space-y-8">
-                    <div className="glass rounded-xl p-8">
-                        <div className="flex items-center justify-between mb-4">
-                            <h3 className="text-2xl font-bold">Alpha Phase (Current)</h3>
-                            <Badge text="In Progress" variant="development" />
+                    {/* Alpha Phase */}
+                    <div className="glass rounded-xl p-8 relative overflow-hidden">
+                        <div className="absolute top-0 right-0 p-4 opacity-10">
+                            <h1 className="text-9xl font-bold">01</h1>
                         </div>
-                        <p className="text-neutral-700 dark:text-neutral-300 mb-6">
-                            Building core platform infrastructure, biomarker ingestion pipelines, and initial AI model training. Internal testing with simulated data and early validation studies.
-                        </p>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div>
-                                <h4 className="font-semibold text-primary-400 mb-2">Engineering Focus</h4>
-                                <ul className="space-y-1 text-sm text-neutral-600 dark:text-neutral-400">
-                                    <li>• Wearable API integrations</li>
-                                    <li>• Data pipeline infrastructure</li>
-                                    <li>• ML model architecture</li>
-                                    <li>• Security and privacy foundations</li>
-                                </ul>
+                        <div className="relative z-10">
+                            <div className="flex items-center justify-between mb-4">
+                                <h3 className="text-2xl font-bold">Alpha Phase (Current)</h3>
+                                <Badge text="In Progress" variant="development" />
                             </div>
-                            <div>
-                                <h4 className="font-semibold text-primary-400 mb-2">Research Focus</h4>
-                                <ul className="space-y-1 text-sm text-neutral-600 dark:text-neutral-400">
-                                    <li>• Biomarker validation studies</li>
-                                    <li>• Model training datasets</li>
-                                    <li>• Clinical literature review</li>
-                                    <li>• Regulatory pathway planning</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="glass rounded-xl p-8">
-                        <div className="flex items-center justify-between mb-4">
-                            <h3 className="text-2xl font-bold">Beta Phase</h3>
-                            <Badge text="Q2-Q3 2026" variant="status" />
-                        </div>
-                        <p className="text-neutral-700 dark:text-neutral-300 mb-6">
-                            Limited user testing with real GLP-1 patients. Refinement of coaching algorithms, tolerance prediction models, and intervention frameworks. Wearable integrations expanded.
-                        </p>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div>
-                                <h4 className="font-semibold text-primary-400 mb-2">Features</h4>
-                                <ul className="space-y-1 text-sm text-neutral-600 dark:text-neutral-400">
-                                    <li>• Patient onboarding flow</li>
-                                    <li>• Real-time monitoring dashboard</li>
-                                    <li>• Adaptive coaching engine</li>
-                                    <li>• Emergency alerting system</li>
-                                </ul>
-                            </div>
-                            <div>
-                                <h4 className="font-semibold text-primary-400 mb-2">Milestones</h4>
-                                <ul className="space-y-1 text-sm text-neutral-600 dark:text-neutral-400">
-                                    <li>• 100+ beta testers enrolled</li>
-                                    <li>• Model performance validation</li>
-                                    <li>• User feedback integration</li>
-                                    <li>• Platform stability improvements</li>
-                                </ul>
+                            <p className="text-neutral-700 dark:text-neutral-300 mb-6 max-w-3xl">
+                                The foundation. We are currently architecting the secure data pipelines, training our initial Transformer-based time-series models on synthetic and retrospective datasets, and establishing our regulatory compliance framework.
+                            </p>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                <div>
+                                    <h4 className="font-semibold text-primary-500 mb-3 border-b border-neutral-200 dark:border-neutral-700 pb-2">Engineering & AI</h4>
+                                    <ul className="space-y-2 text-sm text-neutral-600 dark:text-neutral-400">
+                                        <li>• <strong>Data Pipeline:</strong> implementing robust ELT pipelines for high-velocity wearable data.</li>
+                                        <li>• <strong>Model Architecture:</strong> Developing LSTM and Transformer models for anomaly detection.</li>
+                                        <li>• <strong>Security:</strong> Implementing encryption-at-rest and strict IAM policies.</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h4 className="font-semibold text-primary-500 mb-3 border-b border-neutral-200 dark:border-neutral-700 pb-2">Clinical & Research</h4>
+                                    <ul className="space-y-2 text-sm text-neutral-600 dark:text-neutral-400">
+                                        <li>• <strong>Biomarker Validation:</strong> Reviewing literature to establish baseline correlation for HRV and Nausea.</li>
+                                        <li>• <strong>Synthetic Data:</strong> Generative adversarial networks (GANs) to simulate patient cohorts for stress testing.</li>
+                                        <li>• <strong>Regulatory Strategy:</strong> Drafting the Pre-Submission package for FDA engagement.</li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <div className="glass rounded-xl p-8">
-                        <div className="flex items-center justify-between mb-4">
-                            <h3 className="text-2xl font-bold">Research Pilots</h3>
-                            <Badge text="Q4 2026" variant="research" />
+                    {/* Beta Phase */}
+                    <div className="glass rounded-xl p-8 relative overflow-hidden">
+                        <div className="absolute top-0 right-0 p-4 opacity-10">
+                            <h1 className="text-9xl font-bold">02</h1>
                         </div>
-                        <p className="text-neutral-700 dark:text-neutral-300 mb-6">
-                            Partnership pilots with CROs, academic institutions, and pharmaceutical companies. Pharmacovigilance signal validation. Real-world evidence generation studies.
-                        </p>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div>
-                                <h4 className="font-semibold text-primary-400 mb-2">Partnerships</h4>
-                                <ul className="space-y-1 text-sm text-neutral-600 dark:text-neutral-400">
-                                    <li>• CRO data exchange pilots</li>
-                                    <li>• Academic research collaborations</li>
-                                    <li>• Pharma post-market surveillance</li>
-                                    <li>• Regulatory body engagement</li>
-                                </ul>
+                        <div className="relative z-10">
+                            <div className="flex items-center justify-between mb-4">
+                                <h3 className="text-2xl font-bold">Beta Phase</h3>
+                                <Badge text="Q2-Q3 2026" variant="status" />
                             </div>
-                            <div>
-                                <h4 className="font-semibold text-primary-400 mb-2">Outputs</h4>
-                                <ul className="space-y-1 text-sm text-neutral-600 dark:text-neutral-400">
-                                    <li>• Peer-reviewed publications</li>
-                                    <li>• Conference presentations</li>
-                                    <li>• Real-world evidence reports</li>
-                                    <li>• Safety signal validation studies</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="glass rounded-xl p-8">
-                        <div className="flex items-center justify-between mb-4">
-                            <h3 className="text-2xl font-bold">Regulatory Pathway</h3>
-                            <Badge text="2027" variant="regulatory" />
-                        </div>
-                        <p className="text-neutral-700 dark:text-neutral-300 mb-6">
-                            FDA engagement for potential Software as a Medical Device (SaMD) classification. Preparation of regulatory submissions. Clinical validation studies. Compliance documentation.
-                        </p>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div>
-                                <h4 className="font-semibold text-primary-400 mb-2">Regulatory Steps</h4>
-                                <ul className="space-y-1 text-sm text-neutral-600 dark:text-neutral-400">
-                                    <li>• Pre-submission meetings (FDA)</li>
-                                    <li>• Clinical validation trials</li>
-                                    <li>• 510(k) or De Novo pathway decision</li>
-                                    <li>• Quality Management System (QMS)</li>
-                                </ul>
-                            </div>
-                            <div>
-                                <h4 className="font-semibold text-primary-400 mb-2">Compliance</h4>
-                                <ul className="space-y-1 text-sm text-neutral-600 dark:text-neutral-400">
-                                    <li>• HIPAA full compliance</li>
-                                    <li>• GDPR alignment (EU expansion)</li>
-                                    <li>• ISO 13485 certification (roadmap)</li>
-                                    <li>• Cybersecurity risk management</li>
-                                </ul>
+                            <p className="text-neutral-700 dark:text-neutral-300 mb-6 max-w-3xl">
+                                The validation. We will open the platform to a closed cohort of 500 GLP-1 patients to gather real-world data, refine our coaching algorithms, and stress-test our infrastructure.
+                            </p>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                <div>
+                                    <h4 className="font-semibold text-primary-500 mb-3 border-b border-neutral-200 dark:border-neutral-700 pb-2">Product Features</h4>
+                                    <ul className="space-y-2 text-sm text-neutral-600 dark:text-neutral-400">
+                                        <li>• <strong>Mobile App Launch:</strong> Native iOS and Android apps for patient onboarding.</li>
+                                        <li>• <strong>Real-time Dashboard:</strong> Patient-facing views of metabolic stress scores.</li>
+                                        <li>• <strong>Coaching Engine v1:</strong> Rule-based interventions for hydration and diet.</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h4 className="font-semibold text-primary-500 mb-3 border-b border-neutral-200 dark:border-neutral-700 pb-2">Milestones</h4>
+                                    <ul className="space-y-2 text-sm text-neutral-600 dark:text-neutral-400">
+                                        <li>• <strong>Cohort Enrollment:</strong> 500 active users with {'>'}70% daily active usage.</li>
+                                        <li>• <strong>Model Tuning:</strong> RLHF (Reinforcement Learning from Human Feedback) on alert accuracy.</li>
+                                        <li>• <strong>HIPAA Audit:</strong> Third-party verification of compliance controls.</li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <div className="glass rounded-xl p-8">
-                        <div className="flex items-center justify-between mb-4">
-                            <h3 className="text-2xl font-bold">Commercial Phase</h3>
-                            <Badge text="2027-2028" variant="status" />
+                    {/* Research Pilots */}
+                    <div className="glass rounded-xl p-8 relative overflow-hidden">
+                        <div className="absolute top-0 right-0 p-4 opacity-10">
+                            <h1 className="text-9xl font-bold">03</h1>
                         </div>
-                        <p className="text-neutral-700 dark:text-neutral-300 mb-6">
-                            Market launch with regulatory clearance. Scaling infrastructure for broader patient populations. Expanded features, additional wearable integrations, and international expansion.
-                        </p>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div>
-                                <h4 className="font-semibold text-primary-400 mb-2">Launch Strategy</h4>
-                                <ul className="space-y-1 text-sm text-neutral-600 dark:text-neutral-400">
-                                    <li>• Direct-to-patient access</li>
-                                    <li>• Clinician partnerships</li>
-                                    <li>• Insurance reimbursement pathways</li>
-                                    <li>• Employer wellness programs</li>
-                                </ul>
+                        <div className="relative z-10">
+                            <div className="flex items-center justify-between mb-4">
+                                <h3 className="text-2xl font-bold">Research Pilots</h3>
+                                <Badge text="Q4 2026" variant="research" />
                             </div>
-                            <div>
-                                <h4 className="font-semibold text-primary-400 mb-2">Expansion</h4>
-                                <ul className="space-y-1 text-sm text-neutral-600 dark:text-neutral-400">
-                                    <li>• Additional medication classes</li>
-                                    <li>• International markets (EU, CA, AU)</li>
-                                    <li>• Advanced AI capabilities</li>
-                                    <li>• Ecosystem partnerships</li>
-                                </ul>
+                            <p className="text-neutral-700 dark:text-neutral-300 mb-6 max-w-3xl">
+                                The expansion. We systematically validate our clinical utility through partnerships with CROs and academic institutions, moving from "app" to "evidence generation platform."
+                            </p>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                <div>
+                                    <h4 className="font-semibold text-primary-500 mb-3 border-b border-neutral-200 dark:border-neutral-700 pb-2">Partnerships</h4>
+                                    <ul className="space-y-2 text-sm text-neutral-600 dark:text-neutral-400">
+                                        <li>• <strong>CRO Pilots:</strong> Integration with major Clinical Research Organizations.</li>
+                                        <li>• <strong>Academic Studies:</strong> Observational studies with university metabolic centers.</li>
+                                        <li>• <strong>Pharma Engagement:</strong> Post-market surveillance pilots with manufacturers.</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h4 className="font-semibold text-primary-500 mb-3 border-b border-neutral-200 dark:border-neutral-700 pb-2">Outputs</h4>
+                                    <ul className="space-y-2 text-sm text-neutral-600 dark:text-neutral-400">
+                                        <li>• <strong>White Papers:</strong> Publication of initial predictive validity results.</li>
+                                        <li>• <strong>Case Studies:</strong> Documented instances of adverse event prevention.</li>
+                                        <li>• <strong>Data Products:</strong> Launch of "Synthetic Control Arm" datasets.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Regulatory & Commercial */}
+                    <div className="glass rounded-xl p-8 relative overflow-hidden">
+                        <div className="absolute top-0 right-0 p-4 opacity-10">
+                            <h1 className="text-9xl font-bold">04</h1>
+                        </div>
+                        <div className="relative z-10">
+                            <div className="flex items-center justify-between mb-4">
+                                <h3 className="text-2xl font-bold">Regulatory & Commercial</h3>
+                                <Badge text="2027+" variant="regulatory" />
+                            </div>
+                            <p className="text-neutral-700 dark:text-neutral-300 mb-6 max-w-3xl">
+                                The standard of care. With accumulated evidence, we pursue formal regulatory clearance to market EnteraFlux as a clinical decision support tool and expand globally.
+                            </p>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                <div>
+                                    <h4 className="font-semibold text-primary-500 mb-3 border-b border-neutral-200 dark:border-neutral-700 pb-2">Regulatory Pathway</h4>
+                                    <ul className="space-y-2 text-sm text-neutral-600 dark:text-neutral-400">
+                                        <li>• <strong>FDA Submission:</strong> 510(k) or De Novo submission for SaMD status.</li>
+                                        <li>• <strong>ISO 13485:</strong> Full Quality Management System certification.</li>
+                                        <li>• <strong>CE Mark:</strong> Regulatory clearance for EU market entry.</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h4 className="font-semibold text-primary-500 mb-3 border-b border-neutral-200 dark:border-neutral-700 pb-2">Commercialization</h4>
+                                    <ul className="space-y-2 text-sm text-neutral-600 dark:text-neutral-400">
+                                        <li>• <strong>Reimbursement:</strong> Securing CPT codes for remote patient monitoring.</li>
+                                        <li>• <strong>Enterprise:</strong> Employer health plan integration.</li>
+                                        <li>• <strong>Global Expansion:</strong> Launch in Canada, UK, and Australia.</li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>

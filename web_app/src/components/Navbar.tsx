@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Moon, Sun } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
@@ -15,25 +15,12 @@ const navigation = [
 
 export default function Navbar() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-    const [scrolled, setScrolled] = useState(false);
     const { isDark, toggleTheme } = useTheme();
     const location = useLocation();
 
-    useEffect(() => {
-        const handleScroll = () => {
-            setScrolled(window.scrollY > 10);
-        };
-
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
-
     return (
-        <div className="fixed top-0 left-0 right-0 z-50 px-4 pt-4">
-            <nav className={`max-w-7xl mx-auto transition-all duration-700 ease-out rounded-2xl relative overflow-hidden ${scrolled
-                ? 'bg-white/70 backdrop-blur-[40px] backdrop-saturate-150 border border-white/60 shadow-[0_8px_32px_0_rgba(0,0,0,0.12)] scale-[0.98] dark:bg-gradient-to-br dark:from-neutral-900/70 dark:via-neutral-800/70 dark:to-neutral-900/70 dark:border-white/10 dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.4)]'
-                : 'bg-white/60 backdrop-blur-[32px] backdrop-saturate-150 border border-white/50 shadow-[0_4px_24px_0_rgba(0,0,0,0.08)] scale-100 dark:bg-gradient-to-br dark:from-neutral-900/60 dark:via-neutral-800/60 dark:to-neutral-900/60 dark:border-white/5 dark:shadow-[0_4px_24px_0_rgba(0,0,0,0.3)]'
-                }`}>
+        <div className="absolute top-0 left-0 right-0 z-50 px-4 pt-4">
+            <nav className="max-w-7xl mx-auto rounded-2xl relative overflow-hidden bg-white/60 backdrop-blur-[32px] backdrop-saturate-150 border border-white/50 shadow-[0_4px_24px_0_rgba(0,0,0,0.08)] scale-100 dark:bg-gradient-to-br dark:from-neutral-900/60 dark:via-neutral-800/60 dark:to-neutral-900/60 dark:border-white/5 dark:shadow-[0_4px_24px_0_rgba(0,0,0,0.3)]">
                 {/* Glossy overlay effect */}
                 <div className="absolute inset-0 bg-gradient-to-br from-white/40 via-transparent to-transparent pointer-events-none rounded-2xl dark:from-white/10" />
                 <div className="absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-white/80 to-transparent dark:via-white/20" />
@@ -64,7 +51,7 @@ export default function Navbar() {
                                     to={item.href}
                                     style={{ animationDelay: `${index * 50}ms` }}
                                     className={`relative px-4 py-2.5 rounded-xl text-sm font-semibold transition-all duration-300 group overflow-hidden animate-fade-in ${location.pathname === item.href
-                                        ? 'text-primary-700 dark:text-primary-400 bg-gradient-to-br from-primary-50 to-primary-100/50 dark:from-primary-900/30 dark:to-primary-900/10 shadow-sm'
+                                        ? 'text-primary-700 dark:text-primary-300 bg-gradient-to-br from-primary-50 to-primary-100/50 dark:from-primary-500/20 dark:to-primary-500/5 shadow-sm'
                                         : 'text-neutral-600 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white hover:bg-gradient-to-br hover:from-neutral-100 hover:to-neutral-50 dark:hover:from-neutral-800 dark:hover:to-neutral-800/50'
                                         }`}
                                 >
@@ -136,7 +123,7 @@ export default function Navbar() {
                                 <Link
                                     key={item.name}
                                     to={item.href}
-                                    style={{ 
+                                    style={{
                                         animationDelay: `${index * 50}ms`,
                                         transform: mobileMenuOpen ? 'translateX(0)' : 'translateX(-20px)'
                                     }}

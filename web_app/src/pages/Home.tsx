@@ -6,7 +6,9 @@ import Badge from '../components/Badge';
 import CTA from '../components/CTA';
 import ResponsiveGrid from '../components/ResponsiveGrid';
 import { BRAND, PROBLEMS, MODULES, TIMELINE_PHASES, COMPLIANCE, AUDIENCE_CTAS, POSITIONING_PILLARS } from '../data/content';
-import { Activity, Heart, Shield, TrendingUp, Microscope, AlertTriangle, Users, Database, BarChart3} from 'lucide-react';
+import { Activity, Heart, Shield, TrendingUp, Microscope, AlertTriangle, Users, Database, BarChart3, Watch, Brain, MessageSquare } from 'lucide-react';
+import AnalyticsGraph from '../components/visualizations/AnalyticsGraph';
+import BioMarkersVisualization from '../components/visualizations/BioMarkersVisualization';
 
 export default function Home() {
     return (
@@ -31,12 +33,8 @@ export default function Home() {
             >
                 <div className="max-w-6xl mx-auto">
                     {/* Illustration */}
-                    <div className="mb-16 max-w-2xl mx-auto">
-                        <img
-                            src="/images/analytics-illustration.png"
-                            alt="Real-time health monitoring and predictive analytics"
-                            className="w-full h-auto rounded-2xl shadow-lg hover:scale-105 transition-transform duration-500"
-                        />
+                    <div className="mb-16 max-w-4xl mx-auto h-[350px]">
+                        <AnalyticsGraph />
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                         <div className="text-center card-elevated p-8 hover-lift">
@@ -73,25 +71,79 @@ export default function Home() {
                 subtitle="Addressing critical safety and adherence barriers in metabolic treatment"
                 variant="dark"
             >
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
                     {PROBLEMS.map((problem, index) => (
-                        <div key={index} className="card p-6 flex items-start gap-4">
-                            <AlertTriangle className="w-6 h-6 text-warning-500 dark:text-warning-400 flex-shrink-0 mt-1" />
-                            <p className="text-neutral-700 dark:text-neutral-300">{problem}</p>
+                        <div key={index} className="card p-8 flex flex-col gap-4 hover:border-primary-500/30 transition-colors">
+                            <div className="flex items-center gap-3">
+                                <AlertTriangle className="w-6 h-6 text-warning-500 dark:text-warning-400 flex-shrink-0" />
+                                <h3 className="font-bold text-lg text-neutral-900 dark:text-white">{problem.title}</h3>
+                            </div>
+                            <p className="text-neutral-600 dark:text-neutral-400 leading-relaxed text-sm">
+                                {problem.description}
+                            </p>
                         </div>
                     ))}
                 </div>
             </Section>
 
-            {/* Solution Section */}
+
+
+            {/* How It Works Section - NEW CONTENT */}
+            <Section
+                title="How It Works"
+                subtitle="A seamless loop of data, intelligence, and care"
+                variant="default"
+            >
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-6xl mx-auto">
+                    {[
+                        {
+                            icon: Watch,
+                            title: "Connect",
+                            desc: "Patient connects their wearable device (Apple Watch, Oura, Garmin) to the EnteraFlux app."
+                        },
+                        {
+                            icon: Activity,
+                            title: "Monitor",
+                            desc: "Our platform continuously streams physiological data, establishing a baseline for tolerance."
+                        },
+                        {
+                            icon: Brain,
+                            title: "Analyze",
+                            desc: "AI models detect subtle deviations in HRV and stress markers that precede symptoms."
+                        },
+                        {
+                            icon: MessageSquare,
+                            title: " intervene",
+                            desc: "Real-time alerts provide simple, clinically-validated actions to prevent adverse events."
+                        }
+                    ].map((step, i) => (
+                        <div key={i} className="relative group">
+                            {i < 3 && (
+                                <div className="hidden md:block absolute top-8 left-1/2 w-full h-[2px] bg-neutral-200 dark:bg-neutral-800 z-0"></div>
+                            )}
+                            <div className="relative z-10 card p-6 text-center hover:-translate-y-1 transition-transform duration-300 h-full border-t-4 border-primary-500">
+                                <div className="w-16 h-16 mx-auto mb-6 bg-white dark:bg-neutral-800 rounded-full border border-neutral-100 dark:border-neutral-700 shadow-sm flex items-center justify-center group-hover:scale-110 transition-transform">
+                                    <step.icon className="w-8 h-8 text-primary-600 dark:text-primary-400" />
+                                </div>
+                                <h3 className="text-lg font-bold text-neutral-900 dark:text-white mb-3">0{i + 1}. {step.title}</h3>
+                                <p className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">{step.desc}</p>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </Section>
             <Section
                 title="Comprehensive Clinical Decision Support"
                 subtitle="Integrating predictive analytics, continuous monitoring, and evidence-based interventions"
+                variant="gradient"
             >
                 <div className="max-w-5xl mx-auto">
                     <div className="card-elevated p-8 sm:p-12 mb-12">
-                        <p className="text-lg text-neutral-700 dark:text-neutral-300 mb-8 leading-relaxed">
+                        <p className="text-lg text-neutral-700 dark:text-neutral-300 mb-6 leading-relaxed">
                             {BRAND.mission}
+                        </p>
+                        <p className="text-base text-neutral-600 dark:text-neutral-400 leading-relaxed">
+                            We believe that medication should work in harmony with individual physiology. By integrating continuous biomarker monitoring with clinical guidance, we transform the patient experience from one of uncertainty and discomfort to one of confidence and control. Our platform bridges the gap between the clinic and the home, ensuring safety every hour of the day.
                         </p>
                     </div>
                     <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
@@ -148,12 +200,8 @@ export default function Home() {
             >
                 <div className="max-w-5xl mx-auto">
                     {/* Science Illustration */}
-                    <div className="mb-16 max-w-3xl mx-auto">
-                        <img
-                            src="/images/science-illustration.png"
-                            alt="Medical research and biomarker analysis with AI"
-                            className="w-full h-auto rounded-2xl shadow-lg hover:scale-105 transition-transform duration-500"
-                        />
+                    <div className="mb-16 max-w-4xl mx-auto h-[400px]">
+                        <BioMarkersVisualization />
                     </div>
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                         <div className="card p-8 text-center hover:shadow-md dark:hover:shadow-lg-dark transition-shadow">
@@ -272,6 +320,6 @@ export default function Home() {
                     ))}
                 </ResponsiveGrid>
             </Section>
-        </div>
+        </div >
     );
 }

@@ -39,11 +39,24 @@ export const POSITIONING_PILLARS = [
 ];
 
 // Problem Points
+// Problem Points
 export const PROBLEMS = [
-    'Safety and adherence failures in GLP-1 therapy',
-    'Severe GI intolerance causing treatment discontinuation',
-    'Black market counterfeit supply chain risks',
-    'Data-poor research environment limiting insights',
+    {
+        title: 'Safety & Adherence Failures',
+        description: 'GLP-1 discontinuation rates often exceed 50% within the first year due to unmanaged side effects, leading to rebound weight gain and poor long-term outcomes.'
+    },
+    {
+        title: 'Severe GI Intolerance',
+        description: 'Nausea, vomiting, and gastroparesis are common but unpredictable. Current reactive management leaves patients suffering before they receive help.'
+    },
+    {
+        title: 'Counterfeit Supply Chain',
+        description: 'The booming demand has spawned a dangerous black market. Patients risk exposure to contaminated, incorrect, or impotent compounds without verification.'
+    },
+    {
+        title: 'Data-Poor Clinical Research',
+        description: 'Real-world evidence is fragmented. Researchers lack continuous, high-fidelity physiological data to understand how different phenotypes respond to therapy.'
+    },
 ];
 
 // Modules

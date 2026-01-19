@@ -1,21 +1,24 @@
-import { useEffect, useRef, type ReactNode } from 'react';
+import { useEffect, useRef, useState, type ReactNode } from 'react';
 
 interface ScrollRevealProps {
     children: ReactNode;
-    animation?: 'fade' | 'slide' | 'scale' | 'text';
     delay?: number;
-    once?: boolean;
     className?: string;
+    direction?: 'up' | 'down' | 'left' | 'right' | 'none';
+    duration?: number;
+    threshold?: number;
 }
 
 export default function ScrollReveal({
     children,
-    animation = 'slide',
     delay = 0,
-    once = true,
     className = '',
+    direction = 'up',
+    duration = 800,
+    threshold = 0.1
 }: ScrollRevealProps) {
     const elementRef = useRef<HTMLDivElement>(null);
+    const [isVisible, setIsVisible] = useState(false);
 
     useEffect(() => {
         const element = elementRef.current;
@@ -25,23 +28,13 @@ export default function ScrollReveal({
             (entries) => {
                 entries.forEach((entry) => {
                     if (entry.isIntersecting) {
-                        // Add revealed class after delay
-                        setTimeout(() => {
-                            element.classList.add('revealed');
-                        }, delay);
-
-                        // Unobserve if once is true
-                        if (once) {
-                            observer.unobserve(element);
-                        }
-                    } else if (!once) {
-                        // Remove revealed class if not once
-                        element.classList.remove('revealed');
+                        setIsVisible(true);
+                        observer.unobserve(entry.target);
                     }
                 });
             },
             {
-                threshold: 0.05,
+                threshold: threshold,
                 rootMargin: '0px 0px -50px 0px',
             }
         );
@@ -51,18 +44,33 @@ export default function ScrollReveal({
         return () => {
             observer.disconnect();
         };
-    }, [delay, once]);
+    }, [threshold]);
 
-    const animationClass = animation === 'fade'
-        ? 'scroll-reveal'
-        : animation === 'scale'
-            ? 'scroll-reveal'
-            : animation === 'text'
-                ? 'scroll-text'
-                : 'scroll-reveal';
+    const getTransform = () => {
+        if (!isVisible) {
+            switch (direction) {
+                case 'up': return 'translateY(30px)';
+                case 'down': return 'translateY(-30px)';
+                case 'left': return 'translateX(30px)';
+                case 'right': return 'translateX(-30px)';
+                case 'none': return 'translate(0)';
+                default: return 'translateY(30px)';
+            }
+        }
+        return 'translate(0)';
+    };
 
     return (
-        <div ref={elementRef} className={`${animationClass} ${className}`}>
+        <div
+            ref={elementRef}
+            className={`${className}`}
+            style={{
+                opacity: isVisible ? 1 : 0,
+                transform: getTransform(),
+                transition: `opacity ${duration}ms ease-out, transform ${duration}ms cubic-bezier(0.2, 0.8, 0.2, 1)`,
+                transitionDelay: `${delay}ms`,
+            }}
+        >
             {children}
         </div>
     );
