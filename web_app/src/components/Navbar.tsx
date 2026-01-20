@@ -19,8 +19,8 @@ export default function Navbar() {
     const location = useLocation();
 
     return (
-        <div className="fixed top-0 left-0 right-0 z-50 px-4 pt-4">
-            <nav className="max-w-7xl mx-auto rounded-2xl relative overflow-hidden bg-white/60 backdrop-blur-[32px] backdrop-saturate-150 border border-white/50 shadow-[0_4px_24px_0_rgba(0,0,0,0.08)] scale-100 dark:bg-gradient-to-br dark:from-neutral-900/60 dark:via-neutral-800/60 dark:to-neutral-900/60 dark:border-white/5 dark:shadow-[0_4px_24px_0_rgba(0,0,0,0.3)]">
+        <div className="fixed top-0 left-0 right-0 z-50 px-4 pt-4 backdrop-blur-2xl">
+            <nav className="max-w-7xl mx-auto rounded-2xl relative overflow-hidden bg-white/80 backdrop-blur-2xl backdrop-saturate-[180%] border border-white/50 shadow-[0_4px_24px_0_rgba(0,0,0,0.08)] scale-100 dark:bg-neutral-900/80 dark:backdrop-blur-2xl dark:border-white/5 dark:shadow-[0_4px_24px_0_rgba(0,0,0,0.3)]">
                 {/* Glossy overlay effect */}
                 <div className="absolute inset-0 bg-gradient-to-br from-white/40 via-transparent to-transparent pointer-events-none rounded-2xl dark:from-white/10" />
                 <div className="absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-white/80 to-transparent dark:via-white/20" />
