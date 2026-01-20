@@ -8,49 +8,49 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Modern clinical slate-blue primary palette
+        // Clinical Primary - Modern Medical Blue
         primary: {
-          50: '#F0F4FF',
-          100: '#E0E9FF',
-          200: '#C7D7FE',
-          300: '#A4BCFD',
-          400: '#8098F9',
-          500: '#6172F3',
-          600: '#4E5CE6',
-          700: '#3E4AC4',
-          800: '#2F3B9E',
-          900: '#283179',
-          950: '#1A1F4D',
+          50: '#EFF6FF',
+          100: '#DBEAFE',
+          200: '#BFDBFE',
+          300: '#93C5FD',
+          400: '#60A5FA',
+          500: '#3B82F6',
+          600: '#2563EB',
+          700: '#1D4ED8',
+          800: '#1E40AF',
+          900: '#1E3A8A',
+          950: '#172554',
         },
-        // Refined neutral grays (Slate) for premium look
+        // Refined neutral grays (Slate) for clinical depth
         neutral: {
-          50: '#f8fafc',
-          100: '#f1f5f9',
-          200: '#e2e8f0',
-          300: '#cbd5e1',
-          400: '#94a3b8',
-          500: '#64748b',
+          50: '#F8FAFC',
+          100: '#F1F5F9',
+          200: '#E2E8F0',
+          300: '#CBD5E1',
+          400: '#94A3B8',
+          500: '#64748B',
           600: '#475569',
           700: '#334155',
-          800: '#1e293b',
-          900: '#0f172a',
+          800: '#1E293B',
+          900: '#0F172A',
           950: '#020617',
         },
-        // Clinical success/safe - refined emerald
+        // Clinical Success/Safe - Medical Green
         success: {
-          50: '#EDFCF5',
-          100: '#D3F8E2',
-          200: '#AAF0C9',
-          300: '#73E2A8',
-          400: '#3CCE83',
-          500: '#16B364',
-          600: '#0D9750',
-          700: '#087443',
-          800: '#095C37',
-          900: '#084C2E',
-          950: '#032A1A',
+          50: '#F0FDF4',
+          100: '#DCFCE7',
+          200: '#BBF7D0',
+          300: '#86EFAC',
+          400: '#4ADE80',
+          500: '#22C55E',
+          600: '#16A34A',
+          700: '#15803D',
+          800: '#166534',
+          900: '#14532D',
+          950: '#052E16',
         },
-        // Elevated/advisory - warm amber
+        // Advisory/Elevated - Clinical Amber
         advisory: {
           50: '#FFFBEB',
           100: '#FEF3C7',
@@ -64,21 +64,21 @@ export default {
           900: '#78350F',
           950: '#451A03',
         },
-        // High risk/warning - vibrant orange
+        // High Risk/Warning - Clinical Orange
         warning: {
-          50: '#FFF4ED',
-          100: '#FFE6D5',
-          200: '#FFC9AA',
-          300: '#FFA574',
-          400: '#FF7A3C',
-          500: '#FF5416',
-          600: '#F03A0C',
-          700: '#C7280C',
-          800: '#9E2212',
-          900: '#7F1F12',
-          950: '#450C07',
+          50: '#FFF7ED',
+          100: '#FFEDD5',
+          200: '#FED7AA',
+          300: '#FDBA74',
+          400: '#FB923C',
+          500: '#F97316',
+          600: '#EA580C',
+          700: '#C2410C',
+          800: '#9A3412',
+          900: '#7C2D12',
+          950: '#431407',
         },
-        // Critical/error - clinical red
+        // Critical/Error - Clinical Red
         error: {
           50: '#FEF2F2',
           100: '#FEE2E2',
@@ -92,23 +92,25 @@ export default {
           900: '#7F1D1D',
           950: '#450A0A',
         },
-        // Surface-specific tokens for layering
-        surface: {
-          light: {
-            base: '#ffffff',
-            elevated: '#f8fafc',
-            overlay: '#ffffff',
-          },
-          dark: {
-            base: '#020617',
-            elevated: '#0f172a',
-            overlay: '#1e293b',
-          },
+        // Info - Clinical Blue
+        info: {
+          50: '#EFF6FF',
+          100: '#DBEAFE',
+          200: '#BFDBFE',
+          300: '#93C5FD',
+          400: '#60A5FA',
+          500: '#3B82F6',
+          600: '#2563EB',
+          700: '#1D4ED8',
+          800: '#1E40AF',
+          900: '#1E3A8A',
+          950: '#172554',
         },
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
-        display: ['Inter', 'system-ui', 'sans-serif'],
+        sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'SF Pro Display', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif'],
+        display: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'SF Pro Display', 'sans-serif'],
+        mono: ['SF Mono', 'Monaco', 'Consolas', 'Liberation Mono', 'Courier New', 'monospace'],
       },
       boxShadow: {
         // Refined elevation system
@@ -244,10 +246,16 @@ export default {
         '5xl': '96px',
       },
       spacing: {
-        '18': '4.5rem',
-        '88': '22rem',
-        '112': '28rem',
-        '128': '32rem',
+        '0.5': '0.125rem',  // 2px
+        '1.5': '0.375rem',  // 6px
+        '2.5': '0.625rem',  // 10px
+        '3.5': '0.875rem',  // 14px
+        '4.5': '1.125rem',  // 18px
+        '5.5': '1.375rem',  // 22px
+        '18': '4.5rem',     // 72px
+        '88': '22rem',      // 352px
+        '112': '28rem',     // 448px
+        '128': '32rem',     // 512px
       },
       borderRadius: {
         '4xl': '2rem',

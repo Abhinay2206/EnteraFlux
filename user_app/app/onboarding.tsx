@@ -11,11 +11,12 @@ import {
   Alert,
   Animated,
   ActivityIndicator,
-  Modal,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
+import DateTimePicker from '@react-native-community/datetimepicker';
+import * as Contacts from 'expo-contacts';
 import theme from '../constants/theme';
 import { api, ApiError } from '../utils/api';
 import { useUserStore } from '../store/userStore';
@@ -41,7 +42,11 @@ export default function Onboarding() {
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [height, setHeight] = useState('');
+  const [heightFeet, setHeightFeet] = useState('');
+  const [heightInches, setHeightInches] = useState('');
+  const [heightUnit, setHeightUnit] = useState<'cm' | 'ft'>('cm');
   const [weight, setWeight] = useState('');
+  const [weightUnit, setWeightUnit] = useState<'kg' | 'lbs'>('kg');
   const [providerName, setProviderName] = useState('');
   const [selectedMed, setSelectedMed] = useState('');
   const [selectedDosage, setSelectedDosage] = useState('');
@@ -53,11 +58,8 @@ export default function Onboarding() {
   // Safety acknowledgments
   const [understoodEmergencyCare, setUnderstoodEmergencyCare] = useState(false);
   const [acknowledgedMonitoring, setAcknowledgedMonitoring] = useState(false);
-
-  // Date picker temp values
-  const [tempMonth, setTempMonth] = useState('');
-  const [tempDay, setTempDay] = useState('');
-  const [tempYear, setTempYear] = useState('');
+  const [emergencyContactName, setEmergencyContactName] = useState('');
+  const [emergencyContactPhone, setEmergencyContactPhone] = useState('');
 
   // Animation refs
   const fadeAnim = useRef(new Animated.Value(1)).current;
@@ -73,7 +75,8 @@ export default function Onboarding() {
       animateStepTransition(() => setStep(2));
     } else if (step === 2) {
       // Step 2: Health Information
-      if (!height || !weight) {
+      const hasHeight = heightUnit === 'cm' ? height : (heightFeet && heightInches);
+      if (!hasHeight || !weight) {
         Alert.alert('Required Fields', 'Please provide your height and weight');
         return;
       }
@@ -169,8 +172,8 @@ export default function Onboarding() {
       // Update store
       setUser({ ...userData, onboarding_completed: true });
 
-      // Navigate to dashboard
-      router.replace('/(tabs)/dashboard');
+      // Navigate to home
+      router.replace('/(tabs)/home');
     } catch (error) {
       console.error('Onboarding error:', error);
 
@@ -226,7 +229,7 @@ export default function Onboarding() {
         <Text style={styles.label}>Date of Birth *</Text>
         <TouchableOpacity
           style={styles.datePickerButton}
-          onPress={() => setShowDatePicker(true)}
+          onPress={() => setShowDatePicker(!showDatePicker)}
           activeOpacity={0.7}
         >
           <Ionicons name="calendar-outline" size={20} color={theme.colors.textSecondary} />
@@ -235,6 +238,23 @@ export default function Onboarding() {
           </Text>
           <Ionicons name="chevron-down" size={20} color={theme.colors.textSecondary} />
         </TouchableOpacity>
+        {showDatePicker && (
+          <DateTimePicker
+            value={dateOfBirth || new Date(2000, 0, 1)}
+            mode="date"
+            display={Platform.OS === 'ios' ? 'spinner' : 'default'}
+            onChange={(_event: any, selectedDate?: Date) => {
+              setShowDatePicker(Platform.OS === 'ios');
+              if (selectedDate) {
+                setDateOfBirth(selectedDate);
+              }
+            }}
+            maximumDate={new Date()}
+            minimumDate={new Date(1900, 0, 1)}
+            textColor={theme.colors.textPrimary}
+            accentColor={theme.colors.primary}
+          />
+        )}
       </View>
 
       <View style={styles.inputContainer}>
@@ -251,12 +271,12 @@ export default function Onboarding() {
       </View>
 
       <View style={styles.inputContainer}>
-        <Text style={styles.label}>Phone Number</Text>
+        <Text style={styles.label}>Phone Number (+91)</Text>
         <TextInput
           style={styles.input}
           value={phone}
           onChangeText={setPhone}
-          placeholder="(555) 123-4567"
+          placeholder="(+91) 12345 67890"
           keyboardType="phone-pad"
           placeholderTextColor={theme.colors.textTertiary}
         />
@@ -278,24 +298,79 @@ export default function Onboarding() {
       <Text style={styles.stepSubtitle}>This helps us provide personalized monitoring</Text>
 
       <View style={styles.inputContainer}>
-        <Text style={styles.label}>Height (inches) *</Text>
-        <TextInput
-          style={styles.input}
-          value={height}
-          onChangeText={setHeight}
-          placeholder="e.g., 68"
-          keyboardType="number-pad"
-          placeholderTextColor={theme.colors.textTertiary}
-        />
+        <Text style={styles.label}>Height *</Text>
+        <View style={styles.unitToggle}>
+          <TouchableOpacity
+            style={[styles.unitButton, heightUnit === 'cm' && styles.unitButtonActive]}
+            onPress={() => setHeightUnit('cm')}
+          >
+            <Text style={[styles.unitButtonText, heightUnit === 'cm' && styles.unitButtonTextActive]}>cm</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[styles.unitButton, heightUnit === 'ft' && styles.unitButtonActive]}
+            onPress={() => setHeightUnit('ft')}
+          >
+            <Text style={[styles.unitButtonText, heightUnit === 'ft' && styles.unitButtonTextActive]}>ft + in</Text>
+          </TouchableOpacity>
+        </View>
+        {heightUnit === 'cm' ? (
+          <TextInput
+            style={styles.input}
+            value={height}
+            onChangeText={setHeight}
+            placeholder="e.g., 170"
+            keyboardType="number-pad"
+            placeholderTextColor={theme.colors.textTertiary}
+          />
+        ) : (
+          <View style={styles.heightFeetInchesRow}>
+            <View style={{ flex: 1 }}>
+              <Text style={[styles.label, { fontSize: 11, marginBottom: 4 }]}>Feet</Text>
+              <TextInput
+                style={styles.input}
+                value={heightFeet}
+                onChangeText={setHeightFeet}
+                placeholder="5"
+                keyboardType="number-pad"
+                placeholderTextColor={theme.colors.textTertiary}
+              />
+            </View>
+            <View style={{ flex: 1 }}>
+              <Text style={[styles.label, { fontSize: 11, marginBottom: 4 }]}>Inches</Text>
+              <TextInput
+                style={styles.input}
+                value={heightInches}
+                onChangeText={setHeightInches}
+                placeholder="8"
+                keyboardType="number-pad"
+                placeholderTextColor={theme.colors.textTertiary}
+              />
+            </View>
+          </View>
+        )}
       </View>
 
       <View style={styles.inputContainer}>
-        <Text style={styles.label}>Starting Weight (lbs) *</Text>
+        <Text style={styles.label}>Starting Weight *</Text>
+        <View style={styles.unitToggle}>
+          <TouchableOpacity
+            style={[styles.unitButton, weightUnit === 'kg' && styles.unitButtonActive]}
+            onPress={() => setWeightUnit('kg')}
+          >
+            <Text style={[styles.unitButtonText, weightUnit === 'kg' && styles.unitButtonTextActive]}>kg</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[styles.unitButton, weightUnit === 'lbs' && styles.unitButtonActive]}
+            onPress={() => setWeightUnit('lbs')}
+          >
+            <Text style={[styles.unitButtonText, weightUnit === 'lbs' && styles.unitButtonTextActive]}>lbs</Text>
+          </TouchableOpacity>
+        </View>
         <TextInput
           style={styles.input}
           value={weight}
           onChangeText={setWeight}
-          placeholder="e.g., 180"
+          placeholder={weightUnit === 'kg' ? 'e.g., 70' : 'e.g., 154'}
           keyboardType="number-pad"
           placeholderTextColor={theme.colors.textTertiary}
         />
@@ -508,6 +583,60 @@ export default function Onboarding() {
           </Text>
         </TouchableOpacity>
       </View>
+
+      <View style={styles.inputContainer}>
+        <Text style={styles.label}>Emergency Contact (Optional)</Text>
+        <TouchableOpacity
+          style={styles.contactPickerButton}
+          onPress={async () => {
+            const { status } = await Contacts.requestPermissionsAsync();
+            if (status === 'granted') {
+              const { data } = await Contacts.getContactsAsync({
+                fields: [Contacts.Fields.PhoneNumbers],
+              });
+
+              if (data.length > 0) {
+                // For simplicity, let user pick from a simple list
+                // In production, you'd want a proper contact picker UI
+                Alert.alert(
+                  'Select Contact',
+                  'Contact picker opened. For demo, using first contact.',
+                  [
+                    {
+                      text: 'Cancel',
+                      style: 'cancel',
+                    },
+                    {
+                      text: 'Select First Contact',
+                      onPress: () => {
+                        const contact = data[0];
+                        setEmergencyContactName(contact.name || 'Unknown');
+                        setEmergencyContactPhone(
+                          contact.phoneNumbers?.[0]?.number || ''
+                        );
+                      },
+                    },
+                  ]
+                );
+              } else {
+                Alert.alert('No Contacts', 'No contacts found on your device.');
+              }
+            } else {
+              Alert.alert(
+                'Permission Denied',
+                'Please grant contacts permission to select an emergency contact.'
+              );
+            }
+          }}
+          activeOpacity={0.7}
+        >
+          <Ionicons name="people-outline" size={20} color={theme.colors.textSecondary} />
+          <Text style={[styles.contactPickerText, emergencyContactName && styles.contactPickerTextSelected]}>
+            {emergencyContactName ? `${emergencyContactName} - ${emergencyContactPhone}` : 'Select from contacts'}
+          </Text>
+          <Ionicons name="chevron-forward" size={20} color={theme.colors.textSecondary} />
+        </TouchableOpacity>
+      </View>
     </Animated.View>
   );
 
@@ -642,120 +771,6 @@ export default function Onboarding() {
           </TouchableOpacity>
         </View>
       </KeyboardAvoidingView>
-
-      {/* Date Picker Modal */}
-      <Modal
-        visible={showDatePicker}
-        animationType="fade"
-        transparent={true}
-        onRequestClose={() => setShowDatePicker(false)}
-      >
-        <View style={styles.datePickerModalOverlay}>
-          <View style={styles.datePickerModalContent}>
-            <Text style={styles.datePickerModalTitle}>Select Date of Birth</Text>
-
-            <View style={styles.dateInputRow}>
-              <View style={{ flex: 2 }}>
-                <Text style={[styles.label, { marginBottom: 4, fontSize: 11, textAlign: 'center' }]}>
-                  Month
-                </Text>
-                <TextInput
-                  style={styles.dateInputSmall}
-                  placeholder="MM"
-                  keyboardType="number-pad"
-                  maxLength={2}
-                  value={tempMonth}
-                  onChangeText={setTempMonth}
-                  placeholderTextColor={theme.colors.textTertiary}
-                />
-              </View>
-              <View style={{ flex: 2 }}>
-                <Text style={[styles.label, { marginBottom: 4, fontSize: 11, textAlign: 'center' }]}>
-                  Day
-                </Text>
-                <TextInput
-                  style={styles.dateInputSmall}
-                  placeholder="DD"
-                  keyboardType="number-pad"
-                  maxLength={2}
-                  value={tempDay}
-                  onChangeText={setTempDay}
-                  placeholderTextColor={theme.colors.textTertiary}
-                />
-              </View>
-              <View style={{ flex: 3 }}>
-                <Text style={[styles.label, { marginBottom: 4, fontSize: 11, textAlign: 'center' }]}>
-                  Year
-                </Text>
-                <TextInput
-                  style={styles.dateInputSmall}
-                  placeholder="YYYY"
-                  keyboardType="number-pad"
-                  maxLength={4}
-                  value={tempYear}
-                  onChangeText={setTempYear}
-                  placeholderTextColor={theme.colors.textTertiary}
-                />
-              </View>
-            </View>
-
-            <View style={styles.dateModalButtons}>
-              <TouchableOpacity
-                style={[styles.dateModalButton, styles.dateModalCancelButton]}
-                onPress={() => {
-                  setShowDatePicker(false);
-                  setTempMonth('');
-                  setTempDay('');
-                  setTempYear('');
-                }}
-              >
-                <Text style={[styles.dateModalButtonText, styles.dateModalCancelText]}>
-                  Cancel
-                </Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={[styles.dateModalButton, styles.dateModalConfirmButton]}
-                onPress={() => {
-                  const month = parseInt(tempMonth);
-                  const day = parseInt(tempDay);
-                  const year = parseInt(tempYear);
-
-                  if (!tempMonth || !tempDay || !tempYear) {
-                    Alert.alert('Invalid Date', 'Please fill in all date fields');
-                    return;
-                  }
-
-                  if (month < 1 || month > 12) {
-                    Alert.alert('Invalid Month', 'Month must be between 1-12');
-                    return;
-                  }
-
-                  if (day < 1 || day > 31) {
-                    Alert.alert('Invalid Day', 'Day must be between 1-31');
-                    return;
-                  }
-
-                  if (year < 1900 || year > new Date().getFullYear()) {
-                    Alert.alert('Invalid Year', 'Please enter a valid year');
-                    return;
-                  }
-
-                  const selectedDate = new Date(year, month - 1, day);
-                  setDateOfBirth(selectedDate);
-                  setShowDatePicker(false);
-                  setTempMonth('');
-                  setTempDay('');
-                  setTempYear('');
-                }}
-              >
-                <Text style={[styles.dateModalButtonText, styles.dateModalConfirmText]}>
-                  Confirm
-                </Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </View>
-      </Modal>
     </SafeAreaView>
   );
 }
@@ -1057,67 +1072,55 @@ const styles = StyleSheet.create({
     color: theme.colors.textPrimary,
     fontWeight: '500',
   },
-  // Date Picker Modal Styles
-  datePickerModalOverlay: {
+  unitToggle: {
+    flexDirection: 'row',
+    marginBottom: theme.spacing.sm,
+    backgroundColor: theme.colors.backgroundSecondary,
+    borderRadius: theme.borderRadius.md,
+    padding: 4,
+    gap: 4,
+  },
+  unitButton: {
     flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    paddingVertical: theme.spacing.sm,
+    paddingHorizontal: theme.spacing.md,
+    borderRadius: theme.borderRadius.sm,
+    alignItems: 'center',
     justifyContent: 'center',
-    alignItems: 'center',
   },
-  datePickerModalContent: {
-    backgroundColor: theme.colors.surface,
-    borderRadius: 16,
-    padding: 24,
-    width: '85%',
-    maxWidth: 400,
-  },
-  datePickerModalTitle: {
-    fontSize: 20,
-    fontWeight: '600',
-    color: theme.colors.textPrimary,
-    marginBottom: 20,
-    textAlign: 'center',
-  },
-  dateInputRow: {
-    flexDirection: 'row',
-    gap: 8,
-    marginBottom: 20,
-  },
-  dateInputSmall: {
-    flex: 1,
-    borderWidth: 1,
-    borderColor: theme.colors.border,
-    borderRadius: 8,
-    padding: 12,
-    fontSize: 16,
-    color: theme.colors.textPrimary,
-    backgroundColor: theme.colors.backgroundSecondary,
-    textAlign: 'center',
-  },
-  dateModalButtons: {
-    flexDirection: 'row',
-    gap: 12,
-  },
-  dateModalButton: {
-    flex: 1,
-    paddingVertical: 12,
-    borderRadius: 8,
-    alignItems: 'center',
-  },
-  dateModalCancelButton: {
-    backgroundColor: theme.colors.backgroundSecondary,
-  },
-  dateModalConfirmButton: {
+  unitButtonActive: {
     backgroundColor: theme.colors.primary,
   },
-  dateModalButtonText: {
-    fontSize: 16,
+  unitButtonText: {
+    fontSize: theme.fontSize.sm,
     fontWeight: '600',
+    color: theme.colors.textSecondary,
   },
-  dateModalCancelText: {
-    color: theme.colors.textPrimary,
-  },
-  dateModalConfirmText: {
+  unitButtonTextActive: {
     color: '#FFFFFF',
   },
+  heightFeetInchesRow: {
+    flexDirection: 'row',
+    gap: theme.spacing.sm,
+  },
+  contactPickerButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: theme.colors.border,
+    borderRadius: theme.borderRadius.md,
+    padding: theme.spacing.md,
+    backgroundColor: theme.colors.surface,
+    gap: 12,
+  },
+  contactPickerText: {
+    flex: 1,
+    fontSize: theme.fontSize.md,
+    color: theme.colors.textTertiary,
+  },
+  contactPickerTextSelected: {
+    color: theme.colors.textPrimary,
+    fontWeight: '500',
+  },
+
 });

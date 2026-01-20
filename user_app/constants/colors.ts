@@ -5,7 +5,7 @@
  */
 
 export const Colors = {
-    // Primary - Trust Blue
+    // Primary - Clinical Blue (matching web)
     primary: {
         50: '#EFF6FF',
         100: '#DBEAFE',
@@ -14,23 +14,23 @@ export const Colors = {
         400: '#60A5FA', // Dark mode primary
         500: '#3B82F6',
         600: '#2563EB', // Light mode primary (main brand color)
-        700: '#1E40AF',
-        800: '#1E3A8A',
-        900: '#1E293B',
+        700: '#1D4ED8',
+        800: '#1E40AF',
+        900: '#1E3A8A',
     },
 
     // Success/Medical Green - Safe states
     success: {
-        50: '#ECFDF5',
-        100: '#D1FAE5',
-        200: '#A7F3D0',
-        300: '#6EE7B7',
-        400: '#34D399', // Dark mode
-        500: '#10B981', // Light mode (normal/safe indicator)
-        600: '#059669',
-        700: '#047857',
-        800: '#065F46',
-        900: '#064E3B',
+        50: '#F0FDF4',
+        100: '#DCFCE7',
+        200: '#BBF7D0',
+        300: '#86EFAC',
+        400: '#4ADE80', // Dark mode
+        500: '#22C55E', // Light mode (normal/safe indicator)
+        600: '#16A34A',
+        700: '#15803D',
+        800: '#166534',
+        900: '#14532D',
     },
 
     // Advisory/Elevated Risk - Amber
@@ -91,68 +91,68 @@ export const Colors = {
 
     // Neutral Grays - Medical clarity
     gray: {
-        50: '#F9FAFB',   // Light mode secondary background
-        100: '#F3F4F6',  // Light mode card background
-        200: '#E5E7EB',  // Light mode borders
-        300: '#D1D5DB',  // Light mode disabled
-        400: '#9CA3AF',  // Tertiary text
-        500: '#6B7280',  // Secondary text
-        600: '#4B5563',  // Dark mode borders
-        700: '#374151',  // Dark mode surface 2
-        800: '#1F2937',  // Dark mode surface 1
-        900: '#111827',  // Dark mode card background
-        950: '#030712',  // Dark mode primary background
+        50: '#F8FAFC',   // Light mode secondary background
+        100: '#F1F5F9',  // Light mode card background
+        200: '#E2E8F0',  // Light mode borders
+        300: '#CBD5E1',  // Light mode disabled
+        400: '#94A3B8',  // Tertiary text
+        500: '#64748B',  // Secondary text
+        600: '#475569',  // Dark mode borders
+        700: '#334155',  // Dark mode surface 2
+        800: '#1E293B',  // Dark mode surface 1
+        900: '#0F172A',  // Dark mode card background
+        950: '#020617',  // Dark mode primary background
     },
 
     // Light Mode Palette
     light: {
         // Background
         background: '#FFFFFF',
-        backgroundSecondary: '#F9FAFB',
+        backgroundSecondary: '#F8FAFC',
 
         // Surface
         surface: '#FFFFFF',
-        surfaceElevated: '#F9FAFB',
+        surfaceElevated: '#F8FAFC',
 
         // Text
-        textPrimary: '#111827',
-        textSecondary: '#6B7280',
-        textTertiary: '#9CA3AF',
+        textPrimary: '#0F172A',
+        textSecondary: '#64748B',
+        textTertiary: '#94A3B8',
         textInverse: '#FFFFFF',
 
         // Border
-        border: '#E5E7EB',
-        borderLight: '#F3F4F6',
+        border: '#E2E8F0',
+        borderLight: '#F1F5F9',
 
         // Interactive
         primary: '#2563EB',
-        primaryHover: '#1E40AF',
-        primaryActive: '#1E3A8A',
-        primaryDisabled: '#D1D5DB',
+        primaryHover: '#1D4ED8',
+        primaryActive: '#1E40AF',
+        primaryDisabled: '#CBD5E1',
 
         // Semantic
-        success: '#10B981',
+        success: '#22C55E',
         advisory: '#F59E0B',
         warning: '#F97316',
         error: '#EF4444',
         info: '#3B82F6',
 
         // Alert Backgrounds
-        successBackground: '#ECFDF5',
+        successBackground: '#F0FDF4',
         advisoryBackground: '#FFFBEB',
         warningBackground: '#FFF7ED',
         errorBackground: '#FEF2F2',
         infoBackground: '#EFF6FF',
 
         // Alert Borders
-        successBorder: '#10B981',
+        successBorder: '#22C55E',
         advisoryBorder: '#F59E0B',
         warningBorder: '#F97316',
         errorBorder: '#EF4444',
         infoBorder: '#3B82F6',
 
         // Alert Text
-        successText: '#047857',
+        successText: '#15803D',
         advisoryText: '#92400E',
         warningText: '#9A3412',
         errorText: '#991B1B',
@@ -162,53 +162,53 @@ export const Colors = {
     // Dark Mode Palette
     dark: {
         // Background
-        background: '#030712',
-        backgroundSecondary: '#111827',
+        background: '#020617',
+        backgroundSecondary: '#0F172A',
 
         // Surface (elevation through lightness)
-        surface: '#111827',
-        surfaceElevated: '#1F2937',
-        surfaceElevated2: '#374151',
+        surface: '#0F172A',
+        surfaceElevated: '#1E293B',
+        surfaceElevated2: '#334155',
 
         // Text
-        textPrimary: '#F9FAFB',
-        textSecondary: '#D1D5DB',
-        textTertiary: '#9CA3AF',
-        textInverse: '#111827',
+        textPrimary: '#F8FAFC',
+        textSecondary: '#CBD5E1',
+        textTertiary: '#94A3B8',
+        textInverse: '#0F172A',
 
         // Border
-        border: '#374151',
-        borderLight: '#4B5563',
+        border: '#334155',
+        borderLight: '#475569',
 
         // Interactive
         primary: '#60A5FA',
         primaryHover: '#3B82F6',
         primaryActive: '#2563EB',
-        primaryDisabled: '#4B5563',
+        primaryDisabled: '#475569',
 
         // Semantic
-        success: '#34D399',
+        success: '#4ADE80',
         advisory: '#FCD34D',
         warning: '#FDBA74',
         error: '#FCA5A5',
         info: '#60A5FA',
 
         // Alert Backgrounds
-        successBackground: '#064E3B',
+        successBackground: '#14532D',
         advisoryBackground: '#78350F',
         warningBackground: '#7C2D12',
         errorBackground: '#7F1D1D',
         infoBackground: '#1E3A8A',
 
         // Alert Borders
-        successBorder: '#34D399',
+        successBorder: '#4ADE80',
         advisoryBorder: '#FCD34D',
         warningBorder: '#FDBA74',
         errorBorder: '#FCA5A5',
         infoBorder: '#60A5FA',
 
         // Alert Text
-        successText: '#D1FAE5',
+        successText: '#DCFCE7',
         advisoryText: '#FEF3C7',
         warningText: '#FFEDD5',
         errorText: '#FEE2E2',

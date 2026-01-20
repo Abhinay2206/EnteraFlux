@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   SafeAreaView,
   Image,
+  StatusBar,
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
@@ -19,12 +20,14 @@ export default function Index() {
   useEffect(() => {
     // Check if user exists and onboarding completed
     if (user && user.onboarding_completed) {
-      router.replace('/(tabs)/dashboard');
+      // Navigate to home
+      router.replace('/(tabs)/home');
     }
   }, [user]);
 
   return (
     <SafeAreaView style={styles.container}>
+      <StatusBar barStyle="dark-content" backgroundColor={theme.colors.background} />
       <View style={styles.content}>
         <View style={styles.iconContainer}>
           <Image
@@ -34,26 +37,32 @@ export default function Index() {
           />
         </View>
 
-        <Text style={styles.title}>GLP-1 Sentinel</Text>
-        <Text style={styles.subtitle}>Your Personal Medication Guardian</Text>
+        <Text style={styles.title}>EnteraFlux</Text>
+        <Text style={styles.subtitle}>GLP-1 Therapy Companion</Text>
 
         <View style={styles.features}>
           <View style={styles.feature}>
-            <Ionicons name="heart-outline" size={24} color={theme.colors.secondary} />
+            <View style={[styles.featureIcon, { backgroundColor: theme.colors.palette.success[50] }]}>
+              <Ionicons name="heart" size={20} color={theme.colors.palette.success[600]} />
+            </View>
             <Text style={styles.featureText}>Track Biometrics</Text>
           </View>
           <View style={styles.feature}>
-            <Ionicons name="warning-outline" size={24} color={theme.colors.warning} />
-            <Text style={styles.featureText}>Risk Alerts</Text>
+            <View style={[styles.featureIcon, { backgroundColor: theme.colors.palette.warning[50] }]}>
+              <Ionicons name="shield-checkmark" size={20} color={theme.colors.palette.warning[600]} />
+            </View>
+            <Text style={styles.featureText}>Safety Monitoring</Text>
           </View>
           <View style={styles.feature}>
-            <Ionicons name="clipboard-outline" size={24} color={theme.colors.success} />
-            <Text style={styles.featureText}>Log Symptoms</Text>
+            <View style={[styles.featureIcon, { backgroundColor: theme.colors.palette.primary[50] }]}>
+              <Ionicons name="analytics" size={20} color={theme.colors.palette.primary[600]} />
+            </View>
+            <Text style={styles.featureText}>Symptom Insights</Text>
           </View>
         </View>
 
         <Text style={styles.disclaimer}>
-          This app is designed to support medication adherence and safety.
+          This app supports medication adherence and safety monitoring.
           Always consult your healthcare provider for medical advice.
         </Text>
 
@@ -73,81 +82,98 @@ export default function Index() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: theme.colors.backgroundLight,
+    backgroundColor: theme.colors.background,
   },
   content: {
     flex: 1,
-    padding: theme.spacing.lg,
+    padding: theme.spacing.xl,
     justifyContent: 'center',
     alignItems: 'center',
   },
   iconContainer: {
     marginBottom: theme.spacing.xl,
-    padding: theme.spacing.lg,
-    backgroundColor: theme.colors.background,
+    padding: theme.spacing.xl,
+    backgroundColor: theme.colors.surfaceElevated,
     borderRadius: 100,
-    width: 120,
-    height: 120,
+    width: 140,
+    height: 140,
     justifyContent: 'center',
     alignItems: 'center',
+    ...theme.shadow.lg,
   },
   logo: {
-    width: 80,
-    height: 80,
+    width: 90,
+    height: 90,
   },
   title: {
-    fontSize: theme.fontSize.xxl,
+    fontSize: 32,
     fontWeight: '700',
-    color: theme.colors.primary,
-    marginBottom: theme.spacing.sm,
+    color: theme.colors.textPrimary,
+    marginBottom: theme.spacing.xs,
     textAlign: 'center',
+    letterSpacing: -0.5,
   },
   subtitle: {
     fontSize: theme.fontSize.lg,
     color: theme.colors.textSecondary,
-    marginBottom: theme.spacing.xl,
+    marginBottom: theme.spacing.xxl,
     textAlign: 'center',
+    fontWeight: '500',
   },
   features: {
     width: '100%',
-    marginBottom: theme.spacing.xl,
+    marginBottom: theme.spacing.xxl,
+    gap: theme.spacing.md,
   },
   feature: {
     flexDirection: 'row',
     alignItems: 'center',
-    padding: theme.spacing.md,
-    marginBottom: theme.spacing.sm,
-    backgroundColor: theme.colors.background,
-    borderRadius: theme.borderRadius.md,
+    padding: theme.spacing.lg,
+    backgroundColor: theme.colors.surface,
+    borderRadius: theme.borderRadius.lg,
+    borderWidth: 1,
+    borderColor: theme.colors.border,
+    ...theme.shadow.sm,
+  },
+  featureIcon: {
+    width: 40,
+    height: 40,
+    borderRadius: 12,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: theme.spacing.md,
   },
   featureText: {
     fontSize: theme.fontSize.md,
     color: theme.colors.textPrimary,
-    marginLeft: theme.spacing.md,
     fontWeight: '600',
+    flex: 1,
   },
   disclaimer: {
     fontSize: theme.fontSize.sm,
-    color: theme.colors.textLight,
+    color: theme.colors.textTertiary,
     textAlign: 'center',
-    marginBottom: theme.spacing.xl,
+    marginBottom: theme.spacing.xxl,
     lineHeight: 20,
+    paddingHorizontal: theme.spacing.md,
   },
   button: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: theme.colors.primary,
-    paddingVertical: theme.spacing.md,
-    paddingHorizontal: theme.spacing.xl,
+    paddingVertical: theme.spacing.lg,
+    paddingHorizontal: theme.spacing.xxl,
     borderRadius: theme.borderRadius.lg,
     width: '100%',
-    minHeight: 48,
+    minHeight: 56,
+    ...theme.shadow.md,
   },
   buttonText: {
     fontSize: theme.fontSize.lg,
     fontWeight: '600',
     color: '#FFFFFF',
     marginRight: theme.spacing.sm,
+    letterSpacing: 0.3,
   },
 });
