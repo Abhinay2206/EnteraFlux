@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import Section from '../components/Section';
 import Timeline from '../components/Timeline';
 import Badge from '../components/Badge';
@@ -5,6 +6,10 @@ import ScrollReveal from '../components/ScrollReveal';
 import { TIMELINE_PHASES } from '../data/content';
 
 export default function Roadmap() {
+    useEffect(() => {
+        document.title = 'Roadmap - EnteraFlux';
+    }, []);
+
     return (
         <div>
             <Section

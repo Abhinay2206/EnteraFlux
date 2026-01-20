@@ -1,9 +1,14 @@
+import { useEffect } from 'react';
 import Section from '../components/Section';
 import Badge from '../components/Badge';
 import ScrollReveal from '../components/ScrollReveal';
 import { AlertTriangle, Shield, FileText, Lock } from 'lucide-react';
 
 export default function Legal() {
+    useEffect(() => {
+        document.title = 'Legal - EnteraFlux';
+    }, []);
+
     return (
         <div>
             <Section

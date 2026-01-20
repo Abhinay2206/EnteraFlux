@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import Section from '../components/Section';
 import CTA from '../components/CTA';
 import ScrollReveal from '../components/ScrollReveal';
@@ -5,6 +6,10 @@ import { Database, FileText, Shield, Users, FlaskConical, TrendingUp } from 'luc
 import PharmacovigilanceChart from '../components/visualizations/PharmacovigilanceChart';
 
 export default function Research() {
+    useEffect(() => {
+        document.title = 'Research - EnteraFlux';
+    }, []);
+
     return (
         <div>
             <Section

@@ -1,9 +1,14 @@
+import { useEffect } from 'react';
 import Section from '../components/Section';
 import ScrollReveal from '../components/ScrollReveal';
 import { Activity, Heart, Brain, Moon, TrendingUp, Database } from 'lucide-react';
 import MechanismAction from '../components/visualizations/MechanismAction';
 
 export default function Science() {
+    useEffect(() => {
+        document.title = 'Science - EnteraFlux';
+    }, []);
+
     return (
         <div>
             <Section

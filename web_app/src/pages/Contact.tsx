@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import Section from '../components/Section';
 import ScrollReveal from '../components/ScrollReveal';
@@ -7,6 +7,10 @@ import { Mail, User, Building, MessageSquare } from 'lucide-react';
 type UserRole = 'patient' | 'researcher' | 'clinician' | 'investor' | 'partner';
 
 export default function Contact() {
+    useEffect(() => {
+        document.title = 'Contact - EnteraFlux';
+    }, []);
+
     const [searchParams] = useSearchParams();
     const [formData, setFormData] = useState({
         name: '',

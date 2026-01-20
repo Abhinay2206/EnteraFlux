@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import Section from '../components/Section';
 import ModuleCard from '../components/ModuleCard';
 import ResponsiveGrid from '../components/ResponsiveGrid';
@@ -6,6 +7,10 @@ import { MODULES } from '../data/content';
 import ModulesIntegration from '../components/visualizations/ModulesIntegration';
 
 export default function Modules() {
+    useEffect(() => {
+        document.title = 'Modules - EnteraFlux';
+    }, []);
+
     return (
         <div>
             <Section

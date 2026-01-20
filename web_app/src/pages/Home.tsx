@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import Hero from '../components/Hero';
 import Section from '../components/Section';
 import ModuleCard from '../components/ModuleCard';
@@ -11,6 +12,10 @@ import AnalyticsGraph from '../components/visualizations/AnalyticsGraph';
 import BioMarkersVisualization from '../components/visualizations/BioMarkersVisualization';
 
 export default function Home() {
+    useEffect(() => {
+        document.title = 'EnteraFlux';
+    }, []);
+
     return (
         <div>
             {/* Hero Section */}
