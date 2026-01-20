@@ -31,15 +31,18 @@ export default function Navbar() {
                         <Link to="/" className="flex items-center gap-3 group relative">
                             <div className="relative">
                                 <div className="absolute inset-0 bg-primary-500 rounded-xl blur-md opacity-0 group-hover:opacity-50 transition-opacity duration-500" />
-                                <div className="relative w-10 h-10 rounded-xl bg-gradient-to-br from-primary-500 via-primary-600 to-primary-700 flex items-center justify-center group-hover:from-primary-600 group-hover:via-primary-700 group-hover:to-primary-800 transition-all duration-500 group-hover:scale-110 group-hover:rotate-3 shadow-lg shadow-primary-600/30">
-                                    <span className="text-white font-bold text-base tracking-tight">EF</span>
+                                <div className="relative w-10 h-10 rounded-xl overflow-hidden group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-lg shadow-primary-600/30">
+                                    <img
+                                        src="/logo.png"
+                                        alt="EnteraFlux Logo"
+                                        className="w-full h-full object-contain"
+                                    />
                                 </div>
                             </div>
-                            <div className="flex flex-col">
-                                <span className="text-xl font-bold bg-gradient-to-r from-neutral-900 to-neutral-700 bg-clip-text text-transparent group-hover:from-primary-600 group-hover:to-primary-700 transition-all duration-500 dark:from-white dark:to-neutral-200 dark:group-hover:from-primary-400 dark:group-hover:to-primary-500 tracking-tight">
+                            <div className="flex flex-col justify-center">
+                                <span className="text-xl font-bold bg-gradient-to-r from-neutral-900 to-neutral-700 bg-clip-text text-transparent group-hover:from-primary-600 group-hover:to-primary-700 transition-all duration-500 dark:from-white dark:to-neutral-200 dark:group-hover:from-primary-400 dark:group-hover:to-primary-500 tracking-tight leading-none">
                                     EnteraFlux
                                 </span>
-                                <span className="text-[10px] font-medium text-neutral-500 dark:text-neutral-400 tracking-wider uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-300 -mt-0.5">Medical AI</span>
                             </div>
                         </Link>
 

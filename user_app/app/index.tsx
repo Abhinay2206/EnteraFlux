@@ -5,6 +5,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   SafeAreaView,
+  Image,
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
@@ -26,7 +27,11 @@ export default function Index() {
     <SafeAreaView style={styles.container}>
       <View style={styles.content}>
         <View style={styles.iconContainer}>
-          <Ionicons name="shield-checkmark" size={80} color={theme.colors.primary} />
+          <Image
+            source={require('../assets/images/logo.png')}
+            style={styles.logo}
+            resizeMode="contain"
+          />
         </View>
 
         <Text style={styles.title}>GLP-1 Sentinel</Text>
@@ -81,6 +86,14 @@ const styles = StyleSheet.create({
     padding: theme.spacing.lg,
     backgroundColor: theme.colors.background,
     borderRadius: 100,
+    width: 120,
+    height: 120,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  logo: {
+    width: 80,
+    height: 80,
   },
   title: {
     fontSize: theme.fontSize.xxl,
