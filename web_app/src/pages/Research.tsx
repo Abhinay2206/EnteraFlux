@@ -1,191 +1,497 @@
 import { useEffect } from 'react';
 import Section from '../components/Section';
-import CTA from '../components/CTA';
 import ScrollReveal from '../components/ScrollReveal';
-import { Database, FileText, Shield, Users, FlaskConical, TrendingUp } from 'lucide-react';
+import Badge from '../components/Badge';
+import CTA from '../components/CTA';
+import {
+    FlaskConical,
+    BookOpen,
+    ShieldCheck,
+    TrendingUp,
+    Users,
+    Brain,
+    Heart,
+    Activity,
+    Dumbbell,
+    ArrowRight,
+    CheckCircle2,
+    Globe,
+    FileText,
+    Building2,
+    Lightbulb,
+    Target,
+    BarChart3,
+    ChevronRight,
+} from 'lucide-react';
 import PharmacovigilanceChart from '../components/visualizations/PharmacovigilanceChart';
 
 export default function Research() {
     useEffect(() => {
-        document.title = 'Research - EnteraFlux';
+        document.title = 'Research — EnteraFlux';
     }, []);
+
+    const researchPillars = [
+        {
+            icon: Heart,
+            title: 'GLP-1 Side-Effect Patterns',
+            desc: 'Published clinical trials document nausea, fatigue, and muscle loss in 40–50% of GLP-1 users. We map wearable signals against these known patterns — not to diagnose, but to help users notice and respond.',
+            papers: 3,
+            accent: 'from-primary-500 to-primary-600',
+            bgLight: 'bg-primary-50',
+            bgDark: 'dark:bg-primary-500/10',
+            textLight: 'text-primary-600',
+            textDark: 'dark:text-primary-400',
+        },
+        {
+            icon: Activity,
+            title: 'HRV & Autonomic Response',
+            desc: 'Heart rate variability reflects autonomic nervous system balance. Research shows GLP-1 agonists can modulate vagal tone — we use HRV trends to surface recovery readiness and stress resilience.',
+            papers: 5,
+            accent: 'from-success-500 to-success-600',
+            bgLight: 'bg-success-50',
+            bgDark: 'dark:bg-success-500/10',
+            textLight: 'text-success-600',
+            textDark: 'dark:text-success-400',
+        },
+        {
+            icon: Dumbbell,
+            title: 'Sarcopenia & Muscle Preservation',
+            desc: 'Rapid weight loss from GLP-1 therapy can accelerate muscle loss — especially in Indians with the "thin-fat" phenotype. Our protein guidance is informed by sports nutrition and metabolic research.',
+            papers: 4,
+            accent: 'from-warning-500 to-warning-600',
+            bgLight: 'bg-warning-50',
+            bgDark: 'dark:bg-warning-500/10',
+            textLight: 'text-warning-600',
+            textDark: 'dark:text-warning-400',
+        },
+        {
+            icon: Brain,
+            title: 'Sleep Architecture & Medication Timing',
+            desc: 'Weight loss and GLP-1 medications can alter deep sleep and REM ratios. We surface sleep-stage trends so users can explore whether dose timing affects their rest quality.',
+            papers: 2,
+            accent: 'from-info-500 to-info-600',
+            bgLight: 'bg-info-50',
+            bgDark: 'dark:bg-info-500/10',
+            textLight: 'text-info-600',
+            textDark: 'dark:text-info-400',
+        },
+    ];
+
+    const validationApproach = [
+        {
+            step: '01',
+            title: 'Literature Review',
+            desc: 'Every signal we track and every nudge we generate is grounded in peer-reviewed clinical trial data — primarily from STEP, SUSTAIN, and SURPASS programmes.',
+            icon: BookOpen,
+        },
+        {
+            step: '02',
+            title: 'Clinical Advisory Input',
+            desc: 'We consult with endocrinologists, sports nutritionists, and wearable-health researchers to validate our interpretation of biometric patterns.',
+            icon: Users,
+        },
+        {
+            step: '03',
+            title: 'Personal Baseline Calibration',
+            desc: 'Instead of population averages, we calibrate to each user\'s personal norms over a 2-week learning period — making insights individually relevant.',
+            icon: Target,
+        },
+        {
+            step: '04',
+            title: 'Continuous Validation',
+            desc: 'As we onboard beta users in Q3 2026, we\'ll gather anonymised feedback to refine our pattern-matching and improve guidance quality over time.',
+            icon: TrendingUp,
+        },
+    ];
+
+    const futurePlans = [
+        {
+            phase: 'Phase 2A',
+            date: '2027',
+            title: 'Pharma & Research Partnerships',
+            desc: 'Aggregate, anonymised wellness data from Indian GLP-1 users — helping pharma companies understand real-world medication patterns in the Indian population.',
+            icon: Building2,
+            features: [
+                'Real-world wellness data dashboards for pharma R&D teams',
+                'Anonymised cohort analysis by medication type, dosage, and demographics',
+                'Signal detection for emerging side-effect patterns in Indian users',
+                'API access for approved research partners',
+            ],
+        },
+        {
+            phase: 'Phase 2B',
+            date: '2027',
+            title: 'Corporate Wellness Programs',
+            desc: 'Offer GLP-1 lifestyle support as an employee wellness benefit — integrated with corporate health insurance and HR platforms.',
+            icon: Users,
+            features: [
+                'Employer-sponsored GLP-1 wellness programmes',
+                'Aggregate wellness analytics for HR teams (no individual data)',
+                'Integration with Indian health insurance providers',
+                'Employee engagement and adherence tracking',
+            ],
+        },
+        {
+            phase: 'Phase 2C',
+            date: '2027+',
+            title: 'Drug Authenticity Verification',
+            desc: 'Help users verify that their GLP-1 medication is genuine — critical as generics flood the Indian market after patent expiry.',
+            icon: ShieldCheck,
+            features: [
+                'QR / batch-code scanning for medication verification',
+                'Database of approved GLP-1 generics in India',
+                'Counterfeit reporting and community alerts',
+                'Partnership with CDSCO and pharma manufacturers',
+            ],
+        },
+    ];
+
+    const keyStudies = [
+        { title: 'STEP Trials (Novo Nordisk)', journal: 'NEJM, 2021–2023', finding: 'Semaglutide achieves 15–17% weight loss — but 44% of users report nausea, and lean mass loss is a documented concern.' },
+        { title: 'SUSTAIN Programme', journal: 'Lancet Diabetes, 2017–2022', finding: 'Long-term GLP-1 use shows cardiovascular benefits, but gastrointestinal side effects drive discontinuation in >50% of users within Year 1.' },
+        { title: 'SURPASS Trials (Eli Lilly)', journal: 'NEJM, 2022–2024', finding: 'Tirzepatide shows up to 22% weight loss — raising the importance of muscle-preservation strategies during rapid weight loss.' },
+        { title: 'Indian "Thin-Fat" Phenotype Research', journal: 'Lancet, multiple studies', finding: 'Indians have higher visceral fat and lower muscle mass at the same BMI compared to Western populations — making sarcopenia prevention especially critical.' },
+        { title: 'HRV & Autonomic Modulation by GLP-1', journal: 'Diabetes Care, 2020', finding: 'GLP-1 receptor agonists modulate vagal tone, with measurable effects on heart rate variability — supporting HRV as a relevant biometric signal.' },
+    ];
 
     return (
         <div>
+            {/* ── Hero ── */}
             <Section
-                title="Research & Regulatory Partnerships"
-                subtitle="Enabling safer GLP-1 therapies through validated real-world evidence infrastructure"
+                label="Research"
+                title="Research Foundation & What's Next"
+                subtitle="Everything we build is grounded in published research — and here's where we're headed"
                 variant="gradient"
                 firstSection
             >
-                <ScrollReveal delay={200} direction="up">
-                    <div className="max-w-4xl mx-auto">
-                        <p className="text-lg text-neutral-700 dark:text-neutral-300 leading-relaxed mb-8">
-                            EnteraFlux is built to bridge the gap between clinical trial efficacy and real-world safety. We provide Clinical Research Organizations (CROs), academic institutions, pharmaceutical manufacturers, and regulators with the high-fidelity data infrastructure needed to advance metabolic therapy safety and post-market surveillance.
-                        </p>
-                    </div>
-                </ScrollReveal>
-            </Section>
-
-            <Section title="Ecosystem Infrastructure" variant="dark">
-                <div className="max-w-6xl mx-auto">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <ScrollReveal delay={100} direction="up">
-                            <div className="glass rounded-xl p-8 hover-lift cursor-default premium-card">
-                                <Users className="w-12 h-12 text-primary-400 mb-4" />
-                                <h3 className="text-xl font-bold mb-3">Precision Cohort Matching</h3>
-                                <p className="text-neutral-600 dark:text-neutral-400 mb-4">
-                                    Accelerate recruitment by identifying eligible patients based on granular physiological phenotypes, not just demographic data.
-                                </p>
-                                <div className="bg-neutral-50 dark:bg-neutral-800/50 rounded-lg p-4">
-                                    <h4 className="font-semibold text-sm mb-2 text-primary-500">Capabilities</h4>
-                                    <ul className="space-y-2 text-sm text-neutral-600 dark:text-neutral-400">
-                                        <li>• Physiological phenotyping (e.g., "High HRV Responders")</li>
-                                        <li>• Automated inclusion/exclusion screening</li>
-                                        <li>• Direct-to-patient digital consent workflows</li>
-                                        <li>• Real-time enrollment and retention dashboards</li>
-                                    </ul>
+                <div className="max-w-5xl mx-auto">
+                    <ScrollReveal effect="rise" duration={1000}>
+                        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary-600 via-primary-700 to-primary-800 dark:from-primary-700 dark:via-primary-800 dark:to-primary-900 p-8 sm:p-12 text-white shadow-2xl shadow-primary-600/20">
+                            <div className="absolute -top-20 -right-20 w-60 h-60 bg-white/[0.06] rounded-full blur-2xl" />
+                            <div className="absolute -bottom-16 -left-16 w-48 h-48 bg-white/[0.04] rounded-full blur-2xl" />
+                            <div className="relative z-10">
+                                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/10 text-xs font-semibold tracking-wide mb-6">
+                                    <FlaskConical className="w-3 h-3" />
+                                    Research-Informed, Not Research-Claiming
                                 </div>
-                            </div>
-                        </ScrollReveal>
-
-                        <ScrollReveal delay={200} direction="up">
-                            <div className="glass rounded-xl p-8 hover-lift cursor-default premium-card">
-                                <Database className="w-12 h-12 text-primary-400 mb-4" />
-                                <h3 className="text-xl font-bold mb-3">Interoperable Data Exchange</h3>
-                                <p className="text-neutral-600 dark:text-neutral-400 mb-4">
-                                    Break down data silos with our API-first, standards-based architecture designed for seamless EDC integration.
+                                <p className="text-lg sm:text-xl leading-relaxed text-white/90 mb-4">
+                                    EnteraFlux is a wellness app — not a clinical tool. We don't diagnose, treat, or predict medical outcomes. But every feature we build is grounded in published clinical data and validated physiological principles.
                                 </p>
-                                <div className="bg-neutral-50 dark:bg-neutral-800/50 rounded-lg p-4">
-                                    <h4 className="font-semibold text-sm mb-2 text-primary-500">Technical Specs</h4>
-                                    <ul className="space-y-2 text-sm text-neutral-600 dark:text-neutral-400">
-                                        <li>• HL7 FHIR R4 standard compliance</li>
-                                        <li>• RESTful API endpoints for raw and aggregate data</li>
-                                        <li>• Secure webhooks for real-time event triggers</li>
-                                        <li>• Automated EDC population (RedCap, Medidata)</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </ScrollReveal>
-
-                        <ScrollReveal delay={300} direction="up">
-                            <div className="glass rounded-xl p-8 hover-lift cursor-default premium-card">
-                                <FlaskConical className="w-12 h-12 text-primary-400 mb-4" />
-                                <h3 className="text-xl font-bold mb-3">Real-World Evidence (RWE)</h3>
-                                <p className="text-neutral-600 dark:text-neutral-400 mb-4">
-                                    Capture high-fidelity physiological data outside controlled trial environments to supplement RCT findings and support label expansion.
-                                </p>
-                                <div className="bg-neutral-50 dark:bg-neutral-800/50 rounded-lg p-4">
-                                    <h4 className="font-semibold text-sm mb-2 text-primary-500">Data Assets</h4>
-                                    <ul className="space-y-2 text-sm text-neutral-600 dark:text-neutral-400">
-                                        <li>• Continuous longitudinal biomarker streams</li>
-                                        <li>• Context-aware patient reported outcomes (ePRO)</li>
-                                        <li>• Medication adherence verificaton</li>
-                                        <li>• Synthetic control arm generation</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </ScrollReveal>
-
-                        <ScrollReveal delay={400} direction="up">
-                            <div className="glass rounded-xl p-8 hover-lift cursor-default premium-card">
-                                <Shield className="w-12 h-12 text-primary-400 mb-4" />
-                                <h3 className="text-xl font-bold mb-3">Regulatory-Grade Compliance</h3>
-                                <p className="text-neutral-600 dark:text-neutral-400 mb-4">
-                                    Ensure data integrity and patient safety with our robust quality management and compliance framework.
-                                </p>
-                                <div className="bg-neutral-50 dark:bg-neutral-800/50 rounded-lg p-4">
-                                    <h4 className="font-semibold text-sm mb-2 text-primary-500">Standards</h4>
-                                    <ul className="space-y-2 text-sm text-neutral-600 dark:text-neutral-400">
-                                        <li>• 21 CFR Part 11 ready audit trails</li>
-                                        <li>• Full data provenance and chain of custody</li>
-                                        <li>• HIPAA & GDPR compliant architecture</li>
-                                        <li>• ISO 27001 security controls (Roadmap)</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </ScrollReveal>
-                    </div>
-
-                    <div className="mt-16 text-center">
-                        <CTA text="Partner with Us (CRO)" href="/contact?type=researcher" variant="primary" />
-                    </div>
-                </div>
-            </Section>
-
-            <Section title="Data Fidelity & Quality" variant="default">
-                <div className="max-w-4xl mx-auto text-center mb-12">
-                    <p className="text-neutral-700 dark:text-neutral-300">
-                        We don't just aggregate data; we standardize and enrich it. EnteraFlux ingests raw sensor data at the highest available sampling rates supported by consumer hardware, applying clinical-grade signal processing to ensure research readiness.
-                    </p>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-                    <div className="card p-6 text-center">
-                        <div className="text-3xl font-bold text-primary-600 dark:text-primary-400 mb-2">High-Res</div>
-                        <div className="text-sm font-semibold mb-2">Sampling Rate</div>
-                        <p className="text-xs text-neutral-500">Ingestion of beat-to-beat intervals (RR intervals) where supported for precise HRV calculation.</p>
-                    </div>
-                    <div className="card p-6 text-center">
-                        <div className="text-3xl font-bold text-primary-600 dark:text-primary-400 mb-2">Meta-Data</div>
-                        <div className="text-sm font-semibold mb-2">Contextual Enrichment</div>
-                        <p className="text-xs text-neutral-500">All samples tagged with device source, confidence intervals, and user activity state (sleep/wake/motion).</p>
-                    </div>
-                    <div className="card p-6 text-center">
-                        <div className="text-3xl font-bold text-primary-600 dark:text-primary-400 mb-2">Clean</div>
-                        <div className="text-sm font-semibold mb-2">Artifact Removal</div>
-                        <p className="text-xs text-neutral-500">Automated filtering of signal noise and motion artifacts to maximize signal-to-noise ratio.</p>
-                    </div>
-                </div>
-            </Section>
-
-            <Section title="Pharmacovigilance Intelligence" variant="dark">
-                <div className="max-w-4xl mx-auto">
-                    <div className="glass rounded-xl p-8 mb-8">
-                        <TrendingUp className="w-12 h-12 text-secondary-400 mb-4" />
-                        <h3 className="text-2xl font-bold mb-4">Digital Pharmacovigilance (Digital PV)</h3>
-                        <p className="text-neutral-700 dark:text-neutral-300 mb-6">
-                            Traditional pharmacovigilance relies on passive, retrospective reporting. EnteraFlux actively monitors the "digital pulse" of the GLP-1 patient population to detect safety signals <strong>months earlier</strong> than traditional channels.
-                        </p>
-                        <div className="mb-12">
-                            <PharmacovigilanceChart />
-                        </div>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                            <div className="bg-white/50 dark:bg-black/20 rounded-xl p-5">
-                                <h4 className="font-bold text-primary-400 mb-2">NLP Sentiment Analysis</h4>
-                                <p className="text-sm text-neutral-600 dark:text-neutral-400">
-                                    Advanced Natural Language Processing (NLP) models scan millions of social posts to extract adverse event mentions and sentiment shifts.
-                                </p>
-                            </div>
-                            <div className="bg-white/50 dark:bg-black/20 rounded-xl p-5">
-                                <h4 className="font-bold text-primary-400 mb-2">Community Pattern Detection</h4>
-                                <p className="text-sm text-neutral-600 dark:text-neutral-400">
-                                    Identification of symptom clusters in communities like r/Ozempic and r/Mounjaro that may indicate batch issues or novel side effects.
-                                </p>
-                            </div>
-                            <div className="bg-white/50 dark:bg-black/20 rounded-xl p-5">
-                                <h4 className="font-bold text-primary-400 mb-2">Automated Literature Review</h4>
-                                <p className="text-sm text-neutral-600 dark:text-neutral-400">
-                                    Continuous scanning of PubMed and clinical trial registries to correlate digital signals with emerging clinical findings.
+                                <p className="text-sm text-white/60 leading-relaxed max-w-3xl">
+                                    This page explains the research behind our approach, our validation methodology, and our plans for Phase 2 — where we'll bring enterprise-grade tools to pharma companies, employers, and researchers working in the Indian GLP-1 space.
                                 </p>
                             </div>
                         </div>
-                    </div>
+                    </ScrollReveal>
+                </div>
+            </Section>
 
-                    <div className="glass rounded-xl p-8">
-                        <FileText className="w-12 h-12 text-accent-400 mb-4" />
-                        <h3 className="text-xl font-bold mb-3">Regulatory Reporting Integration</h3>
-                        <p className="text-neutral-600 dark:text-neutral-400 mb-4">
-                            We transform unstructured data into structured, regulatory-ready formats to streamline safety reporting workflows.
-                        </p>
-                        <ul className="space-y-2 text-sm text-neutral-600 dark:text-neutral-400">
-                            <li>• Mapping to MedDRA (Medical Dictionary for Regulatory Activities) terms</li>
-                            <li>• E2B(R3) compatible export formats for ICSRs</li>
-                            <li>• Automated signal strength scoring and prioritization</li>
-                        </ul>
+            {/* ── Research Pillars: 2x2 grid ── */}
+            <Section
+                label="Research Basis"
+                title="What Our Science Rests On"
+                subtitle="Four areas of published research inform every feature in EnteraFlux"
+                variant="dark"
+            >
+                <div className="max-w-5xl mx-auto">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        {researchPillars.map((pillar, i) => (
+                            <ScrollReveal key={i} delay={i * 100} effect="flip-up">
+                                <div className="group p-6 rounded-2xl border border-neutral-200/50 dark:border-white/[0.06] bg-white/60 dark:bg-white/[0.02] backdrop-blur-sm hover:border-primary-200 dark:hover:border-primary-500/20 transition-all duration-300 h-full relative overflow-hidden">
+                                    {/* Top accent bar */}
+                                    <div className={`absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r ${pillar.accent} opacity-70`} />
+                                    <div className="flex items-start gap-4 mb-4">
+                                        <div className={`w-11 h-11 rounded-xl ${pillar.bgLight} ${pillar.bgDark} flex items-center justify-center flex-shrink-0`}>
+                                            <pillar.icon className={`w-5 h-5 ${pillar.textLight} ${pillar.textDark}`} />
+                                        </div>
+                                        <div className="flex-1 min-w-0">
+                                            <h3 className="text-sm font-bold text-neutral-900 dark:text-white mb-1 leading-snug">{pillar.title}</h3>
+                                            <div className="flex items-center gap-1.5 text-[10px] text-neutral-400 dark:text-neutral-500">
+                                                <FileText className="w-3 h-3" />
+                                                <span>{pillar.papers}+ peer-reviewed references</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p className="text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed">{pillar.desc}</p>
+                                </div>
+                            </ScrollReveal>
+                        ))}
                     </div>
                 </div>
             </Section>
 
+            {/* ── Key Studies: Numbered list ── */}
+            <Section
+                label="Evidence"
+                title="Key Studies We Reference"
+                subtitle="The clinical trials and research papers that inform our approach"
+                variant="default"
+            >
+                <div className="max-w-4xl mx-auto space-y-4">
+                    {keyStudies.map((study, i) => (
+                        <ScrollReveal key={i} delay={i * 80} effect="rise">
+                            <div className="group flex items-start gap-5 p-5 rounded-2xl border border-neutral-200/50 dark:border-white/[0.06] bg-white/60 dark:bg-white/[0.02] backdrop-blur-sm hover:border-primary-300 dark:hover:border-primary-500/20 transition-all duration-300 relative overflow-hidden">
+                                {/* Left accent */}
+                                <div className="absolute left-0 top-0 bottom-0 w-[3px] bg-gradient-to-b from-primary-400 to-primary-600 opacity-50 group-hover:opacity-100 transition-opacity" />
+                                <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-primary-50 dark:bg-primary-500/10 flex items-center justify-center text-sm font-bold text-primary-600 dark:text-primary-400">
+                                    {String(i + 1).padStart(2, '0')}
+                                </div>
+                                <div className="flex-1 min-w-0">
+                                    <div className="flex items-start justify-between gap-3 mb-1.5">
+                                        <h3 className="text-sm font-bold text-neutral-900 dark:text-white leading-snug">{study.title}</h3>
+                                    </div>
+                                    <p className="text-[11px] text-primary-500 dark:text-primary-400 font-medium mb-2">{study.journal}</p>
+                                    <p className="text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed">{study.finding}</p>
+                                </div>
+                                <ChevronRight className="w-4 h-4 text-neutral-300 dark:text-neutral-600 flex-shrink-0 mt-3 group-hover:text-primary-500 dark:group-hover:text-primary-400 transition-colors" />
+                            </div>
+                        </ScrollReveal>
+                    ))}
+
+                    <ScrollReveal delay={500} effect="blur-in">
+                        <p className="text-center text-xs text-neutral-400 dark:text-neutral-500 mt-6">
+                            We reference peer-reviewed publications only. We do not make clinical claims based on our own data at this stage.
+                        </p>
+                    </ScrollReveal>
+                </div>
+            </Section>
+
+            {/* ── Validation Approach: Connected steps ── */}
+            <Section
+                label="Our Method"
+                title="How We Validate What We Build"
+                subtitle="A structured approach to ensuring our wellness guidance is meaningful and grounded"
+                variant="gradient"
+            >
+                <div className="max-w-5xl mx-auto">
+                    <div className="relative">
+                        {/* Connection line — desktop */}
+                        <div className="hidden lg:block absolute top-[52px] left-[calc(12.5%+20px)] right-[calc(12.5%+20px)] h-px bg-gradient-to-r from-primary-200 via-success-300 to-warning-200 dark:from-primary-800 dark:via-success-600 dark:to-warning-800" />
+
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                            {validationApproach.map((item, i) => (
+                                <ScrollReveal key={i} delay={i * 120} effect="elastic-scale">
+                                    <div className="relative text-center group">
+                                        <div className="relative z-10 w-[104px] h-[104px] mx-auto mb-6 rounded-2xl bg-gradient-to-br from-white to-primary-50/40 dark:from-white/[0.04] dark:to-primary-500/[0.06] border border-primary-200/50 dark:border-primary-500/20 flex flex-col items-center justify-center shadow-sm shadow-primary-500/[0.05] group-hover:border-primary-400 dark:group-hover:border-primary-500/40 group-hover:shadow-lg group-hover:shadow-primary-500/[0.1] transition-all duration-300">
+                                            <span className="text-[10px] font-bold text-primary-500 dark:text-primary-400 uppercase tracking-widest mb-1.5">{item.step}</span>
+                                            <item.icon className="w-7 h-7 text-neutral-600 dark:text-neutral-400 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors" />
+                                        </div>
+                                        <h3 className="text-sm font-bold text-neutral-900 dark:text-white mb-2">{item.title}</h3>
+                                        <p className="text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed max-w-[220px] mx-auto">{item.desc}</p>
+                                    </div>
+                                </ScrollReveal>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            </Section>
+
+            {/* ── Signal Detection Viz ── */}
+            <Section
+                label="Phase 2 Preview"
+                title="Real-World Signal Detection"
+                subtitle="In Phase 2, we'll aggregate anonymised wellness data to help pharma and researchers understand GLP-1 patterns in India"
+                variant="dark"
+            >
+                <div className="max-w-5xl mx-auto">
+                    <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 items-start">
+                        <div className="lg:col-span-3">
+                            <ScrollReveal delay={100} effect="zoom-in" duration={1000}>
+                                <div className="rounded-2xl overflow-hidden border border-neutral-200/40 dark:border-white/[0.06]">
+                                    <PharmacovigilanceChart />
+                                </div>
+                            </ScrollReveal>
+                        </div>
+
+                        <div className="lg:col-span-2 space-y-5">
+                            <ScrollReveal delay={150} effect="slide-rotate">
+                                <div className="p-5 rounded-2xl border border-warning-200/40 dark:border-warning-500/15 bg-white/60 dark:bg-white/[0.02] backdrop-blur-sm relative overflow-hidden">
+                                    {/* Top accent */}
+                                    <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-warning-400 to-warning-600 opacity-70" />
+                                    <div className="flex items-center gap-3 mb-4">
+                                        <div className="w-9 h-9 rounded-lg bg-warning-50 dark:bg-warning-500/10 flex items-center justify-center">
+                                            <BarChart3 className="w-5 h-5 text-warning-600 dark:text-warning-400" />
+                                        </div>
+                                        <h3 className="text-sm font-bold text-neutral-900 dark:text-white">Population-Level Insights</h3>
+                                    </div>
+                                    <p className="text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed">
+                                        Aggregated, anonymised data from thousands of Indian GLP-1 users — revealing side-effect patterns, adherence trends, and lifestyle factors unique to the Indian population.
+                                    </p>
+                                </div>
+                            </ScrollReveal>
+
+                            <ScrollReveal delay={250} effect="tilt-in">
+                                <div className="p-5 rounded-2xl border border-primary-200/40 dark:border-primary-500/15 bg-white/60 dark:bg-white/[0.02] backdrop-blur-sm relative overflow-hidden">
+                                    {/* Top accent */}
+                                    <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-primary-400 to-primary-600 opacity-70" />
+                                    <div className="flex items-center gap-3 mb-4">
+                                        <div className="w-9 h-9 rounded-lg bg-primary-50 dark:bg-primary-500/10 flex items-center justify-center">
+                                            <Globe className="w-5 h-5 text-primary-600 dark:text-primary-400" />
+                                        </div>
+                                        <h3 className="text-sm font-bold text-neutral-900 dark:text-white">India-First Data</h3>
+                                    </div>
+                                    <p className="text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed">
+                                        Most GLP-1 research comes from Western populations. EnteraFlux will generate India-specific wellness data — covering Indian diets, lifestyles, and the "thin-fat" phenotype.
+                                    </p>
+                                </div>
+                            </ScrollReveal>
+
+                            <ScrollReveal delay={350} effect="flip-up">
+                                <div className="p-5 rounded-2xl border border-success-200/40 dark:border-success-500/15 bg-white/60 dark:bg-white/[0.02] backdrop-blur-sm relative overflow-hidden">
+                                    {/* Top accent */}
+                                    <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-success-400 to-success-600 opacity-70" />
+                                    <div className="flex items-center gap-3 mb-4">
+                                        <div className="w-9 h-9 rounded-lg bg-success-50 dark:bg-success-500/10 flex items-center justify-center">
+                                            <ShieldCheck className="w-5 h-5 text-success-600 dark:text-success-400" />
+                                        </div>
+                                        <h3 className="text-sm font-bold text-neutral-900 dark:text-white">Privacy by Design</h3>
+                                    </div>
+                                    <p className="text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed">
+                                        All research data is fully anonymised and aggregated. Individual user data is never shared with third parties — ever. Users opt-in explicitly for any data contribution.
+                                    </p>
+                                </div>
+                            </ScrollReveal>
+                        </div>
+                    </div>
+                </div>
+            </Section>
+
+            {/* ── Future Plans: Phase 2 Modules ── */}
+            <Section
+                label="What's Next"
+                title="Phase 2: Enterprise & Research"
+                subtitle="After our consumer launch, we're building tools for pharma, employers, and drug safety"
+                variant="default"
+            >
+                <div className="max-w-5xl mx-auto space-y-6">
+                    {futurePlans.map((plan, i) => (
+                        <ScrollReveal key={i} delay={i * 120} effect="rise" duration={900}>
+                            <div className="group p-6 sm:p-8 rounded-2xl border border-neutral-200/50 dark:border-white/[0.06] bg-white/60 dark:bg-white/[0.02] backdrop-blur-sm hover:border-primary-200 dark:hover:border-primary-500/20 transition-all duration-300 relative overflow-hidden">
+                                {/* Top accent bar */}
+                                <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-primary-400 to-blue-500 opacity-70" />
+                                <div className="flex flex-col sm:flex-row sm:items-start gap-5">
+                                    <div className="flex items-center gap-4 sm:flex-col sm:items-start sm:w-32 flex-shrink-0">
+                                        <div className="w-11 h-11 rounded-xl bg-primary-50 dark:bg-primary-500/10 flex items-center justify-center">
+                                            <plan.icon className="w-5 h-5 text-primary-600 dark:text-primary-400" />
+                                        </div>
+                                        <div>
+                                            <Badge text={`${plan.phase} — ${plan.date}`} variant="status" />
+                                        </div>
+                                    </div>
+
+                                    <div className="flex-1 min-w-0">
+                                        <h3 className="text-base font-bold text-neutral-900 dark:text-white mb-2">{plan.title}</h3>
+                                        <p className="text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed mb-5">{plan.desc}</p>
+
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                                            {plan.features.map((feature, j) => (
+                                                <div key={j} className="flex items-start gap-2 text-xs text-neutral-500 dark:text-neutral-400">
+                                                    <CheckCircle2 className="w-3.5 h-3.5 text-success-500 dark:text-success-400 flex-shrink-0 mt-0.5" />
+                                                    <span>{feature}</span>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </ScrollReveal>
+                    ))}
+
+                    <ScrollReveal delay={400} effect="blur-in">
+                        <p className="text-center text-xs text-neutral-400 dark:text-neutral-500">
+                            Phase 2 features are planned for 2027 and beyond. They are not part of the current consumer app.
+                        </p>
+                    </ScrollReveal>
+                </div>
+            </Section>
+
+            {/* ── Transparency ── */}
+            <Section
+                label="Transparency"
+                title="What We Are — and What We're Not"
+                subtitle="We believe in being upfront about our positioning"
+                variant="gradient"
+            >
+                <div className="max-w-3xl mx-auto">
+                    <ScrollReveal effect="rise" duration={900}>
+                        <div className="p-8 rounded-2xl border border-neutral-200/50 dark:border-white/[0.06] bg-white/60 dark:bg-white/[0.02] backdrop-blur-sm">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+                                {[
+                                    { label: 'We ARE', items: ['A wellness & lifestyle companion', 'Research-informed (published studies)', 'Built for Indian GLP-1 users', 'Privacy-first and transparent'], color: 'success' },
+                                    { label: 'We are NOT', items: ['A medical device or diagnostic tool', 'Making clinical claims', 'Replacing your doctor', 'Selling or sharing individual data'], color: 'error' },
+                                ].map((col, i) => (
+                                    <div key={i} className="space-y-3">
+                                        <h4 className={`text-sm font-bold ${i === 0 ? 'text-success-600 dark:text-success-400' : 'text-error-600 dark:text-error-400'}`}>{col.label}</h4>
+                                        <ul className="space-y-2">
+                                            {col.items.map((item, j) => (
+                                                <li key={j} className="flex items-start gap-2 text-xs text-neutral-500 dark:text-neutral-400">
+                                                    <CheckCircle2 className={`w-3.5 h-3.5 flex-shrink-0 mt-0.5 ${i === 0 ? 'text-success-500 dark:text-success-400' : 'text-error-500 dark:text-error-400'}`} />
+                                                    <span>{item}</span>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                ))}
+                            </div>
+
+                            <div className="flex flex-wrap gap-2 justify-center mb-6">
+                                <Badge text="Wellness App — Not a Medical Device" variant="regulatory" />
+                                <Badge text="Research-Informed Approach" variant="status" />
+                                <Badge text="Currently In Development" variant="development" />
+                            </div>
+
+                            <p className="text-center text-neutral-500 dark:text-neutral-400 text-xs leading-relaxed">
+                                EnteraFlux provides wellness tips informed by published research — not medical advice. Always consult your doctor for health decisions related to GLP-1 medications.
+                            </p>
+                        </div>
+                    </ScrollReveal>
+                </div>
+            </Section>
+
+            {/* ── CTA ── */}
+            <Section
+                label="Get Involved"
+                title="Interested in Our Research?"
+                subtitle="Whether you're a researcher, pharma professional, or just curious — we'd love to hear from you"
+                variant="dark"
+                noPadding
+            >
+                <div className="max-w-3xl mx-auto">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                        <ScrollReveal delay={100} effect="blur-in">
+                            <div className="group p-6 rounded-2xl border border-primary-200/40 dark:border-primary-500/15 bg-white/60 dark:bg-white/[0.02] backdrop-blur-sm hover:border-primary-300 dark:hover:border-primary-500/25 transition-all duration-300 h-full flex flex-col relative overflow-hidden">
+                                {/* Top accent */}
+                                <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-primary-400 to-primary-600 opacity-70" />
+                                <div className="w-10 h-10 rounded-xl bg-primary-50 dark:bg-primary-500/10 flex items-center justify-center mb-4">
+                                    <FlaskConical className="w-5 h-5 text-primary-600 dark:text-primary-400" />
+                                </div>
+                                <span className="text-[11px] font-bold text-primary-500 dark:text-primary-400 uppercase tracking-widest mb-2">Researchers & Pharma</span>
+                                <h3 className="text-base font-bold text-neutral-900 dark:text-white mb-2">Phase 2 Partnerships</h3>
+                                <p className="text-sm text-neutral-500 dark:text-neutral-400 mb-6 flex-1 leading-relaxed">
+                                    Interested in real-world GLP-1 wellness data from Indian users? We're building enterprise tools for pharma, research institutions, and clinical networks.
+                                </p>
+                                <CTA text="Get In Touch" href="/contact?type=researcher" variant="primary" icon={<ArrowRight className="w-4 h-4" />} />
+                            </div>
+                        </ScrollReveal>
+
+                        <ScrollReveal delay={200} effect="blur-in">
+                            <div className="group p-6 rounded-2xl border border-success-200/40 dark:border-success-500/15 bg-white/60 dark:bg-white/[0.02] backdrop-blur-sm hover:border-success-300 dark:hover:border-success-500/25 transition-all duration-300 h-full flex flex-col relative overflow-hidden">
+                                {/* Top accent */}
+                                <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-success-400 to-success-600 opacity-70" />
+                                <div className="w-10 h-10 rounded-xl bg-success-50 dark:bg-success-500/10 flex items-center justify-center mb-4">
+                                    <Lightbulb className="w-5 h-5 text-success-600 dark:text-success-400" />
+                                </div>
+                                <span className="text-[11px] font-bold text-success-500 dark:text-success-400 uppercase tracking-widest mb-2">Investors & Partners</span>
+                                <h3 className="text-base font-bold text-neutral-900 dark:text-white mb-2">Back Our Mission</h3>
+                                <p className="text-sm text-neutral-500 dark:text-neutral-400 mb-6 flex-1 leading-relaxed">
+                                    India's GLP-1 market is about to grow rapidly. Help us build the country's first dedicated wellness companion for this space.
+                                </p>
+                                <CTA text="Contact Us" href="/contact?type=investor" variant="primary" icon={<ArrowRight className="w-4 h-4" />} />
+                            </div>
+                        </ScrollReveal>
+                    </div>
+                </div>
+            </Section>
         </div>
     );
 }

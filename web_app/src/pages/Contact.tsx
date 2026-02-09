@@ -8,7 +8,7 @@ type UserRole = 'patient' | 'researcher' | 'clinician' | 'investor' | 'partner';
 
 export default function Contact() {
     useEffect(() => {
-        document.title = 'Contact - EnteraFlux';
+        document.title = 'Contact — EnteraFlux';
     }, []);
 
     const [searchParams] = useSearchParams();
@@ -44,15 +44,15 @@ export default function Contact() {
     return (
         <div>
             <Section
-                title="Get in Touch"
-                subtitle="Join the waitlist, request partnership access, or reach out with questions"
+                title="Contact Us"
+                subtitle="Have questions, want to join the waitlist, or interested in working together in India?"
                 variant="gradient"
                 firstSection
             >
-                <ScrollReveal delay={200} direction="up">
+                <ScrollReveal delay={200} effect="blur-in">
                     <div className="max-w-2xl mx-auto text-center">
                         <p className="text-neutral-700 dark:text-neutral-300 mb-8">
-                            Whether you're a patient interested in early access, a researcher exploring partnerships, or an investor learning about our mission, we'd love to hear from you.
+                            Whether you're starting GLP-1 medication in India, a doctor or nutritionist, or a researcher interested in Phase 2 — we'd love to hear from you.
                         </p>
                     </div>
                 </ScrollReveal>
@@ -60,7 +60,7 @@ export default function Contact() {
 
             <Section variant="dark">
                 <div className="max-w-3xl mx-auto">
-                    <div className="glass rounded-2xl p-8 sm:p-12">
+                    <div className="card p-8 sm:p-10">
                         <form onSubmit={handleSubmit} className="space-y-6">
                             {/* Name */}
                             <div>
@@ -75,7 +75,7 @@ export default function Contact() {
                                     required
                                     value={formData.name}
                                     onChange={handleChange}
-                                    className="w-full px-4 py-3 rounded-lg bg-white dark:bg-slate-900 border border-neutral-300 dark:border-slate-700 text-neutral-900 dark:text-white placeholder-neutral-400 dark:placeholder-slate-500 focus:border-primary-500 focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-slate-950 transition-colors"
+                                    className="w-full px-4 py-3 rounded-xl bg-white dark:bg-white/[0.04] border border-neutral-200 dark:border-white/[0.08] text-neutral-900 dark:text-white placeholder-neutral-400 dark:placeholder-neutral-600 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/30 focus:ring-offset-0 transition-colors"
                                     placeholder="Jane Smith"
                                 />
                             </div>
@@ -93,7 +93,7 @@ export default function Contact() {
                                     required
                                     value={formData.email}
                                     onChange={handleChange}
-                                    className="w-full px-4 py-3 rounded-lg bg-white dark:bg-slate-900 border border-neutral-300 dark:border-slate-700 text-neutral-900 dark:text-white placeholder-neutral-400 dark:placeholder-slate-500 focus:border-primary-500 focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-slate-950 transition-colors"
+                                    className="w-full px-4 py-3 rounded-xl bg-white dark:bg-white/[0.04] border border-neutral-200 dark:border-white/[0.08] text-neutral-900 dark:text-white placeholder-neutral-400 dark:placeholder-neutral-600 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/30 focus:ring-offset-0 transition-colors"
                                     placeholder="jane@example.com"
                                 />
                             </div>
@@ -110,7 +110,7 @@ export default function Contact() {
                                     name="organization"
                                     value={formData.organization}
                                     onChange={handleChange}
-                                    className="w-full px-4 py-3 rounded-lg bg-white dark:bg-slate-900 border border-neutral-300 dark:border-slate-700 text-neutral-900 dark:text-white placeholder-neutral-400 dark:placeholder-slate-500 focus:border-primary-500 focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-slate-950 transition-colors"
+                                    className="w-full px-4 py-3 rounded-xl bg-white dark:bg-white/[0.04] border border-neutral-200 dark:border-white/[0.08] text-neutral-900 dark:text-white placeholder-neutral-400 dark:placeholder-neutral-600 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/30 focus:ring-offset-0 transition-colors"
                                     placeholder="Company or Institution"
                                 />
                             </div>
@@ -125,13 +125,13 @@ export default function Contact() {
                                     name="role"
                                     value={formData.role}
                                     onChange={handleChange}
-                                    className="w-full px-4 py-3 rounded-lg bg-white dark:bg-slate-900 border border-neutral-300 dark:border-slate-700 text-neutral-900 dark:text-white focus:border-primary-500 focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-slate-950 transition-colors"
+                                    className="w-full px-4 py-3 rounded-xl bg-white dark:bg-white/[0.04] border border-neutral-200 dark:border-white/[0.08] text-neutral-900 dark:text-white focus:border-primary-500 focus:ring-2 focus:ring-primary-500/30 focus:ring-offset-0 transition-colors"
                                 >
-                                    <option value="patient">Patient (join waitlist)</option>
-                                    <option value="researcher">Researcher / CRO</option>
-                                    <option value="clinician">Clinician</option>
-                                    <option value="investor">Investor</option>
-                                    <option value="partner">Partner / Other</option>
+                                    <option value="patient">GLP-1 User in India — I want early access</option>
+                                    <option value="researcher">Researcher / Pharma (Phase 2)</option>
+                                    <option value="clinician">Doctor / Nutritionist</option>
+                                    <option value="investor">Investor / Partner</option>
+                                    <option value="partner">Other / Just Curious</option>
                                 </select>
                             </div>
 
@@ -148,8 +148,8 @@ export default function Contact() {
                                     rows={6}
                                     value={formData.message}
                                     onChange={handleChange}
-                                    className="w-full px-4 py-3 rounded-lg bg-white dark:bg-slate-900 border border-neutral-300 dark:border-slate-700 text-neutral-900 dark:text-white placeholder-neutral-400 dark:placeholder-slate-500 focus:border-primary-500 focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-slate-950 transition-colors resize-none"
-                                    placeholder="Tell us about your interest in EnteraFlux..."
+                                    className="w-full px-4 py-3 rounded-xl bg-white dark:bg-white/[0.04] border border-neutral-200 dark:border-white/[0.08] text-neutral-900 dark:text-white placeholder-neutral-400 dark:placeholder-neutral-600 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/30 focus:ring-offset-0 transition-colors resize-none"
+                                    placeholder="Tell us about your interest in EnteraFlux — are you in India? Starting GLP-1 medication? Something else?"
                                 />
                             </div>
 
@@ -163,7 +163,7 @@ export default function Contact() {
                                     {submitted ? 'Submitted!' : 'Send Message'}
                                 </button>
                                 <p className="text-xs text-neutral-500 dark:text-slate-500 mt-4 text-center">
-                                    This is a placeholder form. In production, submissions would be sent to our team.
+                                    This is a demo form. In the live version, your message will be sent directly to our team.
                                 </p>
                             </div>
                         </form>
@@ -175,8 +175,8 @@ export default function Contact() {
                 <div className="max-w-4xl mx-auto">
                     <h3 className="text-2xl font-bold text-center mb-8 text-neutral-900 dark:text-white">Other Ways to Connect</h3>
                     <div className="grid grid-cols-1 md:grid-cols-1 gap-6">
-                        <div className="text-center glass rounded-xl p-6">
-                            <Mail className="w-12 h-12 text-primary-600 dark:text-primary-400 mx-auto mb-4" />
+                        <div className="text-center card p-6">
+                            <Mail className="w-10 h-10 text-primary-600 dark:text-primary-400 mx-auto mb-4" />
                             <h4 className="font-bold mb-2 text-neutral-900 dark:text-white">Email</h4>
                             <a href="mailto:contact.enteraflux@gmail.com" className="text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 text-sm">
                                 contact.enteraflux@gmail.com
