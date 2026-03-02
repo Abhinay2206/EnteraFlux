@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { submitSurveyResponse } from '../firebase';
+import useMetaTags from '../hooks/useMetaTags';
 import {
     ClipboardList,
     Scale,
@@ -155,7 +156,12 @@ export default function Survey() {
 
     const navigate = useNavigate();
 
-    useEffect(() => { document.title = 'Research Survey — EnteraFlux'; }, []);
+    useMetaTags({
+        title: 'Weight-Loss & Health Perception Survey — EnteraFlux',
+        description: 'Participate in our anonymous research survey about health behaviors, weight management perceptions, and technology usage patterns in India.',
+        url: 'https://www.enteraflux.tech/public/survey',
+        image: 'https://www.enteraflux.tech/logo.png',
+    });
 
     // Prevent browser back button from navigating away from the survey
     useEffect(() => {
