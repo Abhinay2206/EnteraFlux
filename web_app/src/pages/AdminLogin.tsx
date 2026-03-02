@@ -12,7 +12,7 @@ export default function AdminLogin() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        document.title = 'Admin Login — EnteraFlux';
+        document.title = 'Admin — EnteraFlux';
         const unsub = onAuthStateChanged(auth, (user) => {
             if (user) navigate('/admin/dashboard', { replace: true });
             else setChecking(false);

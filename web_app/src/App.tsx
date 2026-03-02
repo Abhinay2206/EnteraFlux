@@ -14,6 +14,7 @@ import Legal from './pages/Legal';
 import Survey from './pages/Survey';
 import AdminLogin from './pages/AdminLogin';
 import AdminDashboard from './pages/AdminDashboard';
+import AdminFeedback from './pages/AdminFeedback';
 import { ThemeProvider } from './contexts/ThemeContext';
 import './index.css';
 
@@ -57,6 +58,7 @@ function App() {
           <Route path="/public/survey" element={<Survey />} />
           <Route path="/admin" element={<AdminLogin />} />
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
+          <Route path="/admin/feedback" element={<AdminFeedback />} />
           <Route path="/*" element={<MainLayout />} />
         </Routes>
       </BrowserRouter>

@@ -120,4 +120,48 @@ export async function submitRDInterest(data: Record<string, unknown>): Promise<b
     }
 }
 
+/**
+ * Fetch all feedback entries, newest first.
+ */
+export async function fetchFeedback() {
+    const q = query(collection(db, 'feedback'), orderBy('submitted_at', 'desc'));
+    const snapshot = await getDocs(q);
+    return snapshot.docs.map((d) => ({ id: d.id, ...d.data() }));
+}
+
+/**
+ * Delete a feedback entry by document ID.
+ */
+export async function deleteFeedbackEntry(docId: string): Promise<boolean> {
+    try {
+        await deleteDoc(doc(db, 'feedback', docId));
+        return true;
+    } catch (error) {
+        console.error('Error deleting feedback:', error);
+        return false;
+    }
+}
+
+/**
+ * Fetch all R&D applications, newest first.
+ */
+export async function fetchRDApplications() {
+    const q = query(collection(db, 'rd_applications'), orderBy('submitted_at', 'desc'));
+    const snapshot = await getDocs(q);
+    return snapshot.docs.map((d) => ({ id: d.id, ...d.data() }));
+}
+
+/**
+ * Delete an R&D application by document ID.
+ */
+export async function deleteRDApplication(docId: string): Promise<boolean> {
+    try {
+        await deleteDoc(doc(db, 'rd_applications', docId));
+        return true;
+    } catch (error) {
+        console.error('Error deleting R&D application:', error);
+        return false;
+    }
+}
+
 export { app, analytics, db, auth, onAuthStateChanged, type User };

@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import {
     fetchSurveyResponses,
     deleteSurveyResponse,
@@ -24,6 +24,7 @@ import {
     Activity,
     Eye,
     Download,
+    MessageSquare,
 } from 'lucide-react';
 
 /* ═══════════════════════════════════════════
@@ -497,6 +498,14 @@ export default function AdminDashboard() {
                             <RefreshCw className={`w-3.5 h-3.5 ${loading ? 'animate-spin' : ''}`} />
                             Refresh
                         </button>
+                        <div className="w-px h-6 bg-gray-200 mx-1" />
+                        <Link
+                            to="/admin/feedback"
+                            className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-medium text-gray-600 hover:bg-gray-100 transition-colors"
+                        >
+                            <MessageSquare className="w-3.5 h-3.5" />
+                            Feedback
+                        </Link>
                         <div className="w-px h-6 bg-gray-200 mx-1" />
                         <button
                             onClick={handleLogout}
