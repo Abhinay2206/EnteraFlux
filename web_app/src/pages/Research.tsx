@@ -481,12 +481,12 @@ export default function Research() {
                                 <div className="w-10 h-10 rounded-xl bg-success-50 dark:bg-success-500/10 flex items-center justify-center mb-4">
                                     <Lightbulb className="w-5 h-5 text-success-600 dark:text-success-400" />
                                 </div>
-                                <span className="text-[11px] font-bold text-success-500 dark:text-success-400 uppercase tracking-widest mb-2">Investors & Partners</span>
-                                <h3 className="text-base font-bold text-neutral-900 dark:text-white mb-2">Back Our Mission</h3>
+                                <span className="text-[11px] font-bold text-success-500 dark:text-success-400 uppercase tracking-widest mb-2">Developers & Researchers</span>
+                                <h3 className="text-base font-bold text-neutral-900 dark:text-white mb-2">Join Our R&D</h3>
                                 <p className="text-sm text-neutral-500 dark:text-neutral-400 mb-6 flex-1 leading-relaxed">
-                                    India's GLP-1 market is about to grow rapidly. Help us build the country's first dedicated wellness companion for this space.
+                                    Want to contribute to wellness tech research? Join our R&D team and help build tools that make a real difference for GLP-1 users in India.
                                 </p>
-                                <CTA text="Contact Us" href="/contact?type=investor" variant="primary" icon={<ArrowRight className="w-4 h-4" />} />
+                                <CTA text="Apply Now" href="/contact?tab=rnd" variant="primary" icon={<ArrowRight className="w-4 h-4" />} />
                             </div>
                         </ScrollReveal>
                     </div>

@@ -11,6 +11,8 @@ export default function Footer() {
         company: [
             { name: 'Future Plans', href: '/future-plans' },
             { name: 'Contact Us', href: '/contact' },
+            { name: 'Research Survey', href: '/public/survey' },
+            { name: 'Admin Dashboard', href: '/admin' },
         ],
         legal: [
             { name: 'Legal Disclaimers', href: '/legal' },
@@ -25,17 +27,17 @@ export default function Footer() {
                     <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
                         <div>
                             <h3 className="text-xl sm:text-2xl font-bold text-white mb-2 tracking-tight">
-                                Ready to start your GLP-1 wellness journey?
+                                Help shape the future of GLP-1 wellness in India
                             </h3>
                             <p className="text-neutral-400 text-sm max-w-lg">
-                                Join the waitlist for early access to EnteraFlux — India’s first wellness companion built specifically for GLP-1 medication users.
+                                Share your feedback as a patient or developer, or join our R&D team — help us build India's first wellness companion for GLP-1 medication users.
                             </p>
                         </div>
                         <Link
-                            to="/contact?type=patient"
+                            to="/contact"
                             className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-primary-600 hover:bg-primary-700 text-white font-semibold text-sm transition-all duration-200 shadow-lg shadow-primary-600/25 hover:shadow-xl hover:shadow-primary-600/30 flex-shrink-0"
                         >
-                            Join Waitlist
+                            Give Feedback
                             <ArrowRight className="w-4 h-4" />
                         </Link>
                     </div>

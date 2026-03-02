@@ -38,8 +38,8 @@ export default function Home() {
                 title={BRAND.name}
                 subtitle={BRAND.tagline}
                 primaryCTA={{
-                    text: 'Join Waitlist',
-                    href: '/contact?type=patient',
+                    text: 'Give Feedback',
+                    href: '/contact',
                     variant: 'primary',
                 }}
                 badge={COMPLIANCE.development}
@@ -191,19 +191,19 @@ export default function Home() {
                             const icons = [Heart, Activity, Brain, Users, Shield, MapPin];
                             const Icon = icons[index] || Heart;
                             return (
-                            <ScrollReveal key={index} delay={index * 80} effect="tilt-in">
-                                <div className="relative p-5 rounded-2xl border border-neutral-200/50 dark:border-white/[0.06] bg-white/60 dark:bg-white/[0.02] backdrop-blur-sm hover:border-primary-300 dark:hover:border-primary-500/20 transition-all duration-300 h-full overflow-hidden">
-                                    {/* Top accent bar */}
-                                    <div className={`absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r ${accents[index]} opacity-80`} />
-                                    <div className="flex items-center gap-3 mb-2.5">
-                                        <div className="w-8 h-8 rounded-lg bg-primary-50 dark:bg-primary-500/10 flex items-center justify-center flex-shrink-0">
-                                            <Icon className="w-4 h-4 text-primary-600 dark:text-primary-400" />
+                                <ScrollReveal key={index} delay={index * 80} effect="tilt-in">
+                                    <div className="relative p-5 rounded-2xl border border-neutral-200/50 dark:border-white/[0.06] bg-white/60 dark:bg-white/[0.02] backdrop-blur-sm hover:border-primary-300 dark:hover:border-primary-500/20 transition-all duration-300 h-full overflow-hidden">
+                                        {/* Top accent bar */}
+                                        <div className={`absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r ${accents[index]} opacity-80`} />
+                                        <div className="flex items-center gap-3 mb-2.5">
+                                            <div className="w-8 h-8 rounded-lg bg-primary-50 dark:bg-primary-500/10 flex items-center justify-center flex-shrink-0">
+                                                <Icon className="w-4 h-4 text-primary-600 dark:text-primary-400" />
+                                            </div>
+                                            <h4 className="text-sm font-bold text-neutral-900 dark:text-white">{pillar.title}</h4>
                                         </div>
-                                        <h4 className="text-sm font-bold text-neutral-900 dark:text-white">{pillar.title}</h4>
+                                        <p className="text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed">{pillar.description}</p>
                                     </div>
-                                    <p className="text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed">{pillar.description}</p>
-                                </div>
-                            </ScrollReveal>
+                                </ScrollReveal>
                             );
                         })}
                     </div>

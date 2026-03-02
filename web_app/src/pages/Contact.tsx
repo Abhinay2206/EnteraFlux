@@ -2,9 +2,11 @@ import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import Section from '../components/Section';
 import ScrollReveal from '../components/ScrollReveal';
-import { Mail, User, Building, MessageSquare } from 'lucide-react';
+import { Mail, User, Building, MessageSquare, Beaker, Loader2, CheckCircle2, AlertCircle } from 'lucide-react';
+import { submitFeedback, submitRDInterest } from '../firebase';
 
-type UserRole = 'patient' | 'researcher' | 'clinician' | 'investor' | 'partner';
+type FeedbackRole = 'patient' | 'developer' | 'clinician' | 'researcher' | 'other';
+type ActiveTab = 'feedback' | 'rnd';
 
 export default function Contact() {
     useEffect(() => {
@@ -12,47 +14,75 @@ export default function Contact() {
     }, []);
 
     const [searchParams] = useSearchParams();
-    const [formData, setFormData] = useState({
+    const defaultTab: ActiveTab = searchParams.get('tab') === 'rnd' ? 'rnd' : 'feedback';
+    const [activeTab, setActiveTab] = useState<ActiveTab>(defaultTab);
+
+    // ── Feedback Form ──
+    const [feedbackData, setFeedbackData] = useState({
+        name: '',
+        email: '',
+        role: (searchParams.get('type') as FeedbackRole) || 'patient',
+        message: '',
+    });
+    const [feedbackSubmitting, setFeedbackSubmitting] = useState(false);
+    const [feedbackSubmitted, setFeedbackSubmitted] = useState(false);
+    const [feedbackError, setFeedbackError] = useState(false);
+
+    const handleFeedbackChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+        setFeedbackData({ ...feedbackData, [e.target.name]: e.target.value });
+    };
+
+    const handleFeedbackSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setFeedbackSubmitting(true);
+        setFeedbackError(false);
+        const ok = await submitFeedback(feedbackData);
+        setFeedbackSubmitting(false);
+        if (ok) setFeedbackSubmitted(true);
+        else setFeedbackError(true);
+    };
+
+    // ── R&D Form ──
+    const [rndData, setRndData] = useState({
         name: '',
         email: '',
         organization: '',
-        role: (searchParams.get('type') as UserRole) || 'patient',
-        message: '',
+        expertise: '',
+        motivation: '',
     });
+    const [rndSubmitting, setRndSubmitting] = useState(false);
+    const [rndSubmitted, setRndSubmitted] = useState(false);
+    const [rndError, setRndError] = useState(false);
 
-    const [submitted, setSubmitted] = useState(false);
+    const handleRndChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        setRndData({ ...rndData, [e.target.name]: e.target.value });
+    };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleRndSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        // Placeholder: Would integrate with backend API
-        console.log('Form submission:', formData);
-        setSubmitted(true);
-
-        // In production, this would be an API call
-        setTimeout(() => {
-            alert('Thank you! We\'ll be in touch soon. (This is a placeholder - no data was actually sent)');
-        }, 100);
+        setRndSubmitting(true);
+        setRndError(false);
+        const ok = await submitRDInterest(rndData);
+        setRndSubmitting(false);
+        if (ok) setRndSubmitted(true);
+        else setRndError(true);
     };
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value,
-        });
-    };
+    const inputClass =
+        'w-full px-4 py-3 rounded-xl bg-white dark:bg-white/[0.04] border border-neutral-200 dark:border-white/[0.08] text-neutral-900 dark:text-white placeholder-neutral-400 dark:placeholder-neutral-600 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/30 focus:ring-offset-0 transition-colors';
 
     return (
         <div>
             <Section
-                title="Contact Us"
-                subtitle="Have questions, want to join the waitlist, or interested in working together in India?"
+                title="Get In Touch"
+                subtitle="Share your feedback or join our Research & Development team"
                 variant="gradient"
                 firstSection
             >
                 <ScrollReveal delay={200} effect="blur-in">
                     <div className="max-w-2xl mx-auto text-center">
                         <p className="text-neutral-700 dark:text-neutral-300 mb-8">
-                            Whether you're starting GLP-1 medication in India, a doctor or nutritionist, or a researcher interested in Phase 2 — we'd love to hear from you.
+                            Whether you're a patient using GLP-1 medications, a developer, clinician, or researcher — we'd love to hear your thoughts and ideas.
                         </p>
                     </div>
                 </ScrollReveal>
@@ -60,114 +90,228 @@ export default function Contact() {
 
             <Section variant="dark">
                 <div className="max-w-3xl mx-auto">
-                    <div className="card p-8 sm:p-10">
-                        <form onSubmit={handleSubmit} className="space-y-6">
-                            {/* Name */}
-                            <div>
-                                <label htmlFor="name" className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
-                                    <User className="w-4 h-4 inline mr-2" />
-                                    Full Name
-                                </label>
-                                <input
-                                    type="text"
-                                    id="name"
-                                    name="name"
-                                    required
-                                    value={formData.name}
-                                    onChange={handleChange}
-                                    className="w-full px-4 py-3 rounded-xl bg-white dark:bg-white/[0.04] border border-neutral-200 dark:border-white/[0.08] text-neutral-900 dark:text-white placeholder-neutral-400 dark:placeholder-neutral-600 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/30 focus:ring-offset-0 transition-colors"
-                                    placeholder="Jane Smith"
-                                />
-                            </div>
-
-                            {/* Email */}
-                            <div>
-                                <label htmlFor="email" className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
-                                    <Mail className="w-4 h-4 inline mr-2" />
-                                    Email Address
-                                </label>
-                                <input
-                                    type="email"
-                                    id="email"
-                                    name="email"
-                                    required
-                                    value={formData.email}
-                                    onChange={handleChange}
-                                    className="w-full px-4 py-3 rounded-xl bg-white dark:bg-white/[0.04] border border-neutral-200 dark:border-white/[0.08] text-neutral-900 dark:text-white placeholder-neutral-400 dark:placeholder-neutral-600 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/30 focus:ring-offset-0 transition-colors"
-                                    placeholder="jane@example.com"
-                                />
-                            </div>
-
-                            {/* Organization (optional) */}
-                            <div>
-                                <label htmlFor="organization" className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
-                                    <Building className="w-4 h-4 inline mr-2" />
-                                    Organization (Optional)
-                                </label>
-                                <input
-                                    type="text"
-                                    id="organization"
-                                    name="organization"
-                                    value={formData.organization}
-                                    onChange={handleChange}
-                                    className="w-full px-4 py-3 rounded-xl bg-white dark:bg-white/[0.04] border border-neutral-200 dark:border-white/[0.08] text-neutral-900 dark:text-white placeholder-neutral-400 dark:placeholder-neutral-600 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/30 focus:ring-offset-0 transition-colors"
-                                    placeholder="Company or Institution"
-                                />
-                            </div>
-
-                            {/* Role */}
-                            <div>
-                                <label htmlFor="role" className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
-                                    I am a...
-                                </label>
-                                <select
-                                    id="role"
-                                    name="role"
-                                    value={formData.role}
-                                    onChange={handleChange}
-                                    className="w-full px-4 py-3 rounded-xl bg-white dark:bg-white/[0.04] border border-neutral-200 dark:border-white/[0.08] text-neutral-900 dark:text-white focus:border-primary-500 focus:ring-2 focus:ring-primary-500/30 focus:ring-offset-0 transition-colors"
-                                >
-                                    <option value="patient">GLP-1 User in India — I want early access</option>
-                                    <option value="researcher">Researcher / Pharma (Phase 2)</option>
-                                    <option value="clinician">Doctor / Nutritionist</option>
-                                    <option value="investor">Investor / Partner</option>
-                                    <option value="partner">Other / Just Curious</option>
-                                </select>
-                            </div>
-
-                            {/* Message */}
-                            <div>
-                                <label htmlFor="message" className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
-                                    <MessageSquare className="w-4 h-4 inline mr-2" />
-                                    Message
-                                </label>
-                                <textarea
-                                    id="message"
-                                    name="message"
-                                    required
-                                    rows={6}
-                                    value={formData.message}
-                                    onChange={handleChange}
-                                    className="w-full px-4 py-3 rounded-xl bg-white dark:bg-white/[0.04] border border-neutral-200 dark:border-white/[0.08] text-neutral-900 dark:text-white placeholder-neutral-400 dark:placeholder-neutral-600 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/30 focus:ring-offset-0 transition-colors resize-none"
-                                    placeholder="Tell us about your interest in EnteraFlux — are you in India? Starting GLP-1 medication? Something else?"
-                                />
-                            </div>
-
-                            {/* Submit Button */}
-                            <div className="pt-4">
-                                <button
-                                    type="submit"
-                                    disabled={submitted}
-                                    className="w-full btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
-                                >
-                                    {submitted ? 'Submitted!' : 'Send Message'}
-                                </button>
-                                <p className="text-xs text-neutral-500 dark:text-slate-500 mt-4 text-center">
-                                    This is a demo form. In the live version, your message will be sent directly to our team.
-                                </p>
-                            </div>
-                        </form>
+                    {/* Tab Switcher */}
+                    <div className="flex items-center gap-1 mb-8 bg-white/80 dark:bg-white/[0.04] rounded-xl border border-neutral-200/60 dark:border-white/[0.08] p-1.5 w-fit mx-auto">
+                        <button
+                            onClick={() => setActiveTab('feedback')}
+                            className={`flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold transition-all cursor-pointer ${activeTab === 'feedback'
+                                    ? 'bg-primary-600 text-white shadow-sm'
+                                    : 'text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white'
+                                }`}
+                        >
+                            <MessageSquare className="w-4 h-4" />
+                            Give Feedback
+                        </button>
+                        <button
+                            onClick={() => setActiveTab('rnd')}
+                            className={`flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold transition-all cursor-pointer ${activeTab === 'rnd'
+                                    ? 'bg-primary-600 text-white shadow-sm'
+                                    : 'text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white'
+                                }`}
+                        >
+                            <Beaker className="w-4 h-4" />
+                            Join R&D
+                        </button>
                     </div>
+
+                    {/* ═══════════ Feedback Form ═══════════ */}
+                    {activeTab === 'feedback' && (
+                        <div className="card p-8 sm:p-10">
+                            {feedbackSubmitted ? (
+                                <div className="text-center py-10">
+                                    <CheckCircle2 className="w-14 h-14 text-success-500 mx-auto mb-4" />
+                                    <h3 className="text-xl font-bold text-neutral-900 dark:text-white mb-2">Thank You!</h3>
+                                    <p className="text-neutral-500 dark:text-neutral-400 text-sm">Your feedback has been submitted and saved. We really appreciate it.</p>
+                                </div>
+                            ) : (
+                                <form onSubmit={handleFeedbackSubmit} className="space-y-6">
+                                    <div className="mb-2">
+                                        <h3 className="text-lg font-bold text-neutral-900 dark:text-white">Share Your Feedback</h3>
+                                        <p className="text-sm text-neutral-500 dark:text-neutral-400 mt-1">
+                                            As a patient, developer, or health professional — tell us what you think about EnteraFlux.
+                                        </p>
+                                    </div>
+
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                        <div>
+                                            <label htmlFor="fb-name" className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
+                                                <User className="w-4 h-4 inline mr-2" />
+                                                Full Name
+                                            </label>
+                                            <input
+                                                type="text" id="fb-name" name="name" required
+                                                value={feedbackData.name} onChange={handleFeedbackChange}
+                                                className={inputClass} placeholder="Your name"
+                                            />
+                                        </div>
+                                        <div>
+                                            <label htmlFor="fb-email" className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
+                                                <Mail className="w-4 h-4 inline mr-2" />
+                                                Email
+                                            </label>
+                                            <input
+                                                type="email" id="fb-email" name="email" required
+                                                value={feedbackData.email} onChange={handleFeedbackChange}
+                                                className={inputClass} placeholder="you@example.com"
+                                            />
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <label htmlFor="fb-role" className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
+                                            I am a...
+                                        </label>
+                                        <select
+                                            id="fb-role" name="role"
+                                            value={feedbackData.role} onChange={handleFeedbackChange}
+                                            className={inputClass}
+                                        >
+                                            <option value="patient">Patient / GLP-1 User</option>
+                                            <option value="developer">Developer / Tech Professional</option>
+                                            <option value="clinician">Doctor / Nutritionist</option>
+                                            <option value="researcher">Researcher</option>
+                                            <option value="other">Other</option>
+                                        </select>
+                                    </div>
+
+                                    <div>
+                                        <label htmlFor="fb-message" className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
+                                            <MessageSquare className="w-4 h-4 inline mr-2" />
+                                            Your Feedback
+                                        </label>
+                                        <textarea
+                                            id="fb-message" name="message" required rows={5}
+                                            value={feedbackData.message} onChange={handleFeedbackChange}
+                                            className={`${inputClass} resize-none`}
+                                            placeholder="Share your thoughts, suggestions, or experience with EnteraFlux..."
+                                        />
+                                    </div>
+
+                                    {feedbackError && (
+                                        <div className="flex items-center gap-2 p-3 rounded-lg bg-red-50 dark:bg-red-500/10 border border-red-200 dark:border-red-500/20">
+                                            <AlertCircle className="w-4 h-4 text-red-500 shrink-0" />
+                                            <p className="text-sm text-red-600 dark:text-red-400">Failed to submit. Please try again.</p>
+                                        </div>
+                                    )}
+
+                                    <button
+                                        type="submit"
+                                        disabled={feedbackSubmitting}
+                                        className="w-full btn-primary disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                                    >
+                                        {feedbackSubmitting ? (
+                                            <><Loader2 className="w-4 h-4 animate-spin" /> Submitting...</>
+                                        ) : (
+                                            'Submit Feedback'
+                                        )}
+                                    </button>
+                                </form>
+                            )}
+                        </div>
+                    )}
+
+                    {/* ═══════════ R&D Join Form ═══════════ */}
+                    {activeTab === 'rnd' && (
+                        <div className="card p-8 sm:p-10">
+                            {rndSubmitted ? (
+                                <div className="text-center py-10">
+                                    <CheckCircle2 className="w-14 h-14 text-success-500 mx-auto mb-4" />
+                                    <h3 className="text-xl font-bold text-neutral-900 dark:text-white mb-2">Application Received!</h3>
+                                    <p className="text-neutral-500 dark:text-neutral-400 text-sm">Thank you for your interest in joining our R&D team. We'll review your application and get back to you.</p>
+                                </div>
+                            ) : (
+                                <form onSubmit={handleRndSubmit} className="space-y-6">
+                                    <div className="mb-2">
+                                        <h3 className="text-lg font-bold text-neutral-900 dark:text-white">Join Our R&D Team</h3>
+                                        <p className="text-sm text-neutral-500 dark:text-neutral-400 mt-1">
+                                            Interested in contributing to research and development at EnteraFlux? Tell us about yourself.
+                                        </p>
+                                    </div>
+
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                        <div>
+                                            <label htmlFor="rnd-name" className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
+                                                <User className="w-4 h-4 inline mr-2" />
+                                                Full Name
+                                            </label>
+                                            <input
+                                                type="text" id="rnd-name" name="name" required
+                                                value={rndData.name} onChange={handleRndChange}
+                                                className={inputClass} placeholder="Your name"
+                                            />
+                                        </div>
+                                        <div>
+                                            <label htmlFor="rnd-email" className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
+                                                <Mail className="w-4 h-4 inline mr-2" />
+                                                Email
+                                            </label>
+                                            <input
+                                                type="email" id="rnd-email" name="email" required
+                                                value={rndData.email} onChange={handleRndChange}
+                                                className={inputClass} placeholder="you@example.com"
+                                            />
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <label htmlFor="rnd-org" className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
+                                            <Building className="w-4 h-4 inline mr-2" />
+                                            Organization / University (Optional)
+                                        </label>
+                                        <input
+                                            type="text" id="rnd-org" name="organization"
+                                            value={rndData.organization} onChange={handleRndChange}
+                                            className={inputClass} placeholder="Your organization or university"
+                                        />
+                                    </div>
+
+                                    <div>
+                                        <label htmlFor="rnd-expertise" className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
+                                            <Beaker className="w-4 h-4 inline mr-2" />
+                                            Area of Expertise
+                                        </label>
+                                        <input
+                                            type="text" id="rnd-expertise" name="expertise" required
+                                            value={rndData.expertise} onChange={handleRndChange}
+                                            className={inputClass} placeholder="e.g. Machine Learning, Nutrition Science, Health Tech..."
+                                        />
+                                    </div>
+
+                                    <div>
+                                        <label htmlFor="rnd-motivation" className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
+                                            <MessageSquare className="w-4 h-4 inline mr-2" />
+                                            Why do you want to join?
+                                        </label>
+                                        <textarea
+                                            id="rnd-motivation" name="motivation" required rows={5}
+                                            value={rndData.motivation} onChange={handleRndChange}
+                                            className={`${inputClass} resize-none`}
+                                            placeholder="Tell us about your interest in wellness tech, GLP-1 research, or what you'd like to contribute..."
+                                        />
+                                    </div>
+
+                                    {rndError && (
+                                        <div className="flex items-center gap-2 p-3 rounded-lg bg-red-50 dark:bg-red-500/10 border border-red-200 dark:border-red-500/20">
+                                            <AlertCircle className="w-4 h-4 text-red-500 shrink-0" />
+                                            <p className="text-sm text-red-600 dark:text-red-400">Failed to submit. Please try again.</p>
+                                        </div>
+                                    )}
+
+                                    <button
+                                        type="submit"
+                                        disabled={rndSubmitting}
+                                        className="w-full btn-primary disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                                    >
+                                        {rndSubmitting ? (
+                                            <><Loader2 className="w-4 h-4 animate-spin" /> Submitting...</>
+                                        ) : (
+                                            'Submit Application'
+                                        )}
+                                    </button>
+                                </form>
+                            )}
+                        </div>
+                    )}
                 </div>
             </Section>
 

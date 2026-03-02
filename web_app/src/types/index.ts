@@ -74,6 +74,6 @@ export interface ContactFormData {
     name: string;
     email: string;
     organization?: string;
-    role: 'patient' | 'researcher' | 'clinician' | 'investor' | 'partner';
+    role: 'patient' | 'researcher' | 'clinician' | 'developer' | 'other';
     message: string;
 }
