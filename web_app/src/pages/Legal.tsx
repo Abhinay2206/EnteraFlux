@@ -6,14 +6,14 @@ import { AlertTriangle, Shield, FileText, Lock } from 'lucide-react';
 
 export default function Legal() {
     useEffect(() => {
-        document.title = 'Legal — EnteraFlux';
+        document.title = 'Legal | EnteraFlux';
     }, []);
 
     return (
         <div>
             <Section
                 title="Important Disclaimers"
-                subtitle="Please read this so you understand what EnteraFlux is — and what it is not"
+                subtitle="Please read this so you understand what EnteraFlux is, and what it is not"
                 variant="gradient"
                 firstSection
             >
@@ -112,7 +112,7 @@ export default function Legal() {
                             <div>
                                 <h3 className="text-2xl font-bold mb-2">Your Privacy Matters</h3>
                                 <p className="text-neutral-700 dark:text-neutral-300 leading-relaxed mb-4">
-                                    Protecting your personal and wearable data is a top priority. We are committed to handling your information responsibly.
+                                    We take your personal and wearable data seriously. Here's how we handle your information.
                                 </p>
                                 <h4 className="font-bold text-primary-400 mb-2">What We Do Now:</h4>
                                 <ul className="space-y-2 text-neutral-700 dark:text-neutral-300 text-sm mb-4">
@@ -123,9 +123,9 @@ export default function Legal() {
                                 </ul>
                                 <h4 className="font-bold text-primary-400 mb-2">What's Coming:</h4>
                                 <ul className="space-y-2 text-neutral-700 dark:text-neutral-300 text-sm">
-                                    <li>• Compliance with India's Digital Personal Data Protection Act (DPDPA) — by launch</li>
-                                    <li>• Independent security audits — 2027</li>
-                                    <li>• GDPR compliance for any international users — 2027</li>
+                                    <li>• Compliance with India's Digital Personal Data Protection Act (DPDPA), by launch</li>
+                                    <li>• Independent security audits, planned for 2027</li>
+                                    <li>• GDPR compliance for any international users, planned for 2027</li>
                                 </ul>
                             </div>
                         </div>

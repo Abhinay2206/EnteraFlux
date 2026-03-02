@@ -16,7 +16,7 @@ import IndiaAdoptionMap from '../components/visualizations/IndiaAdoptionMap';
 
 export default function Home() {
     useEffect(() => {
-        document.title = 'EnteraFlux — Wellness Companion for GLP-1 Medications in India';
+        document.title = 'EnteraFlux | Wellness Companion for GLP-1 Medications in India';
     }, []);
 
     const stats = [
@@ -26,10 +26,10 @@ export default function Home() {
     ];
 
     const steps = [
-        { icon: Watch, title: 'Connect', desc: 'Link your smartwatch or fitness band — Mi Band, Noise, boAt, Apple Watch, Fitbit, and more.' },
+        { icon: Watch, title: 'Connect', desc: 'Link your smartwatch or fitness band. We support Mi Band, Noise, boAt, Apple Watch, Fitbit, and more.' },
         { icon: Activity, title: 'Calibrate', desc: 'The app spends 2 weeks learning your baseline heart rate, sleep, and recovery rhythms.' },
         { icon: Brain, title: 'Understand', desc: 'See meaningful changes from your baseline, especially after doses, travel, or poor sleep.' },
-        { icon: MessageSquare, title: 'Act', desc: 'Get simple, personalised tips — like "have extra dal today" or "drink more water."' },
+        { icon: MessageSquare, title: 'Act', desc: 'Get simple, personalised tips like "have extra dal today" or "drink more water."' },
     ];
 
     return (
@@ -49,7 +49,7 @@ export default function Home() {
             <Section
                 label="India Context"
                 title="Why India, Why Now"
-                subtitle="GLP-1 medications are arriving in India — and millions of people need the right support"
+                subtitle="GLP-1 medications are arriving in India, and millions of people need the right support"
                 variant="default"
             >
                 <div className="max-w-5xl mx-auto">
@@ -87,7 +87,7 @@ export default function Home() {
             <Section
                 label="The Challenge"
                 title="Problems We're Solving"
-                subtitle="Real challenges facing GLP-1 users in India — backed by research"
+                subtitle="Real challenges facing GLP-1 users in India, backed by research"
                 variant="dark"
             >
                 <div className="max-w-4xl mx-auto space-y-4">
@@ -222,9 +222,9 @@ export default function Home() {
                         {/* Left: Feature list */}
                         <div className="lg:col-span-2 space-y-4">
                             {[
-                                { icon: Activity, title: '2-Week Calibration', desc: 'The app learns your personal baseline — heart rate, sleep, and recovery rhythms.' },
+                                { icon: Activity, title: '2-Week Calibration', desc: 'The app learns your personal baseline: heart rate, sleep, and recovery rhythms.' },
                                 { icon: TrendingUp, title: 'Event-Based Check-ins', desc: 'After dose days, travel, or poor sleep, get relevant wellness nudges.' },
-                                { icon: Heart, title: 'Weekly Trends', desc: 'Simple summaries of how your body signals change over time — no medical jargon.' },
+                                { icon: Heart, title: 'Weekly Trends', desc: 'Simple summaries of how your body signals change over time, without the medical jargon.' },
                             ].map((item, i) => (
                                 <ScrollReveal key={i} delay={i * 100} effect="slide-rotate">
                                     <div className="flex gap-4 p-4 rounded-xl hover:bg-neutral-50 dark:hover:bg-white/[0.02] transition-colors duration-300 group">
@@ -260,7 +260,7 @@ export default function Home() {
             <Section
                 label="Module 2"
                 title="Muscle-Safe Weight-Loss Coaching"
-                subtitle="Lose fat, not muscle — with Indian-diet-friendly protein guidance"
+                subtitle="Lose fat, not muscle, with Indian-diet-friendly protein guidance"
                 variant="dark"
             >
                 <div className="max-w-5xl mx-auto">
@@ -338,7 +338,7 @@ export default function Home() {
                                         {/* Top accent */}
                                         <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-primary-400 to-blue-500 opacity-70" />
                                         <div className="mb-3">
-                                            <Badge text="Phase 2 — Coming 2027" variant="status" />
+                                            <Badge text="Phase 2 | Coming 2027" variant="status" />
                                         </div>
                                         <h3 className="text-sm font-bold text-neutral-900 dark:text-white mb-1.5">{module.title}</h3>
                                         <p className="text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed">{module.description}</p>
@@ -357,7 +357,7 @@ export default function Home() {
             <Section
                 label="Roadmap"
                 title="Where We Are & Where We're Going"
-                subtitle="A clear plan from today to launch — built for India"
+                subtitle="A clear plan from today to launch, made for India"
             >
                 <Timeline phases={TIMELINE_PHASES} />
                 <div className="text-center mt-14">
@@ -383,7 +383,7 @@ export default function Home() {
                             <Badge text={COMPLIANCE.betaAccess} variant="development" />
                         </div>
                         <p className="text-center text-neutral-500 dark:text-neutral-400 text-sm max-w-2xl mx-auto leading-relaxed">
-                            EnteraFlux is a <strong className="text-neutral-700 dark:text-neutral-300">wellness and lifestyle app</strong> — it is <strong className="text-neutral-700 dark:text-neutral-300">not a medical device</strong> and does not diagnose, treat, or prevent any condition. We provide research-informed wellness tips, not medical advice. Always consult your doctor for health decisions.
+                            EnteraFlux is a <strong className="text-neutral-700 dark:text-neutral-300">wellness and lifestyle app</strong>. It is <strong className="text-neutral-700 dark:text-neutral-300">not a medical device</strong> and does not diagnose, treat, or prevent any condition. We provide research-informed wellness tips, not medical advice. Always consult your doctor for health decisions.
                         </p>
                     </div>
                 </div>
@@ -393,7 +393,7 @@ export default function Home() {
             <Section
                 label="Join Us"
                 title="Get Involved"
-                subtitle="Whether you're a GLP-1 user, doctor, researcher, or supporter — there's a place for you"
+                subtitle="Whether you're a GLP-1 user, doctor, researcher, or supporter, there's a place for you"
             >
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 max-w-4xl mx-auto">
                     {AUDIENCE_CTAS.map((item, index) => (

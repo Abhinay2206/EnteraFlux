@@ -7,7 +7,7 @@ import { TIMELINE_PHASES } from '../data/content';
 
 export default function Roadmap() {
     useEffect(() => {
-        document.title = 'Roadmap — EnteraFlux';
+        document.title = 'Roadmap | EnteraFlux';
     }, []);
 
     return (
@@ -21,12 +21,12 @@ export default function Roadmap() {
                 <div className="max-w-4xl mx-auto text-center">
                     <ScrollReveal delay={200} effect="blur-in">
                         <p className="text-lg text-neutral-700 dark:text-neutral-300 mb-8">
-                            We're building EnteraFlux carefully and transparently — starting with a consumer wellness app for individual GLP-1 users in India, and expanding to enterprise tools later. Here's where we are and what's coming next.
+                            We're building EnteraFlux carefully and openly. We're starting with a consumer wellness app for individual GLP-1 users in India, and expanding to enterprise tools later. Here's where we are and what's coming next.
                         </p>
                     </ScrollReveal>
                     <div className="flex justify-center gap-3 flex-wrap">
                         <Badge text="We're Here Now → Building the Foundation" variant="development" />
-                        <Badge text="Early Access in India — Q3 2026" variant="status" />
+                        <Badge text="Early Access in India | Q3 2026" variant="status" />
                     </div>
                 </div>
             </Section>
@@ -113,10 +113,10 @@ export default function Roadmap() {
                         <div className="relative z-10">
                             <div className="flex items-center justify-between mb-4">
                                 <h3 className="text-2xl font-bold">Generics Launch + Phase 1 Public Release</h3>
-                                <Badge text="Mid–Q4 2026" variant="status" />
+                                <Badge text="Mid to Q4 2026" variant="status" />
                             </div>
                             <p className="text-neutral-700 dark:text-neutral-300 mb-6 max-w-3xl">
-                                GLP-1 generic medications are expected in India after March 2026, making these drugs much more affordable and widely available. This is when we'll launch the full Phase 1 consumer app — Body Signals + Muscle-Safe Coaching — for all Indian GLP-1 users.
+                                GLP-1 generic medications are expected in India after March 2026, making these drugs much more affordable and widely available. This is when we'll launch the full Phase 1 consumer app (Body Signals + Muscle-Safe Coaching) for all Indian GLP-1 users.
                             </p>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                                 <div>
@@ -124,13 +124,13 @@ export default function Roadmap() {
                                     <ul className="space-y-2 text-sm text-neutral-600 dark:text-neutral-400">
                                         <li>• <strong>Generics:</strong> Affordable GLP-1 generics enter the Indian market, expanding access significantly.</li>
                                         <li>• <strong>Growing Demand:</strong> Millions of Indians expected to start GLP-1 medications for weight loss.</li>
-                                        <li>• <strong>Support Gap:</strong> Very few India-specific wellness tools available for GLP-1 users — EnteraFlux fills this gap.</li>
+                                        <li>• <strong>Support Gap:</strong> Very few India-specific wellness tools available for GLP-1 users. EnteraFlux fills this gap.</li>
                                     </ul>
                                 </div>
                                 <div>
                                     <h4 className="font-semibold text-primary-500 mb-3 border-b border-neutral-200 dark:border-neutral-700 pb-2">Our Launch</h4>
                                     <ul className="space-y-2 text-sm text-neutral-600 dark:text-neutral-400">
-                                        <li>• <strong>Full App:</strong> Both modules — Body Signals and Muscle-Safe Coaching — available to everyone.</li>
+                                        <li>• <strong>Full App:</strong> Both modules (Body Signals and Muscle-Safe Coaching) available to everyone.</li>
                                         <li>• <strong>Free Tier:</strong> Basic features available free; premium features via subscription.</li>
                                         <li>• <strong>Android First:</strong> Prioritising Android (the most popular platform in India).</li>
                                     </ul>
@@ -150,7 +150,7 @@ export default function Roadmap() {
                                 <Badge text="2027+" variant="status" />
                             </div>
                             <p className="text-neutral-700 dark:text-neutral-300 mb-6 max-w-3xl">
-                                With a strong consumer base and real-world wellness data from Indian users, we expand into enterprise tools — pharma partnerships, corporate wellness programs, and drug authenticity verification.
+                                With a strong consumer base and real-world wellness data from Indian users, we expand into enterprise tools: pharma partnerships, corporate wellness programs, and drug authenticity verification.
                             </p>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                                 <div>

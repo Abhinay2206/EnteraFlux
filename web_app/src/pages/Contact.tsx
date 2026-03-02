@@ -10,7 +10,7 @@ type ActiveTab = 'feedback' | 'rnd';
 
 export default function Contact() {
     useEffect(() => {
-        document.title = 'Contact — EnteraFlux';
+        document.title = 'Contact | EnteraFlux';
     }, []);
 
     const [searchParams] = useSearchParams();
@@ -82,7 +82,7 @@ export default function Contact() {
                 <ScrollReveal delay={200} effect="blur-in">
                     <div className="max-w-2xl mx-auto text-center">
                         <p className="text-neutral-700 dark:text-neutral-300 mb-8">
-                            Whether you're a patient using GLP-1 medications, a developer, clinician, or researcher — we'd love to hear your thoughts and ideas.
+                            Whether you're a patient using GLP-1 medications, a developer, clinician, or researcher, we'd love to hear your thoughts and ideas.
                         </p>
                     </div>
                 </ScrollReveal>
@@ -128,7 +128,7 @@ export default function Contact() {
                                     <div className="mb-2">
                                         <h3 className="text-lg font-bold text-neutral-900 dark:text-white">Share Your Feedback</h3>
                                         <p className="text-sm text-neutral-500 dark:text-neutral-400 mt-1">
-                                            As a patient, developer, or health professional — tell us what you think about EnteraFlux.
+                                            As a patient, developer, or health professional, tell us what you think about EnteraFlux.
                                         </p>
                                     </div>
 

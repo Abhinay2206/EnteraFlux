@@ -14,7 +14,7 @@ export default function ModulesIntegration() {
     }, []);
 
     const modules = [
-        { label: 'Monitor', color: 'text-primary-500', stroke: 'stroke-primary-500' },
+        { label: 'Analyse', color: 'text-primary-500', stroke: 'stroke-primary-500' },
         { label: 'Coach', color: 'text-success-500', stroke: 'stroke-success-500' },
         { label: 'Research', color: 'text-secondary-500', stroke: 'stroke-secondary-500' },
         { label: 'Safety', color: 'text-warning-500', stroke: 'stroke-warning-500' },

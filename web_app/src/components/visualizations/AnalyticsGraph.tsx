@@ -95,7 +95,7 @@ export default function AnalyticsGraph() {
             <div className="absolute bottom-4 right-4 flex gap-2">
                 <div className="flex items-center gap-2 px-3 py-1.5 bg-success-100/20 dark:bg-success-900/20 rounded-full border border-success-200/50 dark:border-success-800/50">
                     <div className="w-2 h-2 rounded-full bg-success-500 animate-pulse" />
-                    <span className="text-xs font-bold text-success-700 dark:text-success-400">LIVE MONITORING</span>
+                    <span className="text-xs font-bold text-success-700 dark:text-success-400">LIVE ANALYSIS</span>
                 </div>
             </div>
         </div>

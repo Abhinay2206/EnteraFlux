@@ -7,22 +7,22 @@ import WellnessScoreRadar from '../components/visualizations/WellnessScoreRadar'
 
 export default function Science() {
     useEffect(() => {
-        document.title = 'Science — EnteraFlux';
+        document.title = 'Science | EnteraFlux';
     }, []);
 
     const metrics = [
-        { icon: Heart, title: 'Heart Rate Variability (HRV)', desc: 'Tracks autonomic nervous system balance — GLP-1 agonists can modulate vagal tone, and HRV reflects recovery readiness and stress resilience day to day.' },
-        { icon: Activity, title: 'Resting Heart Rate', desc: 'A reliable proxy for cardiovascular load. We detect subtle shifts after dose days, poor sleep, or dehydration — common during GLP-1 therapy.' },
-        { icon: Moon, title: 'Sleep Architecture', desc: 'Deep sleep and REM ratios change with weight loss and medication timing. We surface trends so you can optimise when you take your dose.' },
-        { icon: TrendingUp, title: 'Recovery Score', desc: 'A composite signal combining HRV, sleep quality, and resting HR — calibrated to your personal baseline over the first two weeks.' },
+        { icon: Heart, title: 'Heart Rate Variability (HRV)', desc: 'Reflects autonomic nervous system balance. GLP-1 agonists can modulate vagal tone, and HRV changes from your personal baseline can indicate shifts in recovery readiness and stress resilience day to day.' },
+        { icon: Activity, title: 'Resting Heart Rate', desc: 'A reliable proxy for cardiovascular load. We identify subtle shifts from your personal baseline after dose days, poor sleep, or dehydration, all of which are common during GLP-1 therapy.' },
+        { icon: Moon, title: 'Sleep Architecture', desc: 'Deep sleep and REM ratios change with weight loss and medication timing. We surface trends so you can explore how dose timing affects your rest.' },
+        { icon: TrendingUp, title: 'Recovery Score', desc: 'A composite signal combining HRV, sleep quality, and resting HR, calibrated to your personal baseline over the first two weeks.' },
         { icon: Database, title: 'Weekly Trends', desc: 'Rolling 7-day and 30-day views of all signals, highlighting dose-day effects, travel disruptions, and lifestyle pattern changes.' },
         { icon: Brain, title: 'Event-Based Check-ins', desc: 'After dose days, travel, illness, or poor sleep, the app prompts a short check-in and correlates your subjective feel with objective signals.' },
     ];
 
     const pipeline = [
-        { step: 'Collect', title: 'Wearable Data Ingestion', desc: 'Raw sensor data from your smartwatch — heart rate, steps, sleep stages, SpO₂ — streamed via Health Connect or Apple HealthKit.', accent: 'from-primary-500 to-primary-600' },
-        { step: 'Process', title: 'Baseline Calibration', desc: 'Two weeks of learning your personal norms. We build a statistical model of your resting HR, HRV range, and sleep patterns — no population averages.', accent: 'from-success-500 to-success-600' },
-        { step: 'Surface', title: 'Contextual Insights', desc: 'Deviations from your baseline are matched against known GLP-1 side-effect patterns and lifestyle factors to generate actionable, jargon-free nudges.', accent: 'from-warning-500 to-warning-600' },
+        { step: 'Collect', title: 'Wearable Data Ingestion', desc: 'Raw sensor data from your smartwatch (heart rate, steps, sleep stages, SpO₂) streamed via Health Connect or Apple HealthKit.', accent: 'from-primary-500 to-primary-600' },
+        { step: 'Process', title: 'Baseline Calibration', desc: 'Two weeks of learning your personal norms. We build a statistical model of your resting HR, HRV range, and sleep patterns. No population averages.', accent: 'from-success-500 to-success-600' },
+        { step: 'Surface', title: 'Contextual Insights', desc: 'Deviations from your baseline are correlated with medication timing and lifestyle factors to generate actionable, jargon-free wellness nudges.', accent: 'from-warning-500 to-warning-600' },
     ];
 
     const wearables = [
@@ -40,7 +40,7 @@ export default function Science() {
             <Section
                 label="How It Works"
                 title="The Science Behind EnteraFlux"
-                subtitle="We turn everyday wearable signals into meaningful wellness guidance — grounded in physiology, not hype"
+                subtitle="We turn everyday wearable signals into meaningful wellness guidance, based on physiology, not hype"
                 variant="default"
             >
                 <div className="max-w-5xl mx-auto">
@@ -54,10 +54,10 @@ export default function Science() {
                                     Research-Informed Wellness
                                 </div>
                                 <p className="text-lg sm:text-xl leading-relaxed text-white/90 mb-4">
-                                    GLP-1 receptor agonists — semaglutide, liraglutide, tirzepatide — are transforming weight management. But the medication is only half the story.
+                                    GLP-1 receptor agonists (semaglutide, liraglutide, tirzepatide) are changing weight management. But the medication is only half the story.
                                 </p>
                                 <p className="text-sm text-white/60 leading-relaxed max-w-3xl">
-                                    Side effects like nausea, fatigue, and muscle loss affect over 50% of users. EnteraFlux uses the biometric signals your smartwatch already collects to help you understand how your body is responding — and what you can do about it, every day.
+                                    Side effects like nausea, fatigue, and muscle loss affect over 50% of users. EnteraFlux uses the biometric signals your smartwatch already collects to help you understand how your body is responding, and what you can do about it, every day.
                                 </p>
                             </div>
                         </div>
@@ -69,7 +69,7 @@ export default function Science() {
             <Section
                 label="Calibration"
                 title="Your Personal Baseline"
-                subtitle="No two bodies respond the same way — so we start by learning yours"
+                subtitle="No two bodies respond the same way, so we start by learning yours"
                 variant="dark"
             >
                 <div className="max-w-5xl mx-auto">
@@ -96,7 +96,7 @@ export default function Science() {
                                         <h3 className="text-sm font-bold text-neutral-900 dark:text-white">2-Week Learning Period</h3>
                                     </div>
                                     <p className="text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed">
-                                        During the first 14 days, the app collects resting heart rate, HRV, sleep stages, and step patterns to build a statistical model of <strong className="text-neutral-700 dark:text-neutral-300">your</strong> normal — not a population average.
+                                        During the first 14 days, the app collects resting heart rate, HRV, sleep stages, and step patterns to build a statistical model of <strong className="text-neutral-700 dark:text-neutral-300">your</strong> normal, not a population average.
                                     </p>
                                 </div>
                             </ScrollReveal>
@@ -109,10 +109,10 @@ export default function Science() {
                                         <div className="w-9 h-9 rounded-lg bg-success-50 dark:bg-success-500/10 flex items-center justify-center">
                                             <TrendingUp className="w-5 h-5 text-success-600 dark:text-success-400" />
                                         </div>
-                                        <h3 className="text-sm font-bold text-neutral-900 dark:text-white">Deviation Detection</h3>
+                                        <h3 className="text-sm font-bold text-neutral-900 dark:text-white">Baseline Deviation Analysis</h3>
                                     </div>
                                     <p className="text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed">
-                                        Once calibrated, the app flags meaningful shifts — a 10% HRV drop after a dose day, disrupted deep sleep after travel, or elevated resting HR during dehydration — and explains what it might mean.
+                                        Once calibrated, the app surfaces meaningful deviations from your baseline: a 10% HRV drop after a dose day, disrupted deep sleep after travel, or elevated resting HR during dehydration. It also explains what it might mean.
                                     </p>
                                 </div>
                             </ScrollReveal>
@@ -128,7 +128,7 @@ export default function Science() {
                                         <h3 className="text-sm font-bold text-neutral-900 dark:text-white">Continuous Refinement</h3>
                                     </div>
                                     <p className="text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed">
-                                        Your baseline isn't static. As your body adapts to the medication and your fitness improves, the model recalibrates — ensuring insights stay relevant week after week.
+                                        Your baseline isn't static. As your body adapts to the medication and your fitness improves, the model recalibrates so that insights stay relevant week after week.
                                     </p>
                                 </div>
                             </ScrollReveal>
@@ -140,8 +140,8 @@ export default function Science() {
             {/* ── Body Signals: Numbered List ── */}
             <Section
                 label="Body Signals"
-                title="Six Signals We Track"
-                subtitle="Each metric is chosen for its relevance to GLP-1 therapy — not because it looks impressive on a dashboard"
+                title="Six Signals We Analyse"
+                subtitle="Each metric is chosen for its relevance to GLP-1 therapy, not because it looks impressive on a dashboard"
                 variant="default"
             >
                 <div className="max-w-5xl mx-auto">
@@ -229,7 +229,7 @@ export default function Science() {
             <Section
                 label="Compatibility"
                 title="Works With Your Watch"
-                subtitle="We support the smartwatches and fitness bands most popular in India — plus global favourites"
+                subtitle="We support the smartwatches and fitness bands most popular in India, plus global favourites"
                 variant="dark"
             >
                 <div className="max-w-4xl mx-auto">
@@ -256,7 +256,7 @@ export default function Science() {
                                 <h4 className="text-sm font-bold text-neutral-900 dark:text-white">Integration Layer</h4>
                             </div>
                             <p className="text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed max-w-xl mx-auto">
-                                Data flows through <strong className="text-neutral-700 dark:text-neutral-300">Apple HealthKit</strong> (iOS) or <strong className="text-neutral-700 dark:text-neutral-300">Health Connect</strong> (Android). We never access raw sensor APIs directly — your phone's health platform handles permissions and privacy.
+                                Data flows through <strong className="text-neutral-700 dark:text-neutral-300">Apple HealthKit</strong> (iOS) or <strong className="text-neutral-700 dark:text-neutral-300">Health Connect</strong> (Android). We never access raw sensor APIs directly. Your phone's health platform handles permissions and privacy.
                             </p>
                         </div>
                     </ScrollReveal>

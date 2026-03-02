@@ -89,7 +89,7 @@ export default function Hero({ primaryCTA, secondaryCTA, badge }: HeroProps) {
 
                         {/* Sub-copy */}
                         <p className={`mt-7 text-lg sm:text-xl text-neutral-500 dark:text-neutral-400 leading-relaxed max-w-lg transition-all duration-1000 delay-300 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
-                            Your smartwatch already tracks your body. We turn those signals into personalised wellness guidance — built for Indian diets & lifestyles.
+                            Your smartwatch already tracks your body. We turn those signals into personalised wellness guidance, made for Indian diets & lifestyles.
                         </p>
 
                         {/* CTAs */}
@@ -102,7 +102,7 @@ export default function Hero({ primaryCTA, secondaryCTA, badge }: HeroProps) {
                         <div className={`mt-10 flex flex-wrap items-center gap-x-5 gap-y-2.5 transition-all duration-1000 delay-700 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
                             {[
                                 { icon: Shield, label: 'Research-Informed' },
-                                { icon: CheckCircle, label: 'Built for India' },
+                                { icon: CheckCircle, label: 'Made for India' },
                                 { icon: TrendingUp, label: 'Not a Medical Device' },
                             ].map((t, i) => (
                                 <div key={i} className="flex items-center gap-1.5">
@@ -217,7 +217,7 @@ export default function Hero({ primaryCTA, secondaryCTA, badge }: HeroProps) {
                                             <Utensils className="w-4 h-4 text-success-600 dark:text-success-400" />
                                         </div>
                                         <div className="min-w-0">
-                                            <p className="text-xs font-semibold text-neutral-800 dark:text-neutral-200 mb-0.5">Protein Tip — Lunch</p>
+                                            <p className="text-xs font-semibold text-neutral-800 dark:text-neutral-200 mb-0.5">Protein Tip | Lunch</p>
                                             <p className="text-[11px] text-neutral-500 dark:text-neutral-400 leading-snug">Add a cup of curd for 8g extra protein. You're at 42g / 65g today.</p>
                                         </div>
                                     </div>

@@ -30,7 +30,7 @@ export default function Footer() {
                                 Help shape the future of GLP-1 wellness in India
                             </h3>
                             <p className="text-neutral-400 text-sm max-w-lg">
-                                Share your feedback as a patient or developer, or join our R&D team — help us build India's first wellness companion for GLP-1 medication users.
+                                Share your feedback as a patient or developer, or join our R&D team. Help us build India's first wellness companion for GLP-1 medication users.
                             </p>
                         </div>
                         <Link
@@ -58,13 +58,13 @@ export default function Footer() {
                             </span>
                         </div>
                         <p className="text-neutral-400 text-sm leading-relaxed mb-4 max-w-sm">
-                            A wellness companion for people in India on GLP-1 weight-loss medications — offering Indian-diet-friendly protein tips, body signal awareness, and muscle-safe coaching.
+                            A wellness companion for people in India on GLP-1 weight-loss medications. Indian-diet-friendly protein tips, body signal awareness, and muscle-safe coaching.
                         </p>
                         <div className="flex items-center gap-2 text-neutral-600 text-xs">
                             <div className="w-1.5 h-1.5 rounded-full bg-primary-500" />
                             <span>Currently In Development</span>
                             <span className="text-neutral-700">·</span>
-                            <span>Wellness App — Not a Medical Device</span>
+                            <span>Wellness App | Not a Medical Device</span>
                         </div>
                     </div>
 

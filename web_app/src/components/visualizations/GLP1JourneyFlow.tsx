@@ -3,7 +3,7 @@ import { useEffect, useState, useRef } from 'react';
 const stages = [
     { label: 'Start Medication', icon: '💊', color: '#3B82F6', desc: 'Begin GLP-1 therapy' },
     { label: 'Calibrate', icon: '📊', color: '#8B5CF6', desc: '2-week baseline period' },
-    { label: 'Monitor Signals', icon: '📡', color: '#06B6D4', desc: 'Track body responses' },
+    { label: 'Analyse Patterns', icon: '📡', color: '#06B6D4', desc: 'Correlate body signals' },
     { label: 'Get Insights', icon: '💡', color: '#22C55E', desc: 'Personalised wellness tips' },
     { label: 'Feel Better', icon: '✨', color: '#F59E0B', desc: 'Improved daily wellness' },
 ];

@@ -10,14 +10,14 @@ import ResearchValidation from '../components/ResearchValidation';
 
 export default function Modules() {
     useEffect(() => {
-        document.title = 'Features — EnteraFlux';
+        document.title = 'Features | EnteraFlux';
     }, []);
 
     return (
         <div>
             <Section
                 title="EnteraFlux Features"
-                subtitle="Two core modules designed for Indian GLP-1 users — simple, practical, and culturally relevant"
+                subtitle="Two core modules made for Indian GLP-1 users. Simple, practical, and culturally relevant."
                 variant="gradient"
                 firstSection
             >
@@ -82,7 +82,7 @@ export default function Modules() {
             </Section>
 
             {/* Phase 2 Preview */}
-            <Section title="Coming in Phase 2" subtitle="Enterprise and research features — planned for 2027" variant="dark">
+            <Section title="Coming in Phase 2" subtitle="Enterprise and research features, planned for 2027" variant="dark">
                 <div className="max-w-4xl mx-auto">
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         {PHASE2_MODULES.map((module) => (

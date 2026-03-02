@@ -157,8 +157,8 @@ export default function Survey() {
     const navigate = useNavigate();
 
     useMetaTags({
-        title: 'Weight-Loss & Health Perception Survey — EnteraFlux',
-        description: 'Participate in our anonymous research survey about health behaviors, weight management perceptions, and technology usage patterns in India.',
+        title: 'Weight-Loss & Health Perception Survey | EnteraFlux',
+        description: 'Take part in our anonymous research survey about health behaviours, weight management perceptions, and technology usage patterns in India.',
         url: 'https://www.enteraflux.tech/public/survey',
         image: 'https://www.enteraflux.tech/logo.png',
     });
@@ -573,7 +573,7 @@ export default function Survey() {
                             </div>
                             {/* Q23 */}
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-2"><QNum n={23} />If there was an app that predicted your weight-loss progress, detected when you are about to quit, suggested personalized diet changes, and tracked medication under doctor supervision — would you use it?<RequiredDot /></label>
+                                <label className="block text-sm font-medium text-gray-700 mb-2"><QNum n={23} />If there was an app that analysed your body's physiological patterns during medication use, helped you understand how your body responds over time, suggested personalised diet changes, and supported your journey under doctor supervision, would you use it?<RequiredDot /></label>
                                 <div className="flex flex-wrap gap-3">
                                     {['Yes', 'Maybe', 'No'].map((v) => (
                                         <RadioOption key={v} name="q23" value={v} label={v} checked={data.q23_would_use_app === v} onChange={(val) => set('q23_would_use_app', val)} />

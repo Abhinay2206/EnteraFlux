@@ -61,7 +61,7 @@ export default function ResearchValidation() {
                     {/* Intro Note */}
                     <div className="glass rounded-xl p-6 text-center mb-6">
                         <p className="text-sm text-neutral-600 dark:text-neutral-300 leading-relaxed">
-                            Wondering how EnteraFlux identifies GLP-1–related patterns in your body signals? This section explains the research and reasoning behind our approach — in simple language, with full transparency.
+                            Wondering how EnteraFlux analyses physiological patterns associated with GLP-1 medication use? This section explains the research and reasoning behind our approach, in simple language, with full transparency.
                         </p>
                     </div>
 
@@ -77,23 +77,23 @@ export default function ResearchValidation() {
                         <ul className="space-y-2 mb-4">
                             <li className="flex items-start gap-2">
                                 <span className="w-1.5 h-1.5 rounded-full bg-primary-400 mt-2 flex-shrink-0" />
-                                <span><strong>Nausea and stomach discomfort</strong> — reported by 40–50% of users in clinical studies</span>
+                                <span><strong>Nausea and stomach discomfort</strong>, reported by 40 to 50% of users in clinical studies</span>
                             </li>
                             <li className="flex items-start gap-2">
                                 <span className="w-1.5 h-1.5 rounded-full bg-primary-400 mt-2 flex-shrink-0" />
-                                <span><strong>Fatigue and low energy</strong> — especially during the first few weeks of treatment</span>
+                                <span><strong>Fatigue and low energy</strong>, especially during the first few weeks of treatment</span>
                             </li>
                             <li className="flex items-start gap-2">
                                 <span className="w-1.5 h-1.5 rounded-full bg-primary-400 mt-2 flex-shrink-0" />
-                                <span><strong>Dizziness and lightheadedness</strong> — often linked to reduced food intake and dehydration</span>
+                                <span><strong>Dizziness and lightheadedness</strong>, often linked to reduced food intake and dehydration</span>
                             </li>
                             <li className="flex items-start gap-2">
                                 <span className="w-1.5 h-1.5 rounded-full bg-primary-400 mt-2 flex-shrink-0" />
-                                <span><strong>Sleep changes</strong> — some users report disrupted sleep or changes in sleep quality</span>
+                                <span><strong>Sleep changes</strong>: some users report disrupted sleep or changes in sleep quality</span>
                             </li>
                             <li className="flex items-start gap-2">
                                 <span className="w-1.5 h-1.5 rounded-full bg-primary-400 mt-2 flex-shrink-0" />
-                                <span><strong>Muscle weakness</strong> — particularly when protein intake is too low during weight loss</span>
+                                <span><strong>Muscle weakness</strong>, particularly when protein intake is too low during weight loss</span>
                             </li>
                         </ul>
                         <p className="text-xs text-neutral-500 dark:text-neutral-500">
@@ -107,30 +107,30 @@ export default function ResearchValidation() {
                         icon={<Activity className="w-5 h-5 text-primary-500" />}
                     >
                         <p className="mb-3">
-                            Wearable devices like smartwatches and fitness bands collect signals from your body throughout the day. Published research has found <strong>statistical correlations</strong> between these signals and common GLP-1 side effects:
+                            Wearable devices like smartwatches and fitness bands collect signals from your body throughout the day. Published research has found <strong>statistical correlations</strong> between these physiological signals and the body's response to GLP-1 medications:
                         </p>
                         <ul className="space-y-3 mb-4">
                             <li className="flex items-start gap-2">
                                 <span className="w-1.5 h-1.5 rounded-full bg-accent-400 mt-2 flex-shrink-0" />
-                                <span><strong>Heart Rate Variability (HRV)</strong> — research shows that drops in HRV are associated with physiological stress, fatigue, and poor recovery. Population-level trends suggest that nausea and dehydration from GLP-1 drugs can lower HRV.</span>
+                                <span><strong>Heart Rate Variability (HRV)</strong>: research shows that drops in HRV are associated with physiological stress, fatigue, and poor recovery. Population-level trends suggest that changes in appetite and hydration during GLP-1 therapy can lower HRV.</span>
                             </li>
                             <li className="flex items-start gap-2">
                                 <span className="w-1.5 h-1.5 rounded-full bg-accent-400 mt-2 flex-shrink-0" />
-                                <span><strong>Resting Heart Rate (RHR)</strong> — studies have shown that elevated RHR can indicate dehydration, stress, or the body working harder to adapt. A rise of 5–10 bpm from baseline is a commonly observed pattern during medication adjustments.</span>
+                                <span><strong>Resting Heart Rate (RHR)</strong>: studies have shown that elevated RHR can reflect dehydration, stress, or the body adapting to changes. A rise of 5–10 bpm from your personal baseline is a commonly observed pattern during medication adjustments.</span>
                             </li>
                             <li className="flex items-start gap-2">
                                 <span className="w-1.5 h-1.5 rounded-full bg-accent-400 mt-2 flex-shrink-0" />
-                                <span><strong>Sleep Quality</strong> — wearable-tracked sleep metrics (deep sleep duration, wake-ups) have been correlated with overall recovery and energy levels in research across multiple populations.</span>
+                                <span><strong>Sleep Quality</strong>: wearable-tracked sleep metrics (deep sleep duration, wake-ups) have been correlated with overall recovery and energy levels in research across multiple populations.</span>
                             </li>
                             <li className="flex items-start gap-2">
                                 <span className="w-1.5 h-1.5 rounded-full bg-accent-400 mt-2 flex-shrink-0" />
-                                <span><strong>Stress and Recovery Patterns</strong> — research-backed patterns show that a combination of elevated heart rate, reduced HRV, and poor sleep together often indicate the body is under additional stress.</span>
+                                <span><strong>Stress and Recovery Patterns</strong>: research-backed patterns show that a combination of elevated heart rate, reduced HRV, and poor sleep together often reflect that the body is under additional physiological load.</span>
                             </li>
                         </ul>
                         <div className="bg-primary-50 dark:bg-primary-900/20 rounded-lg p-4">
                             <p className="text-xs text-primary-700 dark:text-primary-300 font-medium mb-1">Important</p>
                             <p className="text-xs text-neutral-600 dark:text-neutral-400">
-                                These are <strong>statistical correlations observed at a population level</strong> — not guarantees for any individual. EnteraFlux uses these research-backed patterns to provide wellness insights, not medical conclusions.
+                                These are <strong>statistical correlations observed at a population level</strong> — not guarantees for any individual. EnteraFlux uses these research-backed patterns to surface personalised wellness insights, not medical conclusions.
                             </p>
                         </div>
                     </ResearchSection>
@@ -177,15 +177,15 @@ export default function ResearchValidation() {
                         <ul className="space-y-2 mb-4">
                             <li className="flex items-start gap-2">
                                 <span className="w-1.5 h-1.5 rounded-full bg-accent-400 mt-2 flex-shrink-0" />
-                                <span><strong>Diet and protein intake</strong> — Traditional Indian diets are often lower in protein compared to Western diets, which can increase the risk of muscle loss during rapid weight loss</span>
+                                <span><strong>Diet and protein intake</strong>: Traditional Indian diets are often lower in protein compared to Western diets, which can increase the risk of muscle loss during rapid weight loss</span>
                             </li>
                             <li className="flex items-start gap-2">
                                 <span className="w-1.5 h-1.5 rounded-full bg-accent-400 mt-2 flex-shrink-0" />
-                                <span><strong>Hydration and climate</strong> — India's hot climate means dehydration can amplify GLP-1 side effects like nausea, dizziness, and elevated heart rate</span>
+                                <span><strong>Hydration and climate</strong>: India's hot climate means dehydration can amplify GLP-1 side effects like nausea, dizziness, and elevated heart rate</span>
                             </li>
                             <li className="flex items-start gap-2">
                                 <span className="w-1.5 h-1.5 rounded-full bg-accent-400 mt-2 flex-shrink-0" />
-                                <span><strong>Thin-fat phenotype</strong> — Many Indians have lower muscle mass relative to body fat, making muscle preservation during weight loss even more important</span>
+                                <span><strong>Thin-fat phenotype</strong>: Many Indians have lower muscle mass relative to body fat, making muscle preservation during weight loss even more important</span>
                             </li>
                             <li className="flex items-start gap-2">
                                 <span className="w-1.5 h-1.5 rounded-full bg-accent-400 mt-2 flex-shrink-0" />
@@ -193,17 +193,17 @@ export default function ResearchValidation() {
                             </li>
                             <li className="flex items-start gap-2">
                                 <span className="w-1.5 h-1.5 rounded-full bg-accent-400 mt-2 flex-shrink-0" />
-                                <span><strong>Cost and discontinuation</strong> — GLP-1 drugs are expensive in India with limited insurance coverage, so users who quit due to side effects lose both money and health progress. Proper wellness support can help people stay on track</span>
+                                <span><strong>Cost and discontinuation</strong>: GLP-1 drugs are expensive in India with limited insurance coverage, so users who quit due to side effects lose both money and health progress. Proper wellness support can help people stay on track</span>
                             </li>
                         </ul>
                         <p className="text-xs text-neutral-500 dark:text-neutral-500">
-                            These factors are why EnteraFlux is designed specifically for Indian users — not just translated from a Western product.
+                            These factors are why EnteraFlux is made specifically for Indian users, not just translated from a Western product.
                         </p>
                     </ResearchSection>
 
                     {/* Section 5: Disclaimer */}
                     <ResearchSection
-                        title="What This Is — and What This Isn't"
+                        title="What This Is, and What This Isn't"
                         icon={<ShieldCheck className="w-5 h-5 text-primary-500" />}
                     >
                         <div className="space-y-4">
@@ -255,7 +255,7 @@ export default function ResearchValidation() {
                     {/* Bottom Note */}
                     <div className="text-center pt-4">
                         <p className="text-xs text-neutral-500 dark:text-neutral-400 max-w-2xl mx-auto leading-relaxed">
-                            This information is provided for <strong>education and transparency</strong>. EnteraFlux is a wellness and lifestyle support app — not a medical device. Always consult your doctor for health-related decisions. All insights are based on population-level trends and your personal baseline, and should be used to support — not replace — professional medical advice.
+                            This information is provided for <strong>education and transparency</strong>. EnteraFlux is a wellness and lifestyle support app, not a medical device. Always consult your doctor for health-related decisions. All insights are based on population-level trends and your personal baseline, and should be used to support, not replace, professional medical advice.
                         </p>
                     </div>
                 </div>

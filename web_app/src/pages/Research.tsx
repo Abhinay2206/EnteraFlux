@@ -27,14 +27,14 @@ import PharmacovigilanceChart from '../components/visualizations/Pharmacovigilan
 
 export default function Research() {
     useEffect(() => {
-        document.title = 'Research — EnteraFlux';
+        document.title = 'Research | EnteraFlux';
     }, []);
 
     const researchPillars = [
         {
             icon: Heart,
             title: 'GLP-1 Side-Effect Patterns',
-            desc: 'Published clinical trials document nausea, fatigue, and muscle loss in 40–50% of GLP-1 users. We map wearable signals against these known patterns — not to diagnose, but to help users notice and respond.',
+            desc: 'Published clinical trials document nausea, fatigue, and muscle loss in 40 to 50% of GLP-1 users. We correlate wearable signals with these known physiological patterns, not to diagnose, but to help users notice and respond.',
             papers: 3,
             accent: 'from-primary-500 to-primary-600',
             bgLight: 'bg-primary-50',
@@ -45,7 +45,7 @@ export default function Research() {
         {
             icon: Activity,
             title: 'HRV & Autonomic Response',
-            desc: 'Heart rate variability reflects autonomic nervous system balance. Research shows GLP-1 agonists can modulate vagal tone — we use HRV trends to surface recovery readiness and stress resilience.',
+            desc: 'Heart rate variability reflects autonomic nervous system balance. Research shows GLP-1 agonists can modulate vagal tone, so we use HRV trends to surface recovery readiness and stress resilience.',
             papers: 5,
             accent: 'from-success-500 to-success-600',
             bgLight: 'bg-success-50',
@@ -56,7 +56,7 @@ export default function Research() {
         {
             icon: Dumbbell,
             title: 'Sarcopenia & Muscle Preservation',
-            desc: 'Rapid weight loss from GLP-1 therapy can accelerate muscle loss — especially in Indians with the "thin-fat" phenotype. Our protein guidance is informed by sports nutrition and metabolic research.',
+            desc: 'Rapid weight loss from GLP-1 therapy can speed up muscle loss, especially in Indians with the "thin-fat" phenotype. Our protein guidance is informed by sports nutrition and metabolic research.',
             papers: 4,
             accent: 'from-warning-500 to-warning-600',
             bgLight: 'bg-warning-50',
@@ -81,7 +81,7 @@ export default function Research() {
         {
             step: '01',
             title: 'Literature Review',
-            desc: 'Every signal we track and every nudge we generate is grounded in peer-reviewed clinical trial data — primarily from STEP, SUSTAIN, and SURPASS programmes.',
+            desc: 'Every signal we analyse and every nudge we generate is backed by peer-reviewed clinical trial data, mainly from the STEP, SUSTAIN, and SURPASS programmes.',
             icon: BookOpen,
         },
         {
@@ -93,7 +93,7 @@ export default function Research() {
         {
             step: '03',
             title: 'Personal Baseline Calibration',
-            desc: 'Instead of population averages, we calibrate to each user\'s personal norms over a 2-week learning period — making insights individually relevant.',
+            desc: 'Instead of population averages, we calibrate to each user\'s personal norms over a 2-week learning period, making insights individually relevant.',
             icon: Target,
         },
         {
@@ -109,12 +109,12 @@ export default function Research() {
             phase: 'Phase 2A',
             date: '2027',
             title: 'Pharma & Research Partnerships',
-            desc: 'Aggregate, anonymised wellness data from Indian GLP-1 users — helping pharma companies understand real-world medication patterns in the Indian population.',
+            desc: 'Aggregate, anonymised wellness data from Indian GLP-1 users, helping pharma companies understand real-world medication patterns in the Indian population.',
             icon: Building2,
             features: [
                 'Real-world wellness data dashboards for pharma R&D teams',
                 'Anonymised cohort analysis by medication type, dosage, and demographics',
-                'Signal detection for emerging side-effect patterns in Indian users',
+                'Pattern analysis for emerging physiological trends in Indian users',
                 'API access for approved research partners',
             ],
         },
@@ -122,7 +122,7 @@ export default function Research() {
             phase: 'Phase 2B',
             date: '2027',
             title: 'Corporate Wellness Programs',
-            desc: 'Offer GLP-1 lifestyle support as an employee wellness benefit — integrated with corporate health insurance and HR platforms.',
+            desc: 'Offer GLP-1 lifestyle support as an employee wellness benefit, integrated with corporate health insurance and HR platforms.',
             icon: Users,
             features: [
                 'Employer-sponsored GLP-1 wellness programmes',
@@ -135,7 +135,7 @@ export default function Research() {
             phase: 'Phase 2C',
             date: '2027+',
             title: 'Drug Authenticity Verification',
-            desc: 'Help users verify that their GLP-1 medication is genuine — critical as generics flood the Indian market after patent expiry.',
+            desc: 'Help users check that their GLP-1 medication is genuine. This is critical as generics flood the Indian market after patent expiry.',
             icon: ShieldCheck,
             features: [
                 'QR / batch-code scanning for medication verification',
@@ -147,11 +147,11 @@ export default function Research() {
     ];
 
     const keyStudies = [
-        { title: 'STEP Trials (Novo Nordisk)', journal: 'NEJM, 2021–2023', finding: 'Semaglutide achieves 15–17% weight loss — but 44% of users report nausea, and lean mass loss is a documented concern.' },
-        { title: 'SUSTAIN Programme', journal: 'Lancet Diabetes, 2017–2022', finding: 'Long-term GLP-1 use shows cardiovascular benefits, but gastrointestinal side effects drive discontinuation in >50% of users within Year 1.' },
-        { title: 'SURPASS Trials (Eli Lilly)', journal: 'NEJM, 2022–2024', finding: 'Tirzepatide shows up to 22% weight loss — raising the importance of muscle-preservation strategies during rapid weight loss.' },
-        { title: 'Indian "Thin-Fat" Phenotype Research', journal: 'Lancet, multiple studies', finding: 'Indians have higher visceral fat and lower muscle mass at the same BMI compared to Western populations — making sarcopenia prevention especially critical.' },
-        { title: 'HRV & Autonomic Modulation by GLP-1', journal: 'Diabetes Care, 2020', finding: 'GLP-1 receptor agonists modulate vagal tone, with measurable effects on heart rate variability — supporting HRV as a relevant biometric signal.' },
+        { title: 'STEP Trials (Novo Nordisk)', journal: 'NEJM, 2021 to 2023', finding: 'Semaglutide achieves 15 to 17% weight loss, but 44% of users report nausea, and lean mass loss is a documented concern.' },
+        { title: 'SUSTAIN Programme', journal: 'Lancet Diabetes, 2017 to 2022', finding: 'Long-term GLP-1 use shows cardiovascular benefits, but gastrointestinal side effects drive discontinuation in over 50% of users within Year 1.' },
+        { title: 'SURPASS Trials (Eli Lilly)', journal: 'NEJM, 2022 to 2024', finding: 'Tirzepatide shows up to 22% weight loss, raising the importance of muscle-preservation strategies during rapid weight loss.' },
+        { title: 'Indian "Thin-Fat" Phenotype Research', journal: 'Lancet, multiple studies', finding: 'Indians have higher visceral fat and lower muscle mass at the same BMI compared to Western populations, making sarcopenia prevention especially critical.' },
+        { title: 'HRV & Autonomic Modulation by GLP-1', journal: 'Diabetes Care, 2020', finding: 'GLP-1 receptor agonists modulate vagal tone, with measurable effects on heart rate variability. This supports HRV as a relevant biometric signal to track.' },
     ];
 
     return (
@@ -160,7 +160,7 @@ export default function Research() {
             <Section
                 label="Research"
                 title="Research Foundation & What's Next"
-                subtitle="Everything we build is grounded in published research — and here's where we're headed"
+                subtitle="Everything we build is based on published research, and here's where we're headed"
                 variant="gradient"
                 firstSection
             >
@@ -175,10 +175,10 @@ export default function Research() {
                                     Research-Informed, Not Research-Claiming
                                 </div>
                                 <p className="text-lg sm:text-xl leading-relaxed text-white/90 mb-4">
-                                    EnteraFlux is a wellness app — not a clinical tool. We don't diagnose, treat, or predict medical outcomes. But every feature we build is grounded in published clinical data and validated physiological principles.
+                                    EnteraFlux is a wellness app, not a clinical tool. We don't diagnose, treat, or predict medical outcomes. But every feature we build is backed by published clinical data and validated physiological principles.
                                 </p>
                                 <p className="text-sm text-white/60 leading-relaxed max-w-3xl">
-                                    This page explains the research behind our approach, our validation methodology, and our plans for Phase 2 — where we'll bring enterprise-grade tools to pharma companies, employers, and researchers working in the Indian GLP-1 space.
+                                    This page explains the research behind our approach, our validation methodology, and our plans for Phase 2, where we'll bring enterprise-grade tools to pharma companies, employers, and researchers working in the Indian GLP-1 space.
                                 </p>
                             </div>
                         </div>
@@ -260,7 +260,7 @@ export default function Research() {
             <Section
                 label="Our Method"
                 title="How We Validate What We Build"
-                subtitle="A structured approach to ensuring our wellness guidance is meaningful and grounded"
+                subtitle="A structured approach to making sure our wellness guidance is meaningful and well-founded"
                 variant="gradient"
             >
                 <div className="max-w-5xl mx-auto">
@@ -286,11 +286,11 @@ export default function Research() {
                 </div>
             </Section>
 
-            {/* ── Signal Detection Viz ── */}
+            {/* ── Physiological Pattern Analysis Viz ── */}
             <Section
                 label="Phase 2 Preview"
-                title="Real-World Signal Detection"
-                subtitle="In Phase 2, we'll aggregate anonymised wellness data to help pharma and researchers understand GLP-1 patterns in India"
+                title="Real-World Physiological Pattern Analysis"
+                subtitle="In Phase 2, we'll aggregate anonymised wellness data to help pharma and researchers understand GLP-1-related patterns in India"
                 variant="dark"
             >
                 <div className="max-w-5xl mx-auto">
@@ -315,7 +315,7 @@ export default function Research() {
                                         <h3 className="text-sm font-bold text-neutral-900 dark:text-white">Population-Level Insights</h3>
                                     </div>
                                     <p className="text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed">
-                                        Aggregated, anonymised data from thousands of Indian GLP-1 users — revealing side-effect patterns, adherence trends, and lifestyle factors unique to the Indian population.
+                                        Aggregated, anonymised data from thousands of Indian GLP-1 users, revealing physiological patterns, adherence trends, and lifestyle factors unique to the Indian population.
                                     </p>
                                 </div>
                             </ScrollReveal>
@@ -331,7 +331,7 @@ export default function Research() {
                                         <h3 className="text-sm font-bold text-neutral-900 dark:text-white">India-First Data</h3>
                                     </div>
                                     <p className="text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed">
-                                        Most GLP-1 research comes from Western populations. EnteraFlux will generate India-specific wellness data — covering Indian diets, lifestyles, and the "thin-fat" phenotype.
+                                        Most GLP-1 research comes from Western populations. EnteraFlux will generate India-specific wellness data, covering Indian diets, lifestyles, and the "thin-fat" phenotype.
                                     </p>
                                 </div>
                             </ScrollReveal>
@@ -347,7 +347,7 @@ export default function Research() {
                                         <h3 className="text-sm font-bold text-neutral-900 dark:text-white">Privacy by Design</h3>
                                     </div>
                                     <p className="text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed">
-                                        All research data is fully anonymised and aggregated. Individual user data is never shared with third parties — ever. Users opt-in explicitly for any data contribution.
+                                        All research data is fully anonymised and aggregated. Individual user data is never shared with third parties. Ever. Users opt in explicitly for any data contribution.
                                     </p>
                                 </div>
                             </ScrollReveal>
@@ -375,7 +375,7 @@ export default function Research() {
                                             <plan.icon className="w-5 h-5 text-primary-600 dark:text-primary-400" />
                                         </div>
                                         <div>
-                                            <Badge text={`${plan.phase} — ${plan.date}`} variant="status" />
+                                            <Badge text={`${plan.phase} | ${plan.date}`} variant="status" />
                                         </div>
                                     </div>
 
@@ -408,7 +408,7 @@ export default function Research() {
             {/* ── Transparency ── */}
             <Section
                 label="Transparency"
-                title="What We Are — and What We're Not"
+                title="What We Are, and What We're Not"
                 subtitle="We believe in being upfront about our positioning"
                 variant="gradient"
             >
@@ -435,13 +435,13 @@ export default function Research() {
                             </div>
 
                             <div className="flex flex-wrap gap-2 justify-center mb-6">
-                                <Badge text="Wellness App — Not a Medical Device" variant="regulatory" />
+                                <Badge text="Wellness App, Not a Medical Device" variant="regulatory" />
                                 <Badge text="Research-Informed Approach" variant="status" />
                                 <Badge text="Currently In Development" variant="development" />
                             </div>
 
                             <p className="text-center text-neutral-500 dark:text-neutral-400 text-xs leading-relaxed">
-                                EnteraFlux provides wellness tips informed by published research — not medical advice. Always consult your doctor for health decisions related to GLP-1 medications.
+                                EnteraFlux provides wellness tips informed by published research, not medical advice. Always consult your doctor for health decisions related to GLP-1 medications.
                             </p>
                         </div>
                     </ScrollReveal>
@@ -452,7 +452,7 @@ export default function Research() {
             <Section
                 label="Get Involved"
                 title="Interested in Our Research?"
-                subtitle="Whether you're a researcher, pharma professional, or just curious — we'd love to hear from you"
+                subtitle="Whether you're a researcher, pharma professional, or just curious, we'd love to hear from you"
                 variant="dark"
                 noPadding
             >
