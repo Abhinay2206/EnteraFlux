@@ -170,9 +170,28 @@ export default function ExecutiveOverview({ responses }: ExecutiveOverviewProps)
 
     const highRiskPct = riskGroups.find((g) => g.level === 'High')?.pct ?? 0;
 
+    // Awareness comes from funnel (stage 1 is already standalone)
     const awareRate = funnel[1]?.pct ?? 0;
-    const interestRate = funnel[2]?.pct ?? 0;
-    const payRate = funnel[3]?.pct ?? 0;
+
+    // Interest & Pay are standalone KPIs — calculated across ALL respondents,
+    // NOT from the cumulative funnel (which only counts aware+interested subsets)
+    const interestRate = useMemo(() => {
+        if (total === 0) return 0;
+        const interested = responses.filter((r) => {
+            const v = String(r.q23_would_use_app || '');
+            return v === 'Yes' || v === 'Maybe';
+        }).length;
+        return Math.round((interested / total) * 100);
+    }, [responses, total]);
+
+    const payRate = useMemo(() => {
+        if (total === 0) return 0;
+        const paying = responses.filter((r) => {
+            const v = String(r.q25_would_pay || '');
+            return v === 'Yes' || v === 'Maybe';
+        }).length;
+        return Math.round((paying / total) * 100);
+    }, [responses, total]);
 
     const tagStyles: Record<string, string> = {
         positive: 'bg-emerald-50 border-emerald-100',
