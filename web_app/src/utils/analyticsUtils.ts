@@ -118,21 +118,27 @@ export interface FunnelStage {
 
 export function getConversionFunnel(responses: SurveyResponse[]): FunnelStage[] {
   const total = responses.length;
-  const aware = responses.filter((r) => String(r.q10_heard_about_injections || '') === 'Yes').length;
-  const interested = responses.filter((r) => {
+
+  // Cumulative funnel: each stage is a strict subset of the previous
+  const awareResponses = responses.filter((r) => String(r.q10_heard_about_injections || '') === 'Yes');
+  const aware = awareResponses.length;
+
+  const interestedResponses = awareResponses.filter((r) => {
     const v = String(r.q23_would_use_app || '');
     return v === 'Yes' || v === 'Maybe';
-  }).length;
-  const payWilling = responses.filter((r) => {
+  });
+  const interested = interestedResponses.length;
+
+  const payWilling = interestedResponses.filter((r) => {
     const v = String(r.q25_would_pay || '');
     return v === 'Yes' || v === 'Maybe';
   }).length;
 
   const stages = [
     { label: 'Total Responses', count: total },
-    { label: 'Awareness', count: aware },
-    { label: 'Interest', count: interested },
-    { label: 'Pay Willingness', count: payWilling },
+    { label: 'Aware', count: aware },
+    { label: 'Aware & Interested', count: interested },
+    { label: 'Aware, Interested & Pay', count: payWilling },
   ];
 
   return stages.map((s, i) => {
@@ -333,9 +339,25 @@ function chiSquareTest(observed: number[][], expected: number[][]): { chi: numbe
       if (e > 0) chi += Math.pow(observed[i][j] - e, 2) / e;
     }
   }
-  // 1 degree of freedom approximation — using survival function of chi-square(1)
-  const p = Math.exp(-chi / 2);
+  // Chi-square survival function for 1 degree of freedom: P(X > x) = erfc(sqrt(x/2))
+  // Using rational approximation of erfc for accuracy
+  const p = 1 - erf(Math.sqrt(chi / 2));
   return { chi: Math.round(chi * 100) / 100, p: Math.round(p * 10000) / 10000 };
+}
+
+/** Approximation of the error function (erf) using Abramowitz & Stegun formula 7.1.26 */
+function erf(x: number): number {
+  const sign = x >= 0 ? 1 : -1;
+  x = Math.abs(x);
+  const a1 = 0.254829592;
+  const a2 = -0.284496736;
+  const a3 = 1.421413741;
+  const a4 = -1.453152027;
+  const a5 = 1.061405429;
+  const p = 0.3275911;
+  const t = 1.0 / (1.0 + p * x);
+  const y = 1.0 - (((((a5 * t + a4) * t) + a3) * t + a2) * t + a1) * t * Math.exp(-x * x);
+  return sign * y;
 }
 
 function getContingencyTable(
@@ -399,22 +421,6 @@ export function getHypothesisTests(responses: SurveyResponse[]): HypothesisResul
   ];
 }
 
-/* ─── Statistical Summary ─── */
-
-const AGE_MAP: Record<string, number> = {
-  'Under 18': 16,
-  '18-24': 21,
-  '18–24': 21,
-  '25-34': 29.5,
-  '25–34': 29.5,
-  '35-44': 39.5,
-  '35–44': 39.5,
-  '45-54': 49.5,
-  '45–54': 49.5,
-  '55-64': 59.5,
-  '55–64': 59.5,
-  '65+': 70,
-};
 
 export interface StatSummary {
   meanAge: number;
@@ -423,42 +429,6 @@ export interface StatSummary {
   ci95Upper: number;
   sampleSize: number;
   biasNote: string;
-}
-
-export function getStatSummary(responses: SurveyResponse[]): StatSummary {
-  const ages = responses.map((r) => {
-    const raw = String(r.q1_age || '');
-    return AGE_MAP[raw] ?? parseFloat(raw.replace(/[^0-9.]/g, ''));
-  }).filter((a) => !isNaN(a));
-
-  const n = ages.length;
-  if (n === 0) return { meanAge: 0, stdAge: 0, ci95Lower: 0, ci95Upper: 0, sampleSize: 0, biasNote: 'Insufficient data' };
-
-  const mean = ages.reduce((a, b) => a + b, 0) / n;
-  const variance = ages.reduce((acc, a) => acc + Math.pow(a - mean, 2), 0) / (n - 1 || 1);
-  const std = Math.sqrt(variance);
-  const se = std / Math.sqrt(n);
-  const ci95Lower = mean - 1.96 * se;
-  const ci95Upper = mean + 1.96 * se;
-
-  const genders = countField(responses, 'q2_gender');
-  const genderEntries = Object.entries(genders).sort((a, b) => b[1] - a[1]);
-  const dominant = genderEntries[0];
-  const dominantPct = dominant && responses.length > 0 ? Math.round((dominant[1] / responses.length) * 100) : 0;
-  const biasNote = dominantPct > 70
-    ? `Sample skews ${dominant[0]} (${dominantPct}%). Results may not generalize.`
-    : n < 30
-      ? 'Small sample size (n<30). Interpret with caution.'
-      : 'Sample appears reasonably balanced.';
-
-  return {
-    meanAge: Math.round(mean * 10) / 10,
-    stdAge: Math.round(std * 10) / 10,
-    ci95Lower: Math.round(ci95Lower * 10) / 10,
-    ci95Upper: Math.round(ci95Upper * 10) / 10,
-    sampleSize: n,
-    biasNote,
-  };
 }
 
 /* ─── Data Quality Metrics ─── */
@@ -771,17 +741,19 @@ export interface ProfitabilitySegment {
 }
 
 export function getSegmentProfitability(responses: SurveyResponse[]): ProfitabilitySegment[] {
-  // Group by body type × risk level
-  const groups: Record<string, { risk: RiskLevel; list: SurveyResponse[] }> = {};
+  // Group by body type
+  const groups: Record<string, SurveyResponse[]> = {};
   for (const r of responses) {
     const bt = String(r.q3_body_type || 'Unknown');
-    const risk = classifyRisk(r);
-    const key = `${bt}`;
-    if (!groups[key]) groups[key] = { risk, list: [] };
-    groups[key].list.push(r);
+    if (!groups[bt]) groups[bt] = [];
+    groups[bt].push(r);
   }
 
-  const segments = Object.entries(groups).map(([segment, { risk, list }]) => {
+  const segments = Object.entries(groups).map(([segment, list]) => {
+    // Determine majority risk level for this segment
+    const riskCounts: Record<RiskLevel, number> = { High: 0, Medium: 0, Low: 0 };
+    for (const r of list) riskCounts[classifyRisk(r)]++;
+    const risk = (Object.entries(riskCounts).sort((a, b) => b[1] - a[1])[0][0]) as RiskLevel;
     const pay = list.filter((r) => boolFilter(r, 'q25_would_pay', ['Yes', 'Maybe']));
     const payPct = list.length > 0 ? Math.round((pay.length / list.length) * 100) : 0;
     const amounts = pay.map(estimateMonthlyAmount).filter((a) => a > 0);

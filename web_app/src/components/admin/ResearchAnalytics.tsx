@@ -10,7 +10,6 @@ import {
     getRiskGroups,
     getCorrelationMatrix,
     getHypothesisTests,
-    getStatSummary,
     getDataQuality,
     getCrossTabByField,
     countField,
@@ -25,7 +24,6 @@ export default function ResearchAnalytics({ responses }: ResearchAnalyticsProps)
     const riskGroups = useMemo(() => getRiskGroups(responses), [responses]);
     const correlations = useMemo(() => getCorrelationMatrix(responses), [responses]);
     const hypotheses = useMemo(() => getHypothesisTests(responses), [responses]);
-    const stats = useMemo(() => getStatSummary(responses), [responses]);
     const dataQuality = useMemo(() => getDataQuality(responses), [responses]);
 
     // Demographic deep analysis cross-tabs
@@ -37,18 +35,17 @@ export default function ResearchAnalytics({ responses }: ResearchAnalyticsProps)
     const triedWL = useMemo(() => countField(responses, 'q5_tried_weight_loss'), [responses]);
     const bodyTypeData = useMemo(() => countField(responses, 'q3_body_type'), [responses]);
 
-    // Build heatmap rows for demographics
-    const maxPayPct = Math.max(...payByAge.map((r) => r.payPct), ...payByGender.map((r) => r.payPct), ...payByBodyType.map((r) => r.payPct), 1);
-    const maxInterestPct = Math.max(...payByAge.map((r) => r.interestPct), ...payByGender.map((r) => r.interestPct), ...payByBodyType.map((r) => r.interestPct), 1);
-    const maxAwarePct = Math.max(...payByAge.map((r) => r.awarenessPct), ...payByGender.map((r) => r.awarenessPct), ...payByBodyType.map((r) => r.awarenessPct), 1);
-
+    // Build heatmap rows for demographics — normalize per-table for accurate heat coloring
     function buildHeatRows(data: typeof payByAge) {
+        const localMaxPay = Math.max(...data.map((r) => r.payPct), 1);
+        const localMaxInterest = Math.max(...data.map((r) => r.interestPct), 1);
+        const localMaxAware = Math.max(...data.map((r) => r.awarenessPct), 1);
         return data.map((row) => ({
             label: `${row.segment} (${row.total})`,
             values: [
-                { label: 'Pay %', value: row.payPct, maxValue: maxPayPct },
-                { label: 'Interest %', value: row.interestPct, maxValue: maxInterestPct },
-                { label: 'Aware %', value: row.awarenessPct, maxValue: maxAwarePct },
+                { label: 'Pay %', value: row.payPct, maxValue: localMaxPay },
+                { label: 'Interest %', value: row.interestPct, maxValue: localMaxInterest },
+                { label: 'Aware %', value: row.awarenessPct, maxValue: localMaxAware },
             ],
         }));
     }
@@ -115,7 +112,7 @@ export default function ResearchAnalytics({ responses }: ResearchAnalyticsProps)
                     <HeatmapTable title="Interest & Pay by Risk Group" icon={Shield} rows={riskAwarenessRows} />
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-                    <DistributionChart title="Interest by Tried Weight Loss" icon={TrendingUp} data={triedWL} total={total} />
+                    <DistributionChart title="Tried Weight Loss Distribution" icon={TrendingUp} data={triedWL} total={total} />
                     <DistributionChart title="Body Type Distribution" icon={Activity} data={bodyTypeData} total={total} />
                 </div>
             </div>
@@ -214,37 +211,6 @@ export default function ResearchAnalytics({ responses }: ResearchAnalyticsProps)
 
             {/* ═══ Statistical Summary + Data Quality ═══ */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                {/* Statistical Summary */}
-                <div className="bg-white rounded-xl border border-gray-200 p-4 sm:p-5">
-                    <div className="flex items-center gap-2 mb-4">
-                        <BarChart3 className="w-4 h-4 text-gray-400" />
-                        <h3 className="text-xs sm:text-sm font-semibold text-gray-700">Statistical Summary</h3>
-                    </div>
-                    <div className="space-y-2.5">
-                        <div className="flex items-center justify-between px-3 py-2 rounded-lg bg-gray-50">
-                            <span className="text-[10px] sm:text-xs text-gray-500">Sample Size (n)</span>
-                            <span className="text-xs sm:text-sm font-bold text-gray-900">{stats.sampleSize}</span>
-                        </div>
-                        <div className="flex items-center justify-between px-3 py-2 rounded-lg bg-gray-50">
-                            <span className="text-[10px] sm:text-xs text-gray-500">Mean Age</span>
-                            <span className="text-xs sm:text-sm font-bold text-gray-900">{stats.meanAge}</span>
-                        </div>
-                        <div className="flex items-center justify-between px-3 py-2 rounded-lg bg-gray-50">
-                            <span className="text-[10px] sm:text-xs text-gray-500">Std Deviation</span>
-                            <span className="text-xs sm:text-sm font-bold text-gray-900">±{stats.stdAge}</span>
-                        </div>
-                        <div className="flex items-center justify-between px-3 py-2 rounded-lg bg-blue-50 border border-blue-100">
-                            <span className="text-[10px] sm:text-xs text-gray-600">95% CI</span>
-                            <span className="text-xs sm:text-sm font-bold text-blue-700">[{stats.ci95Lower}, {stats.ci95Upper}]</span>
-                        </div>
-                        <div className="px-3 py-2 rounded-lg bg-amber-50 border border-amber-100">
-                            <span className="text-[10px] sm:text-xs text-amber-700 flex items-center gap-1">
-                                <AlertCircle className="w-3 h-3 shrink-0" />
-                                {stats.biasNote}
-                            </span>
-                        </div>
-                    </div>
-                </div>
 
                 {/* Data Quality Metrics */}
                 <div className="bg-white rounded-xl border border-gray-200 p-4 sm:p-5">

@@ -10,6 +10,7 @@ import {
     getConversionFunnel,
     getAvgEngagementScore,
     getRiskGroups,
+    classifyRisk,
     countField,
 } from '../../utils/analyticsUtils';
 
@@ -82,18 +83,7 @@ function generateInsights(responses: SurveyResponse[]): Insight[] {
     const riskGroups = getRiskGroups(responses);
     const highRisk = riskGroups.find((g) => g.level === 'High');
     if (highRisk && highRisk.count > 0) {
-        const highRiskResponses = responses.filter((r) => {
-            const bt = String(r.q3_body_type || '').toLowerCase();
-            const med = String(r.q4_medical_conditions || '').toLowerCase().trim();
-            const tried = String(r.q5_tried_weight_loss || '');
-            let score = 0;
-            if (bt.includes('overweight') || bt.includes('obese')) score += 2;
-            else if (bt.includes('slightly')) score += 1;
-            if (med && med !== 'none' && med !== '—' && med.length > 0) score += 2;
-            if (tried.includes('multiple')) score += 2;
-            else if (tried.includes('Yes')) score += 1;
-            return score >= 4;
-        });
+        const highRiskResponses = responses.filter((r) => classifyRisk(r) === 'High');
         const unaware = highRiskResponses.filter((r) => String(r.q10_heard_about_injections || '') !== 'Yes');
         if (highRiskResponses.length > 0) {
             const pct = Math.round((unaware.length / highRiskResponses.length) * 100);
