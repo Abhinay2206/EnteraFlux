@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { getAnalytics, logEvent as firebaseLogEvent, type Analytics } from 'firebase/analytics';
-import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, query, orderBy } from 'firebase/firestore';
+import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, query, orderBy, writeBatch } from 'firebase/firestore';
 import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged, type User } from 'firebase/auth';
 
 const firebaseConfig = {
@@ -161,6 +161,38 @@ export async function deleteRDApplication(docId: string): Promise<boolean> {
     } catch (error) {
         console.error('Error deleting R&D application:', error);
         return false;
+    }
+}
+
+/**
+ * Fetch all FAERS Semaglutide adverse event records.
+ */
+export async function fetchFaersData() {
+    const snapshot = await getDocs(collection(db, 'faers_semaglutide'));
+    return snapshot.docs.map((d) => ({ id: d.id, ...d.data() }));
+}
+
+/**
+ * Fetch all GLP-1 clinical trial records.
+ */
+export async function fetchGlp1Trials() {
+    const snapshot = await getDocs(collection(db, 'glp1_trials'));
+    return snapshot.docs.map((d) => ({ id: d.id, ...d.data() }));
+}
+
+/**
+ * Batch-add records to a Firestore collection. Splits into 500-doc batches (Firestore limit).
+ */
+export async function addRecordsBatch(collectionName: string, records: Record<string, unknown>[]) {
+    const BATCH_SIZE = 500;
+    for (let i = 0; i < records.length; i += BATCH_SIZE) {
+        const batch = writeBatch(db);
+        const chunk = records.slice(i, i + BATCH_SIZE);
+        for (const record of chunk) {
+            const ref = doc(collection(db, collectionName));
+            batch.set(ref, { ...record, uploaded_at: new Date().toISOString() });
+        }
+        await batch.commit();
     }
 }
 

@@ -11,7 +11,7 @@ import {
     Loader2, LogOut, Trash2, RefreshCw, ChevronDown, ChevronUp,
     Search, BarChart3, AlertCircle, Users, Clock, Eye, Download,
     MessageSquare, Target, Beaker, Menu, X, Filter, ArrowUpDown,
-    Calendar, RotateCcw,
+    Calendar, RotateCcw, Activity,
 } from 'lucide-react';
 import type { SurveyResponse } from '../utils/analyticsUtils';
 import { QUESTION_LABELS, classifyRisk } from '../utils/analyticsUtils';
@@ -402,11 +402,25 @@ export default function AdminDashboard() {
                             </button>
                             <div className="w-px h-6 bg-gray-200 mx-1" />
                             <Link
+                                to="/admin/dashboard"
+                                className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-medium text-gray-600 hover:bg-gray-100 transition-colors"
+                            >
+                                <BarChart3 className="w-3.5 h-3.5" />
+                                Dashboard
+                            </Link>
+                            <Link
                                 to="/admin/feedback"
                                 className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-medium text-gray-600 hover:bg-gray-100 transition-colors"
                             >
                                 <MessageSquare className="w-3.5 h-3.5" />
                                 Feedback
+                            </Link>
+                            <Link
+                                to="/admin/datasets-drug-analytics"
+                                className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-medium text-gray-600 hover:bg-gray-100 transition-colors"
+                            >
+                                <Activity className="w-3.5 h-3.5" />
+                                Drug Analytics
                             </Link>
                             <div className="w-px h-6 bg-gray-200 mx-1" />
                             <button
@@ -445,10 +459,22 @@ export default function AdminDashboard() {
                                 <RefreshCw className={`w-3 h-3 ${loading ? 'animate-spin' : ''}`} /> Refresh
                             </button>
                             <Link
+                                to="/admin/dashboard"
+                                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-[10px] font-medium text-gray-600 hover:bg-gray-100"
+                            >
+                                <BarChart3 className="w-3 h-3" /> Dashboard
+                            </Link>
+                            <Link
                                 to="/admin/feedback"
                                 className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-[10px] font-medium text-gray-600 hover:bg-gray-100"
                             >
                                 <MessageSquare className="w-3 h-3" /> Feedback
+                            </Link>
+                            <Link
+                                to="/admin/datasets-drug-analytics"
+                                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-[10px] font-medium text-gray-600 hover:bg-gray-100"
+                            >
+                                <Activity className="w-3 h-3" /> Drug Analytics
                             </Link>
                             <button
                                 onClick={handleLogout}

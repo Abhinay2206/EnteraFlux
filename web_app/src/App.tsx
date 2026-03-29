@@ -13,8 +13,10 @@ import Contact from './pages/Contact';
 import Legal from './pages/Legal';
 import Survey from './pages/Survey';
 import AdminLogin from './pages/AdminLogin';
+import AdminHub from './pages/AdminHub';
 import AdminDashboard from './pages/AdminDashboard';
 import AdminFeedback from './pages/AdminFeedback';
+import AdminDrugAnalytics from './pages/AdminDrugAnalytics';
 import { ThemeProvider } from './contexts/ThemeContext';
 import './index.css';
 
@@ -57,8 +59,10 @@ function App() {
         <Routes>
           <Route path="/public/survey" element={<Survey />} />
           <Route path="/admin" element={<AdminLogin />} />
-          <Route path="/admin/dashboard" element={<AdminDashboard />} />
+          <Route path="/admin/dashboard" element={<AdminHub />} />
+          <Route path="/admin/survey-analytics" element={<AdminDashboard />} />
           <Route path="/admin/feedback" element={<AdminFeedback />} />
+          <Route path="/admin/datasets-drug-analytics" element={<AdminDrugAnalytics />} />
           <Route path="/*" element={<MainLayout />} />
         </Routes>
       </BrowserRouter>
