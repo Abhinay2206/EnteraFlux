@@ -11,11 +11,16 @@ import {
   SafeAreaView,
   TouchableOpacity,
   Switch,
+  Platform,
+  ActivityIndicator,
+  Alert,
 } from 'react-native';
 import { lightTheme } from '@/constants/theme';
 import { H2, H3, H4, Body, Caption } from '@/components/ui/Typography';
 import { Card } from '@/components/ui/Card';
 import { Ionicons } from '@expo/vector-icons';
+import { useHealthStore } from '../../store/healthStore';
+import { healthKitService } from '../../services/healthKit';
 
 // Mock user data
 const MOCK_USER = {
@@ -27,16 +32,65 @@ const MOCK_USER = {
 
 export default function ProfileScreen() {
   const theme = lightTheme;
+  const {
+    healthSyncCompleted,
+    isSyncing,
+    lastSyncedAt,
+    syncHealthData,
+    setHealthSyncCompleted,
+    clearHealthData,
+  } = useHealthStore();
 
   // Settings state
   const [settings, setSettings] = useState({
-    healthKitConnected: true,
     notificationsEnabled: true,
     researchOptedIn: true,
   });
 
   const toggleSetting = (key: keyof typeof settings) => {
     setSettings((prev) => ({ ...prev, [key]: !prev[key] }));
+  };
+
+  const handleConnectHealth = async () => {
+    const granted = await healthKitService.requestPermissions();
+    if (granted) {
+      await setHealthSyncCompleted(true);
+      await syncHealthData();
+    } else {
+      Alert.alert(
+        'Permission Required',
+        'Please enable Apple Health permissions in Settings to sync your health data.',
+        [{ text: 'OK' }]
+      );
+    }
+  };
+
+  const handleDisconnectHealth = () => {
+    Alert.alert(
+      'Disconnect Apple Health',
+      'This will stop syncing health data. You can reconnect at any time.',
+      [
+        { text: 'Cancel', style: 'cancel' },
+        {
+          text: 'Disconnect',
+          style: 'destructive',
+          onPress: () => clearHealthData(),
+        },
+      ]
+    );
+  };
+
+  const formatLastSynced = () => {
+    if (!lastSyncedAt) return 'Never';
+    const date = new Date(lastSyncedAt);
+    const now = new Date();
+    const diffMs = now.getTime() - date.getTime();
+    const diffMins = Math.floor(diffMs / 60000);
+    if (diffMins < 1) return 'Just now';
+    if (diffMins < 60) return `${diffMins}m ago`;
+    const diffHrs = Math.floor(diffMins / 60);
+    if (diffHrs < 24) return `${diffHrs}h ago`;
+    return date.toLocaleDateString();
   };
 
   return (
@@ -70,29 +124,94 @@ export default function ProfileScreen() {
           </View>
         </Card>
 
+        {/* Health Data Section */}
+        {Platform.OS === 'ios' && (
+          <View style={styles.section}>
+            <H3 style={styles.sectionTitle}>Health Data</H3>
+
+            <Card style={styles.settingCard}>
+              <View style={styles.settingRow}>
+                <View style={[styles.settingIcon, { backgroundColor: '#FF2D5515' }]}>
+                  <Ionicons name="heart" size={20} color="#FF2D55" />
+                </View>
+                <View style={styles.settingText}>
+                  <H4 style={{ fontSize: 16 }}>Apple Health</H4>
+                  <Caption style={{ color: healthSyncCompleted ? theme.colors.success : theme.colors.textSecondary }}>
+                    {healthSyncCompleted ? '✓ Connected' : 'Not connected'}
+                  </Caption>
+                </View>
+                {healthSyncCompleted ? (
+                  <View style={styles.connectedBadge}>
+                    <View style={styles.connectedDot} />
+                    <Caption style={{ color: theme.colors.success, fontSize: 12 }}>Active</Caption>
+                  </View>
+                ) : (
+                  <TouchableOpacity
+                    style={styles.connectButton}
+                    onPress={handleConnectHealth}
+                    activeOpacity={0.7}
+                  >
+                    <Caption style={{ color: '#FFFFFF', fontWeight: '600' }}>Connect</Caption>
+                  </TouchableOpacity>
+                )}
+              </View>
+            </Card>
+
+            {healthSyncCompleted && (
+              <>
+                <Card style={styles.settingCard}>
+                  <View style={styles.settingRow}>
+                    <View style={[styles.settingIcon, { backgroundColor: theme.colors.palette.primary[50] }]}>
+                      <Ionicons name="sync" size={20} color={theme.colors.primary} />
+                    </View>
+                    <View style={styles.settingText}>
+                      <H4 style={{ fontSize: 16 }}>Last Synced</H4>
+                      <Caption style={{ color: theme.colors.textSecondary }}>
+                        {formatLastSynced()}
+                      </Caption>
+                    </View>
+                    <TouchableOpacity
+                      style={[styles.syncNowButton, isSyncing && { opacity: 0.5 }]}
+                      onPress={() => syncHealthData()}
+                      disabled={isSyncing}
+                      activeOpacity={0.7}
+                    >
+                      {isSyncing ? (
+                        <ActivityIndicator size="small" color={theme.colors.primary} />
+                      ) : (
+                        <Caption style={{ color: theme.colors.primary, fontWeight: '600' }}>Sync Now</Caption>
+                      )}
+                    </TouchableOpacity>
+                  </View>
+                </Card>
+
+                <TouchableOpacity
+                  onPress={handleDisconnectHealth}
+                  activeOpacity={0.7}
+                >
+                  <Card style={styles.settingCard}>
+                    <View style={styles.settingRow}>
+                      <View style={[styles.settingIcon, { backgroundColor: theme.colors.errorBackground }]}>
+                        <Ionicons name="unlink" size={20} color={theme.colors.error} />
+                      </View>
+                      <View style={styles.settingText}>
+                        <H4 style={{ fontSize: 16, color: theme.colors.error }}>Disconnect Health</H4>
+                        <Caption style={{ color: theme.colors.textSecondary }}>
+                          Stop syncing health data
+                        </Caption>
+                      </View>
+                      <Ionicons name="chevron-forward" size={20} color={theme.colors.textTertiary} />
+                    </View>
+                  </Card>
+                </TouchableOpacity>
+              </>
+            )}
+          </View>
+        )}
+
         {/* Integrations Section */}
         <View style={styles.section}>
           <H3 style={styles.sectionTitle}>Integrations</H3>
-
-          <Card style={styles.settingCard}>
-            <View style={styles.settingRow}>
-              <View style={styles.settingIcon}>
-                <Ionicons name="heart" size={20} color="#FF2D55" />
-              </View>
-              <View style={styles.settingText}>
-                <H4 style={{ fontSize: 16 }}>Apple Health</H4>
-                <Caption style={{ color: theme.colors.textSecondary }}>
-                  Sync biometric data
-                </Caption>
-              </View>
-              <Switch
-                value={settings.healthKitConnected}
-                onValueChange={() => toggleSetting('healthKitConnected')}
-                trackColor={{ false: theme.colors.border, true: theme.colors.success }}
-                thumbColor="#FFFFFF"
-              />
-            </View>
-          </Card>
 
           <Card style={styles.settingCard}>
             <View style={styles.settingRow}>
@@ -359,5 +478,34 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#9CA3AF',
     marginTop: 8,
+  },
+  // Health Data Section
+  connectedBadge: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#F0FDF4',
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+    borderRadius: 12,
+    gap: 5,
+  },
+  connectedDot: {
+    width: 6,
+    height: 6,
+    borderRadius: 3,
+    backgroundColor: '#22C55E',
+  },
+  connectButton: {
+    backgroundColor: '#2563EB',
+    paddingHorizontal: 14,
+    paddingVertical: 6,
+    borderRadius: 8,
+  },
+  syncNowButton: {
+    paddingHorizontal: 14,
+    paddingVertical: 6,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: '#2563EB',
   },
 });

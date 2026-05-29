@@ -7,23 +7,42 @@ import {
   SafeAreaView,
   Image,
   StatusBar,
+  Platform,
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import theme from '../constants/theme';
 import { useUserStore } from '../store/userStore';
+import { useHealthStore } from '../store/healthStore';
 
 export default function Index() {
   const router = useRouter();
   const user = useUserStore((state) => state.user);
+  const { healthSyncCompleted, healthSyncSkipped, isInitialized, initialize } =
+    useHealthStore();
+
+  // Initialize health store on mount
+  useEffect(() => {
+    initialize();
+  }, []);
 
   useEffect(() => {
+    if (!isInitialized) return;
+
     // Check if user exists and onboarding completed
     if (user && user.onboarding_completed) {
-      // Navigate to home
-      router.replace('/(tabs)/home');
+      // On iOS, check if health sync has been done or skipped
+      if (
+        Platform.OS === 'ios' &&
+        !healthSyncCompleted &&
+        !healthSyncSkipped
+      ) {
+        router.replace('/health-sync');
+      } else {
+        router.replace('/(tabs)/home');
+      }
     }
-  }, [user]);
+  }, [user, isInitialized]);
 
   return (
     <SafeAreaView style={styles.container}>

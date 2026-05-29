@@ -7,12 +7,14 @@ import {
     TouchableOpacity,
     RefreshControl,
     SafeAreaView,
+    Platform,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import theme from '../../constants/theme';
 import { api } from '../../utils/api';
 import { useUserStore } from '../../store/userStore';
+import { useHealthStore } from '../../store/healthStore';
 import { MedicalAlert } from '../../components/ui/MedicalAlert';
 import { NextDoseCard } from '../../components/cards/NextDoseCard';
 import { AdherenceCard } from '../../components/cards/AdherenceCard';
@@ -24,6 +26,7 @@ import type { AlertPriority } from '../../constants/colors';
 export default function Home() {
     const router = useRouter();
     const user = useUserStore((state) => state.user);
+    const { healthData, healthSyncCompleted, syncHealthData, isSyncing } = useHealthStore();
     const [loading, setLoading] = useState(true);
     const [refreshing, setRefreshing] = useState(false);
     const [dashboardData, setDashboardData] = useState<any>(null);
@@ -31,6 +34,10 @@ export default function Home() {
 
     useEffect(() => {
         loadData();
+        // Also sync health data if connected
+        if (healthSyncCompleted && Platform.OS === 'ios') {
+            syncHealthData();
+        }
     }, []);
 
     const loadData = async () => {
@@ -54,6 +61,10 @@ export default function Home() {
     const onRefresh = () => {
         setRefreshing(true);
         loadData();
+        // Re-sync health data on pull-to-refresh
+        if (healthSyncCompleted && Platform.OS === 'ios') {
+            syncHealthData();
+        }
     };
 
     const acknowledgeAlert = async (alertId: string) => {
@@ -107,11 +118,41 @@ export default function Home() {
     ];
 
     const riskScore = 2.8;
+
+    // Use real health data if available, otherwise fallback to defaults
+    const hasRealData = healthData && healthSyncCompleted;
     const metrics = {
-        hrv: { value: '62', unit: 'ms', trend: 'up' as const, trendLabel: 'Improving' },
-        sleep: { value: '7.2', unit: '/10', trend: 'stable' as const, trendLabel: 'Good' },
-        restingHR: { value: '58', unit: 'bpm', trend: 'stable' as const, trendLabel: 'Normal' },
+        hrv: {
+            value: hasRealData && healthData.heartRate.average > 0
+                ? String(healthData.heartRate.average)
+                : '62',
+            unit: 'bpm',
+            trend: 'stable' as const,
+            trendLabel: hasRealData ? 'Live' : 'Sample',
+        },
+        sleep: {
+            value: hasRealData && healthData.sleep.lastNight > 0
+                ? String(healthData.sleep.lastNight)
+                : '7.2',
+            unit: 'hrs',
+            trend: 'stable' as const,
+            trendLabel: hasRealData ? 'Last Night' : 'Sample',
+        },
+        restingHR: {
+            value: hasRealData && healthData.heartRate.latest > 0
+                ? String(healthData.heartRate.latest)
+                : '58',
+            unit: 'bpm',
+            trend: 'stable' as const,
+            trendLabel: hasRealData ? 'Latest' : 'Sample',
+        },
     };
+
+    const activityData = hasRealData ? {
+        steps: healthData.steps.today,
+        calories: healthData.calories.today,
+        distance: healthData.distance.today,
+    } : null;
 
     if (loading) {
         return (
@@ -209,6 +250,57 @@ export default function Home() {
                         />
                     </View>
                 </View>
+
+                {/* Today's Activity (from Apple Health) */}
+                {activityData ? (
+                    <View style={styles.section}>
+                        <View style={styles.sectionHeaderRow}>
+                            <Text style={styles.sectionTitle}>Today's Activity</Text>
+                            <View style={styles.liveBadge}>
+                                <View style={styles.liveDot} />
+                                <Text style={styles.liveText}>Apple Health</Text>
+                            </View>
+                        </View>
+                        <View style={styles.activityGrid}>
+                            <View style={styles.activityCard}>
+                                <View style={[styles.activityIconBg, { backgroundColor: theme.colors.palette.primary[50] }]}>
+                                    <Ionicons name="footsteps" size={22} color={theme.colors.palette.primary[500]} />
+                                </View>
+                                <Text style={styles.activityValue}>{activityData.steps.toLocaleString()}</Text>
+                                <Text style={styles.activityLabel}>Steps</Text>
+                            </View>
+                            <View style={styles.activityCard}>
+                                <View style={[styles.activityIconBg, { backgroundColor: theme.colors.palette.warning[50] }]}>
+                                    <Ionicons name="flame" size={22} color={theme.colors.palette.warning[500]} />
+                                </View>
+                                <Text style={styles.activityValue}>{activityData.calories}</Text>
+                                <Text style={styles.activityLabel}>kcal Burned</Text>
+                            </View>
+                            <View style={styles.activityCard}>
+                                <View style={[styles.activityIconBg, { backgroundColor: theme.colors.palette.success[50] }]}>
+                                    <Ionicons name="walk" size={22} color={theme.colors.palette.success[500]} />
+                                </View>
+                                <Text style={styles.activityValue}>{activityData.distance}</Text>
+                                <Text style={styles.activityLabel}>km Distance</Text>
+                            </View>
+                        </View>
+                    </View>
+                ) : Platform.OS === 'ios' && !healthSyncCompleted ? (
+                    <TouchableOpacity
+                        style={styles.connectHealthBanner}
+                        onPress={() => router.push('/health-sync')}
+                        activeOpacity={0.7}
+                    >
+                        <View style={styles.connectHealthIcon}>
+                            <Ionicons name="heart-circle" size={28} color={theme.colors.primary} />
+                        </View>
+                        <View style={styles.connectHealthText}>
+                            <Text style={styles.connectHealthTitle}>Connect Apple Health</Text>
+                            <Text style={styles.connectHealthSubtitle}>Get real-time activity & health insights</Text>
+                        </View>
+                        <Ionicons name="chevron-forward" size={20} color={theme.colors.textTertiary} />
+                    </TouchableOpacity>
+                ) : null}
 
                 {/* Medication Status */}
                 <View style={styles.section}>
@@ -377,6 +469,93 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         flexWrap: 'wrap',
         gap: 12,
+    },
+    // Activity section
+    sectionHeaderRow: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginBottom: 12,
+    },
+    liveBadge: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        backgroundColor: theme.colors.palette.success[50],
+        paddingHorizontal: 10,
+        paddingVertical: 4,
+        borderRadius: 12,
+        gap: 5,
+    },
+    liveDot: {
+        width: 6,
+        height: 6,
+        borderRadius: 3,
+        backgroundColor: theme.colors.success,
+    },
+    liveText: {
+        fontSize: 11,
+        fontWeight: '600',
+        color: theme.colors.palette.success[700],
+    },
+    activityGrid: {
+        flexDirection: 'row',
+        gap: 10,
+    },
+    activityCard: {
+        flex: 1,
+        backgroundColor: theme.colors.surface,
+        borderRadius: 14,
+        padding: 14,
+        alignItems: 'center',
+        borderWidth: 1,
+        borderColor: theme.colors.border,
+    },
+    activityIconBg: {
+        width: 40,
+        height: 40,
+        borderRadius: 12,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginBottom: 8,
+    },
+    activityValue: {
+        fontSize: 18,
+        fontWeight: '700',
+        color: theme.colors.textPrimary,
+        marginBottom: 2,
+    },
+    activityLabel: {
+        fontSize: 11,
+        color: theme.colors.textSecondary,
+        fontWeight: '500',
+    },
+    // Connect Health Banner
+    connectHealthBanner: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginHorizontal: 16,
+        marginTop: 16,
+        padding: 14,
+        backgroundColor: theme.colors.palette.primary[50],
+        borderRadius: 14,
+        borderWidth: 1,
+        borderColor: theme.colors.palette.primary[200],
+    },
+    connectHealthIcon: {
+        marginRight: 12,
+    },
+    connectHealthText: {
+        flex: 1,
+    },
+    connectHealthTitle: {
+        fontSize: 14,
+        fontWeight: '600',
+        color: theme.colors.primary,
+        marginBottom: 2,
+    },
+    connectHealthSubtitle: {
+        fontSize: 12,
+        color: theme.colors.textSecondary,
     },
     actionCard: {
         flex: 1,

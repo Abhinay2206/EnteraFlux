@@ -243,6 +243,23 @@ export const mockApi = {
     console.log('✅ Mock: Education seeded (no-op)');
     return { message: 'Mock education seeded' };
   },
+
+  // Health Data
+  syncHealthData: async (userId: string, healthData: any) => {
+    await delay(500);
+    const entry = { _id: generateId(), user_id: userId, ...healthData, synced_at: new Date().toISOString() };
+    (mockStore as any).healthData = (mockStore as any).healthData || [];
+    (mockStore as any).healthData.push(entry);
+    console.log('✅ Mock: Synced health data for user', userId);
+    return entry;
+  },
+
+  getHealthData: async (userId: string) => {
+    await delay(300);
+    const data = ((mockStore as any).healthData || []).filter((d: any) => d.user_id === userId);
+    console.log('✅ Mock: Retrieved health data', data);
+    return data.length > 0 ? data[data.length - 1] : null;
+  },
 };
 
 // Export the mock API as the main export

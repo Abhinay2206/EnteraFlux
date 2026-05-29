@@ -172,8 +172,12 @@ export default function Onboarding() {
       // Update store
       setUser({ ...userData, onboarding_completed: true });
 
-      // Navigate to home
-      router.replace('/(tabs)/home');
+      // Navigate: iOS goes to health sync, Android goes to home
+      if (Platform.OS === 'ios') {
+        router.replace('/health-sync');
+      } else {
+        router.replace('/(tabs)/home');
+      }
     } catch (error) {
       console.error('Onboarding error:', error);
 

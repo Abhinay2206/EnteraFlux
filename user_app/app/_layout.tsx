@@ -24,6 +24,13 @@ export default function RootLayout() {
           }}
         />
         <Stack.Screen
+          name="health-sync"
+          options={{
+            gestureEnabled: false,
+            animation: 'slide_from_right',
+          }}
+        />
+        <Stack.Screen
           name="(tabs)"
           options={{
             gestureEnabled: false,
